@@ -1,19 +1,14 @@
--- Drop and recreate Users table (Example)
-
-DROP TABLE IF EXISTS user CASCADE;
-CREATE TABLE user (
-  id SERIAL PRIMARY KEY NOT NULL,
-  name VARCHAR(255) NOT NULL,
-  email VARCHAR(255) NOT NULL,
-  password VARCHAR(255) NOT NULL
-);
+DROP TABLE IF EXISTS quiz CASCADE;
+DROP TABLE IF EXISTS quiz_question CASCADE;
+DROP TABLE IF EXISTS quiz_answers CASCADE;
 
 CREATE TABLE quiz (
   id SERIAL PRIMARY KEY NOT NULL,
-  user_id INTEGER REFERENCES user(id) ON DELETE CASCADE,
+  creator_id INTEGER REFERENCES user(id) ON DELETE CASCADE,
   url TEXT NOT NULL,
-  public BOOLEAN DEFAULT TRUE,
-  title TEXT NOT NULL
+  public BOOLEAN NOT NULL DEFAULT TRUE,
+  title VARCHAR(50) NOT NULL,
+  description TEXT NOT NULL
 );
 
 CREATE TABLE quiz_question (
@@ -26,6 +21,8 @@ CREATE TABLE quiz_answers (
   id SERIAL PRIMARY KEY NOT NULL,
   quiz_id INTEGER REFERENCES quiz(id) ON DELETE CASCADE,
   quiz_question_id INTEGER REFERENCES quiz_questions(id) ON DELETE CASCADE,
-  answer TEXT NOT NULL
-  correct BOOLEAN NOT NULL
+  answer TEXT NOT NULL,
+  correct BOOLEAN NOT NULL,
+  answer_index NOT NULL
 );
+
