@@ -13,5 +13,6 @@ CREATE TABLE quiz_result (
   id SERIAL PRIMARY KEY NOT NULL,
   taker_id INTEGER REFERENCES user(id),
   quiz_take_id INTEGER REFERENCES quiz_take(id),
-  score INTEGER
+  score INTEGER,
+  url NOT NULL
 );
