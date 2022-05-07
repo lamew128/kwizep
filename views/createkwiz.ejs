@@ -41,27 +41,31 @@
 <body>
   <%- include('partials/nav.ejs') %>
 
-  <main class="container">
+    <main class="container">
 
-    <form action="/register" method="POST">
+      <form action="/createkwiz" method="POST">
 
-      <div class="mb-3">
-        <label class="form-label">Name</label>
-        <input type="name" class="form-control" placeholder="Enter your name">
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Email address</label>
-        <input type="email" class="form-control" placeholder="Enter your e-mail">
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Password</label>
-        <input type="password" class="form-control" placeholder="Password">
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="mb-3">
+          <label class="form-label">Title</label>
+          <input type="text" class="form-control" placeholder="Enter a title">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Description</label>
+          <input type="text" class="form-control" placeholder="Enter a description">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Image</label>
+          <input type="url" accept="image/gif, image/jpg, image/jpeg, " class="form-control" placeholder="Image URL">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Private</label>
+          <input type="checkbox" class="form-check-label" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
 
-    </form>
+      </form>
 
-  </main>
+    </main>
 
 </body>
 
