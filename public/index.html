@@ -13,50 +13,73 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Bungee&family=Source+Sans+Pro:ital,wght@0,300;0,600;1,300;1,600&display=swap"
     rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- CSS Stylesheets -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="styles/styles.css">
 
+  <!-- External JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- SCRIPTS -->
+  <script type="text/javascript" src="scripts/app.js"></script>
 </head>
 
 <body>
 
   <main class="container">
-    <div class="row">
+
+    <div class="row d-flex justify-content-center">
 
       <!-- PROFILE CARD -->
-      <div class="col-md-3 col-10 ">
-        <div class="kwizcard profile rounded my-5 position-fixed">
-          <div class="col">
-            <div class="row d-flex justify-content-center">
-              <div class="profilepic">
-                <img src="https://cdn2.iconfinder.com/data/icons/user-people-4/48/6-512.png" alt="profilepic"
-                  class="img-fluid border rounded-pill">
-              </div>
-            </div>
-            <div class="row">
-              <div class="profileinfo">
-                <div class="row">
-                  <p class="h3 text-center">USERNAME</p>
+      <div class="col-md-3 col-10">
+        <div class="row">
+          <div class="col kwizcard profile rounded my-5 fixed">
+            <div class="col">
+              <div class="row d-flex justify-content-center">
+                <div class="profilepic mt-3">
+                  <img src="https://cdn2.iconfinder.com/data/icons/user-people-4/48/6-512.png" alt="profilepic"
+                    class="img-fluid border rounded-pill">
                 </div>
-                <h5 class="text-center m-y0 py-0">LAST KWIZ RESULT:</h5>
-                <p class="text-center my-0 py-0">WIN/LOSS</p>
-                <p class="text-center my-0 py-0 mb-3">15 correct out of 20</p>
-                <p>Kwizes created: 5</p>
-                <p>Participated in 8 kwizes</p>
+              </div>
+              <div class="row">
+                <div class="profileinfo p-3">
+                  <div class="row">
+                    <p class="h3 text-center">USERNAME</p>
+                  </div>
+                  <h5 class="text-center m-y0 py-0">LAST KWIZ RESULT:</h5>
+                  <p class="text-center my-0 py-0">(WIN/LOSS)</p>
+                  <p class="text-center my-0 py-0 mb-3">15 correct out of 20</p>
+                  <p>Kwizes created: 5</p>
+                  <p>Participated in 8 kwizes</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
+
       </div>
 
       <!-- QUIZ CARDS -->
       <div class="col my-5">
-        <div class="row">
-          <article class="col-lg-4 col-md-5 col-10 h-100">
-            <div class="card kwiz">
+        <div class="row" id="quizcards">
+          <!-- CREATE QUIZ BUTTON -->
+          <div class="row d-flex justify-content-center mb-5">
+            <button class="pushable w-50">
+              <span class="front">
+                Create new KWIZ!
+              </span>
+            </button>
+          </div>
+
+          <article class="col-lg-4 col-md-5 col-10">
+            <div class="card kwizcard">
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJFZ65LwsawfGT8XIQrWoCg-6inXNiMkopHQ&usqp=CAU"
                 class="card-img-top img-fluid" alt="quizimg">
@@ -67,8 +90,9 @@
               </div>
             </div>
           </article>
-          <article class="col-lg-4 col-md-5 col-10 h-100">
-            <div class="card kwiz">
+
+          <article class="col-lg-4 col-md-5 col-10">
+            <div class="card kwizcard">
               <img
                 src="https://images.unsplash.com/photo-1628510118714-d2124aea4b8a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max"
                 class="card-img-top img-fluid" alt="quizimg">
@@ -79,8 +103,9 @@
               </div>
             </div>
           </article>
-          <article class="col-lg-4 col-md-5 col-10 h-100">
-            <div class="card kwiz">
+
+          <article class="col-lg-4 col-md-5 col-10">
+            <div class="card kwizcard">
               <img
                 src="https://blogdointercambio.west1.com.br/wp-content/uploads/2019/01/268152-toronto-principais-pontos-turisticos-atracoes-e-custo-de-vida-1024x683.jpg"
                 class="card-img-top img-fluid" alt="quizimg">
@@ -91,8 +116,9 @@
               </div>
             </div>
           </article>
-          <article class="col-lg-4 col-md-5 col-10 h-100">
-            <div class="card kwiz">
+
+          <article class="col-lg-4 col-md-5 col-10">
+            <div class="card kwizcard">
               <img src="https://greatpeopleinside.com/wp-content/uploads/2017/05/HR-GR8-technology.jpg"
                 class="card-img-top img-fluid" alt="quizimg">
               <div class="card-body">
@@ -102,8 +128,9 @@
               </div>
             </div>
           </article>
-          <article class="col-lg-4 col-md-5 col-10 h-100">
-            <div class="card kwiz">
+
+          <article class="col-lg-4 col-md-5 col-10">
+            <div class="card kwizcard">
               <img
                 src="https://d5y9g7a5.rocketcdn.me/wp-content/uploads/2020/06/marvel-a-historia-da-editora-nos-quadrinhos-e-no-cinema-1024x512.jpg"
                 class="card-img-top img-fluid" alt="quizimg">
@@ -114,8 +141,9 @@
               </div>
             </div>
           </article>
-          <article class="col-lg-4 col-md-5 col-10 h-100">
-            <div class="card kwiz">
+
+          <article class="col-lg-4 col-md-5 col-10">
+            <div class="card kwizcard">
               <img src="https://files.tecnoblog.net/wp-content/uploads/2020/06/spotify-dc-comics-warner-700x513.jpg"
                 class="card-img-top img-fluid" alt="quizimg">
               <div class="card-body">
@@ -125,12 +153,13 @@
               </div>
             </div>
           </article>
-          <article class="col-lg-4 col-md-5 col-10 h-100">
-            <div class="card kwiz">
+
+          <article class="col-lg-4 col-md-5 col-10">
+            <div class="card kwizcard">
               <img src="https://thumbs2.imgbox.com/2d/46/Ba6012x0_t.jpg" class="card-img-top img-fluid" alt="quizimg">
               <div class="card-body">
                 <h5 class="card-title">GAMES KWIZ</h5>
-                <p class="card-text">Are you a gamanic? See if you know everything about videogames!</p>
+                <p class="card-text">Are you a gamemanic? See if you know everything about videogames!</p>
                 <a href="#" class="btn btn-primary">KWIZ!</a>
               </div>
             </div>
@@ -139,9 +168,10 @@
         </div>
       </div>
     </div>
-    </div>
 
   </main>
+
+  <i id="scroll-top" class="fa-solid fa-angles-up"></i>
 
 </body>
 
