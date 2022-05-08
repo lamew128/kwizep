@@ -43,28 +43,31 @@
 
     <main class="container">
 
-      <form action="/createkwiz" method="POST">
+      <form action="/createkwiz/questions" method="POST">
 
         <div class="mb-3">
-          <label class="form-label">Title</label>
-          <input type="text" name="title" class="form-control" placeholder="Enter a title">
+          <label class="form-label">Question 1</label>
+          <input type="text" name="q1" class="form-control" placeholder="Enter a title">
         </div>
         <div class="mb-3">
-          <label class="form-label">Description</label>
-          <input type="text" name="description" class="form-control" placeholder="Enter a description">
+          <label class="form-label">Answer A</label>
+          <input type="text" name="ansa" class="form-control" placeholder="Enter a title">
         </div>
         <div class="mb-3">
-          <label class="form-label">Image</label>
-          <input type="url" name="imageurl" accept="image/gif, image/jpg, image/jpeg" class="form-control"
-            placeholder="Image URL">
+          <label class="form-label">Answer B</label>
+          <input type="text" name="ansb" class="form-control" placeholder="Enter a title">
         </div>
         <div class="mb-3">
-          <label class="form-label">Private</label>
-          <input type="checkbox" name="private" class="form-check-label">
+          <label class="form-label">Answer C</label>
+          <input type="text" name="ansc" class="form-control" placeholder="Enter a title">
         </div>
-        <a href="/createkwiz/questions">
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </a>
+        <div class="mb-3">
+          <label class="form-label">Answer D</label>
+          <input type="text" name="ansd" class="form-control" placeholder="Enter a title">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
       </form>
 
     </main>
