@@ -47,7 +47,7 @@ module.exports = (db) => {
         res.send({error: "error"});
         return;
       }
-      //req.session.userId = user.id;
+      res.cookie('id', user.id);
       console.log("login success!");
       res.send({user: {name: user.name, email: user.email, id: user.id}});
     })

@@ -5,7 +5,7 @@ require("dotenv").config();
 const PORT = process.env.PORT || 3000;
 const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
-const cookieSession = require('cookie-session');
+cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const app = express();
 const morgan = require("morgan");
@@ -13,10 +13,7 @@ const morgan = require("morgan");
 // PG database client/connection setup
 const db = require("./lib/db.js");
 
-app.use(cookieSession({
-  name: 'session',
-  keys: ['key1']
-}));
+app.use(cookieParser());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
