@@ -48,7 +48,7 @@ $(document).ready(() => {
     },
   ];
 
-  $(document).scroll(function() {
+  $(document).scroll(function () {
     if ($(this).scrollTop() > 100) {
       $('#scroll-top').fadeIn();
     } else {
@@ -61,33 +61,59 @@ $(document).ready(() => {
   });
 
   const createCard = (kwiz) => {
-    const kwizAppend =
-      `<article class="col-lg-4 col-md-5 col-10">
-              <div class="card kwizcard">
-                <img
-                  src="${kwiz.imageurl}"
-                  class="card-img-top img-fluid" alt="quizimg">
-                <div class="card-body">
-                  <h5 class="card-title">${kwiz.title} KWIZ</h5>
-                  <p class="card-text">${kwiz.description}</p>
-                  <a href="#" class="btn btn-primary">KWIZ!</a>
-                </div>
-              </div>
-            </article>`;
+    const kwizAppend = `
+    <article class="col-lg-4 col-md-5 col-10">
+      <div class="card kwizcard">
+        <img src="${kwiz.imageurl}" class="card-img-top img-fluid" alt="quizimg">
+          <div class="card-body">
+            <h5 class="card-title">${kwiz.title} KWIZ</h5>
+            <p class="card-text">${kwiz.description}</p>
+            <a href="#" class="btn btn-primary">KWIZ!</a>
+          </div>
+      </div>
+    </article>`;
     return kwizAppend;
   };
 
-  const renderCardsPublic = (database) => {
-    for (const kwiz of database) {
-      if (kwiz.public) {
-        $('#kwizcontainer').append(createCard(kwiz));
-      }
-    }
+  const loginPage = () => {
+    return `
+      <form action="api/users/login" method="POST">
+        <div class="mb-3">
+          <label class="form-label">Email address</label>
+          <input type="email" name="email" class="form-control" placeholder="Enter your e-mail">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input type="password" name="password" class="form-control" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      `;
   };
 
-  const renderCardsPrivate = (database) => {
+  const registerPage = () => {
+    return `
+    <form action="/register" method="POST">
+      <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input type="name" name="name" class="form-control" placeholder="Enter your name">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Email address</label>
+        <input type="email" name="email" class="form-control" placeholder="Enter your e-mail">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" name="password" class="form-control" placeholder="Password">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    `;
+  };
+
+  const renderCards = (database, public) => {
     for (const kwiz of database) {
-      if (!kwiz.public) {
+      if (public === kwiz.public) {
         $('#kwizcontainer').append(createCard(kwiz));
       }
     }
@@ -96,15 +122,23 @@ $(document).ready(() => {
   $('#publickwizes').click((e) => {
     e.preventDefault();
     $('#kwizcontainer').empty();
-    renderCardsPublic(database);
+    renderCards(database, true);
   });
 
   $('#mykwizes').click((e) => {
     e.preventDefault();
     $('#kwizcontainer').empty();
-    renderCardsPrivate(database);
+    renderCards(database, false);
   });
 
+  $('#login').click((e) => {
+    e.preventDefault();
+    $('.container').empty().append(loginPage());
+  });
 
+  $('#register').click((e) => {
+    e.preventDefault();
+    $('.container').empty().append(registerPage());
+  });
 
 });
