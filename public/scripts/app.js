@@ -134,7 +134,7 @@ $(document).ready(() => {
 
   const questionsForm = () => {
     return `
-    <form action="/createkwiz/questions" method="POST" id="questionsform">
+    <form id="questionsform">
 
     <section class="questions">
 
@@ -281,6 +281,7 @@ $(document).ready(() => {
   $(document).on('submit', '#subcreatekwiz', function (e) {
     e.preventDefault();
     const data = $(this).serialize();
+    console.log(data);
 
     card = data;
 
@@ -304,6 +305,7 @@ $(document).ready(() => {
   $(document).on('submit', '#questionsform', function (e) {
     e.preventDefault();
     const data = $(this).serialize();
+    console.log(data);
     $.post("/createkwiz/questions", data);
     $('.container').empty().append(createCard(card));
     n = 0;
