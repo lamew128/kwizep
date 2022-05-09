@@ -1,9 +1,10 @@
 /* eslint-disable no-undef */
 // Client facing scripts here
 
-//const { register } = require("./network");
+
 
 $(document).ready(() => {
+  let user;
 
   const createCard = (kwiz) => {
     const kwizAppend = `
@@ -56,7 +57,7 @@ $(document).ready(() => {
     `;
   };
 
-  const renderContainer = () => {
+  const renderContainer = (user) => {
     return `
     <div class="row d-flex justify-content-center">
 
@@ -69,7 +70,7 @@ $(document).ready(() => {
             </div>
             <div class="profileinfo">
               <section class="row">
-                <p class="h3 text-center">USERNAME</p>
+                <p class="h3 text-center">${user.name}</p>
               </section>
               <section class="row border rounded d-flex justify-content-center m-1">
                 <h5 class="text-center my-0 p-0">LAST KWIZ RESULT:</h5>
@@ -106,30 +107,32 @@ $(document).ready(() => {
   };
 
   const createKwiz = () => {
-    return `
-    <form action="/createkwiz" method="POST" id="subcreatekwiz">
-        <div class="mb-3">
-          <label class="form-label">Title</label>
-          <input type="text" name="title" class="form-control" placeholder="Enter a title">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Description</label>
-          <input type="text" name="description" class="form-control" placeholder="Enter a description">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Image</label>
-          <input type="url" name="imageurl" accept="image/gif, image/jpg, image/jpeg" class="form-control"
-            placeholder="Image URL">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Private</label>
-          <input type="checkbox" name="private" class="form-check-label">
-        </div>
-        <a href="/createkwiz/questions">
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </a>
-      </form>
-    `;
+    if (user) {
+      return `
+      <form action="/createkwiz" method="POST" id="subcreatekwiz">
+          <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input type="text" name="title" class="form-control" placeholder="Enter a title">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Description</label>
+            <input type="text" name="description" class="form-control" placeholder="Enter a description">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Image</label>
+            <input type="url" name="imageurl" accept="image/gif, image/jpg, image/jpeg" class="form-control"
+              placeholder="Image URL">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Private</label>
+            <input type="checkbox" name="private" class="form-check-label">
+          </div>
+          <a href="/createkwiz/questions">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </a>
+        </form>
+      `;
+    }
   };
 
   const questionsForm = () => {
@@ -157,19 +160,19 @@ $(document).ready(() => {
   </div>
   <div class="mb-3">
     <label class="form-label">Answer A</label>
-    <input type="radio" name="ans" value="q${questionN}a"> <input type="text" name="q${questionN}a" class="form-control">
+    <input type="radio" name="q${questionN}ans" value="q${questionN}a"> <input type="text" name="q${questionN}a" class="form-control">
   </div>
   <div class="mb-3">
     <label class="form-label">Answer B</label>
-    <input type="radio" name="ans" value="q${questionN}b"><input type="text" name="q${questionN}b" class="form-control">
+    <input type="radio" name="q${questionN}ans" value="q${questionN}b"><input type="text" name="q${questionN}b" class="form-control">
   </div>
   <div class="mb-3">
     <label class="form-label">Answer C</label>
-    <input type="radio" name="ans" value="q${questionN}c"><input type="text" name="q${questionN}c" class="form-control">
+    <input type="radio" name="q${questionN}ans" value="q${questionN}c"><input type="text" name="q${questionN}c" class="form-control">
   </div>
   <div class="mb-3">
     <label class="form-label">Answer D</label>
-    <input type="radio" name="ans" value="q${questionN}d"><input type="text" name="q${questionN}d" class="form-control">
+    <input type="radio" name="q${questionN}ans" value="q${questionN}d"><input type="text" name="q${questionN}d" class="form-control">
   </div>
     </section>
       `;
@@ -242,15 +245,15 @@ $(document).ready(() => {
     }
   };
 
-  $('#publickwizes').click((e) => {
+  $(document).on('click', '#publickwizes', (e) => {
     e.preventDefault();
-    $('.container').empty().append(renderContainer());
+    $('.container').empty().append(renderContainer(user));
     renderCards(database, true);
   });
 
-  $('#mykwizes').click((e) => {
+  $(document).on('click', '#mykwizes', (e) => {
     e.preventDefault();
-    $('.container').empty().append(renderContainer());
+    $('.container').empty().append(renderContainer(user));
     renderCards(database, false);
   });
 
@@ -261,7 +264,7 @@ $(document).ready(() => {
 
   $(document).on('click', '#logout', (e) => {
     logOut().then(() => {
-      $('.container').empty().append(renderContainer()).html();
+      $('.container').empty().append(renderContainer(user)).html();
     });
   });
 
@@ -275,20 +278,17 @@ $(document).ready(() => {
     $('.container').empty().append(createKwiz());
   });
 
-  let n = 1;
-  let card = {};
 
   $(document).on('submit', '#subcreatekwiz', function (e) {
     e.preventDefault();
     const data = $(this).serialize();
-
-    card = data;
 
     $.post("/createkwiz", data);
     $('.container').empty().append(questionsForm());
     $('.questions').append(questionN(n));
   });
 
+  let n = 1;
   $(document).on('click', '#newquestion', (e) => {
     e.preventDefault();
     n++;
@@ -309,7 +309,7 @@ $(document).ready(() => {
     n = 0;
   });
 
-  $(document).on('submit', '#login-form', function(e) {
+  $(document).on('submit', '#login-form', function (e) {
     e.preventDefault();
 
     const data = $(this).serialize();
@@ -322,21 +322,23 @@ $(document).ready(() => {
           return;
         }
         console.log("json.user", json.user);
-        $('.container').empty().append(renderContainer()).html();
+        user = json.user;
+        $('.container').empty().append(renderContainer(user));
         //header.update(json.user);
         //views_manager.show('listings');
       });
   });
 
-  $(document).on('submit', '#register-form', function(e) {
+  $(document).on('submit', '#register-form', function (e) {
     e.preventDefault();
 
     const data = $(this).serialize();
     signUp(data)
       //.then(getMyDetails)
       .then((json) => {
-        console.log("json.user",json.user);
-        $('.container').empty().append(renderContainer()).html();
+        console.log("json.user", json.user);
+        user = json.user;
+        $('.container').empty().append(renderContainer(user));
         //header.update(json.user);
         //views_manager.show('listings');
       });
