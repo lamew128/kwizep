@@ -259,6 +259,12 @@ $(document).ready(() => {
     $('.container').empty().append(loginPage());
   });
 
+  $(document).on('click', '#logout', (e) => {
+    logOut().then(() => {
+      $('.container').empty().append(renderContainer()).html();
+    });
+  });
+
   $(document).on('click', '#register', (e) => {
     e.preventDefault();
     $('.container').empty().append(registerPage());
