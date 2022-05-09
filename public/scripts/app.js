@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 // Client facing scripts here
 
-// const { getMyDetails } = require("./network");
+//const { register } = require("./network");
 
 $(document).ready(() => {
 
@@ -38,7 +38,7 @@ $(document).ready(() => {
 
   const registerPage = () => {
     return `
-    <form action="/register" method="POST">
+    <form id="register-form">
       <div class="mb-3">
         <label class="form-label">Name</label>
         <input type="name" name="name" class="form-control" placeholder="Enter your name">
@@ -254,16 +254,18 @@ $(document).ready(() => {
     renderCards(database, false);
   });
 
-  $('#login').click((e) => {
+  $(document).on('click', '#login', (e) => {
     e.preventDefault();
     $('.container').empty().append(loginPage());
   });
 
-  $('#logout').click((e) => {
-    e.preventDefault();
+  $(document).on('click', '#logout', (e) => {
+    logOut().then(() => {
+      $('.container').empty().append(renderContainer()).html();
+    });
   });
 
-  $('#register').click((e) => {
+  $(document).on('click', '#register', (e) => {
     e.preventDefault();
     $('.container').empty().append(registerPage());
   });
@@ -320,6 +322,20 @@ $(document).ready(() => {
           return;
         }
         console.log("json.user", json.user);
+        $('.container').empty().append(renderContainer()).html();
+        //header.update(json.user);
+        //views_manager.show('listings');
+      });
+  });
+
+  $(document).on('submit', '#register-form', function(e) {
+    e.preventDefault();
+
+    const data = $(this).serialize();
+    signUp(data)
+      //.then(getMyDetails)
+      .then((json) => {
+        console.log("json.user",json.user);
         $('.container').empty().append(renderContainer()).html();
         //header.update(json.user);
         //views_manager.show('listings');

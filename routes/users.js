@@ -38,6 +38,7 @@ module.exports = (db) => {
   }
   exports.login = login;
 
+  //login
   router.post("/login", (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
@@ -53,5 +54,26 @@ module.exports = (db) => {
     })
     .catch(e => res.send(e));
   });
+
+  router.post('/logout', (req, res) => {
+    res.clearCookie('id');
+    res.send({});
+  });
+
+  // Create a new user
+  router.post('/register', (req, res) => {
+    const user = req.body;
+    db.addUser(user)
+    .then(user => {
+      if (!user) {
+        res.send({error: "error"});
+        return;
+      }
+      res.cookie('id', user.id);
+      res.send("🤗");
+    })
+    .catch(e => res.send(e));
+  });
+
   return router;
 };
