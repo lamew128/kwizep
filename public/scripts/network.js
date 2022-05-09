@@ -1,5 +1,3 @@
-/* eslint-disable func-style */
-
 function getMyDetails() {
   console.log("getMyDetails");
   return $.ajax({
@@ -29,10 +27,3 @@ function signUp(data) {
     data
   });
 }
-
-module.exports = {
-  getMyDetails,
-  logOut,
-  logIn,
-  signUp
-};

@@ -1,6 +1,8 @@
 /* eslint-disable no-undef */
 // Client facing scripts here
 
+// const { getMyDetails } = require("./network");
+
 $(document).ready(() => {
 
   const createCard = (kwiz) => {
@@ -20,7 +22,7 @@ $(document).ready(() => {
 
   const loginPage = () => {
     return `
-      <form id='login-form'>
+      <form id="login-form">
         <div class="mb-3">
           <label class="form-label">Email address</label>
           <input id='email' type="email" name="email" class="form-control" placeholder="Enter your e-mail">
@@ -257,6 +259,10 @@ $(document).ready(() => {
     $('.container').empty().append(loginPage());
   });
 
+  $('#logout').click((e) => {
+    e.preventDefault();
+  });
+
   $('#register').click((e) => {
     e.preventDefault();
     $('.container').empty().append(registerPage());
@@ -269,7 +275,8 @@ $(document).ready(() => {
 
   let n = 1;
   let card = {};
-  $(document).on('submit', '#subcreatekwiz', function(e) {
+
+  $(document).on('submit', '#subcreatekwiz', function (e) {
     e.preventDefault();
     const data = $(this).serialize();
 
@@ -292,7 +299,7 @@ $(document).ready(() => {
     n--;
   });
 
-  $(document).on('submit', '#questionsform', function(e) {
+  $(document).on('submit', '#questionsform', function (e) {
     e.preventDefault();
     const data = $(this).serialize();
     $.post("/createkwiz/questions", data);
@@ -307,12 +314,12 @@ $(document).ready(() => {
     //console.log("data", data);
     logIn(data)
       .then(json => {
-        console.log("json",json);
+        console.log("json", json);
         if (!json.user) {
           console.log('fail');
           return;
         }
-        console.log("json.user",json.user);
+        console.log("json.user", json.user);
         $('.container').empty().append(renderContainer()).html();
         //header.update(json.user);
         //views_manager.show('listings');
