@@ -173,6 +173,8 @@ $(document).ready(() => {
       `;
   };
 
+  
+
   const database = [
     {
       title: 'CANADA',
@@ -268,9 +270,13 @@ $(document).ready(() => {
   });
 
   let n = 1;
-  $(document).on('submit', '#subcreatekwiz', function (e) {
+  let card = {};
+  $(document).on('submit', '#subcreatekwiz', function(e) {
     e.preventDefault();
     const data = $(this).serialize();
+
+    card = data;
+
     $.post("/createkwiz", data);
     $('.container').empty().append(questionsForm());
     $('.questions').append(questionN(n));
@@ -288,11 +294,11 @@ $(document).ready(() => {
     n--;
   });
 
-  $(document).on('submit', '#questionsform', function (e) {
+  $(document).on('submit', '#questionsform', function(e) {
     e.preventDefault();
     const data = $(this).serialize();
-    $.post("/createkwiz/questions", data)
-      .then(() => window.location.replace('/'));
+    $.post("/createkwiz/questions", data);
+    $('.container').empty().append(createCard(card));
     n = 0;
   });
 
