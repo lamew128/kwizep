@@ -1,8 +1,6 @@
 /* eslint-disable no-undef */
 // Client facing scripts here
 
-// const { getMyDetails } = require("./network");
-
 $(document).ready(() => {
 
   const createCard = (kwiz) => {
