@@ -30,7 +30,7 @@ $(document).ready(() => {
     },
     {
       title: 'MARVEL',
-      description: 'ove Spider-man and company? Test your knowledge!',
+      description: 'Love Spider-man and company? Test your knowledge!',
       imageurl: 'https://d5y9g7a5.rocketcdn.me/wp-content/uploads/2020/06/marvel-a-historia-da-editora-nos-quadrinhos-e-no-cinema-1024x512.jpg',
       public: false
     },
@@ -174,25 +174,25 @@ $(document).ready(() => {
   $('#publickwizes').click((e) => {
     e.preventDefault();
     // $('#kwizcontainer').empty();
-    $('.container').empty().append(renderContainer());
+    $('.container').empty().append(renderContainer()).html();
     renderCards(database, true);
   });
 
   $('#mykwizes').click((e) => {
     e.preventDefault();
     // $('#kwizcontainer').empty();
-    $('.container').empty().append(renderContainer());
+    $('.container').empty().append(renderContainer()).html();
     renderCards(database, false);
   });
 
   $('#login').click((e) => {
     e.preventDefault();
-    $('.container').empty().append(loginPage());
+    $('.container').empty().append(loginPage()).html();
   });
 
   $('#register').click((e) => {
     e.preventDefault();
-    $('.container').empty().append(registerPage());
+    $('.container').empty().append(registerPage()).html();
   });
 
   const createKwiz = () => {
@@ -223,10 +223,11 @@ $(document).ready(() => {
     `;
   };
 
-  const questions = (questionN) => {
+  const questions = () => {
     return `
     <form action="/createkwiz/questions" method="POST">
 
+    <section class="questions">
         <div class="mb-3">
           <label class="form-label">Question 1</label>
           <input type="text" name="q1" class="form-control" placeholder="Enter a title">
@@ -247,22 +248,55 @@ $(document).ready(() => {
           <label class="form-label">Answer D</label>
           <input type="text" name="ansd" class="form-control" placeholder="Enter a title">
         </div>
+    </section>
 
-        <button type="submit" class="btn btn-primary" id="newquestion">Create new question</button>
+        <button type="button" class="btn btn-primary" id="newquestion">Create new question</button>
         <button type="submit" class="btn btn-primary">Submit</button>
 
       </form>
       `;
   };
 
+  const questionN = (questionN) => {
+    return `
+        <div class="mb-3">
+          <label class="form-label">Question ${questionN}</label>
+          <input type="text" name="q1" class="form-control" placeholder="Enter a title">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Answer A</label>
+          <input type="text" name="q${questionN}a" class="form-control" placeholder="Enter a title">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Answer B</label>
+          <input type="text" name="q${questionN}b" class="form-control" placeholder="Enter a title">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Answer C</label>
+          <input type="text" name="q${questionN}c" class="form-control" placeholder="Enter a title">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Answer D</label>
+          <input type="text" name="q${questionN}d" class="form-control" placeholder="Enter a title">
+        </div>
+      `;
+  };
+
   $('#createkwiz').click((e) => {
     e.preventDefault();
-    $('.container').empty().append(createKwiz());
+    $('.container').empty().append(questions());
   });
 
   $('#subcreatekwiz').click((e) => {
     e.preventDefault();
-    $('.container').empty().append(createKwiz());
+    $('.container').empty().append(questions());
+  });
+
+  let n;
+  $('#newquestion').click((e) => {
+    e.preventDefault();
+    n++;
+    $('.questions').append(questionN(n));
   });
 
 });
