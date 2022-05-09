@@ -48,6 +48,8 @@ $(document).ready(() => {
     },
   ];
 
+  $('#scroll-top').fadeOut();
+
   $(document).scroll(function () {
     if ($(this).scrollTop() > 100) {
       $('#scroll-top').fadeIn();
@@ -111,6 +113,56 @@ $(document).ready(() => {
     `;
   };
 
+  const renderContainer = () => {
+    return `
+    <div class="row d-flex justify-content-center">
+
+    <!-- PROFILE CARD -->
+    <div class="col-md-3 col-10">
+      <div class="row">
+        <div class="col kwizcard profile rounded my-5 fixed">
+          <div class="col">
+            <div class="row d-flex justify-content-center">
+            </div>
+            <div class="profileinfo">
+              <section class="row">
+                <p class="h3 text-center">USERNAME</p>
+              </section>
+              <section class="row border rounded d-flex justify-content-center m-1">
+                <h5 class="text-center my-0 p-0">LAST KWIZ RESULT:</h5>
+                <hr class="w-75">
+                <p class="text-center my-0 p-0">(WIN/LOSS)</p>
+                <hr class="w-75">
+                <p class="text-center my-0 p-0">8 out of 10</p>
+              </section>
+              <p class="py-3 m-0">Kwizes created: 3</p>
+              <hr class="w-100">
+              <p class="py-3 m-0">Kwizes participated: 8</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ CARDS -->
+    <div class="col">
+          <div class="row d-flex justify-content-center mb-5">
+            <a href="/createkwiz" id="createkwiz">
+              <button class="pushable w-50">
+                <span class="front">
+                  Create new KWIZ!
+                </span>
+              </button>
+            </a>
+          </div>
+          <div class="row" id="kwizcontainer">
+
+          </div>
+        </div>
+  </div>
+    `;
+  };
+
   const renderCards = (database, public) => {
     for (const kwiz of database) {
       if (public === kwiz.public) {
@@ -121,13 +173,15 @@ $(document).ready(() => {
 
   $('#publickwizes').click((e) => {
     e.preventDefault();
-    $('#kwizcontainer').empty();
+    // $('#kwizcontainer').empty();
+    $('.container').empty().append(renderContainer());
     renderCards(database, true);
   });
 
   $('#mykwizes').click((e) => {
     e.preventDefault();
-    $('#kwizcontainer').empty();
+    // $('#kwizcontainer').empty();
+    $('.container').empty().append(renderContainer());
     renderCards(database, false);
   });
 
@@ -139,6 +193,76 @@ $(document).ready(() => {
   $('#register').click((e) => {
     e.preventDefault();
     $('.container').empty().append(registerPage());
+  });
+
+  const createKwiz = () => {
+    return `
+    <form action="/createkwiz" method="POST">
+
+        <div class="mb-3">
+          <label class="form-label">Title</label>
+          <input type="text" name="title" class="form-control" placeholder="Enter a title">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Description</label>
+          <input type="text" name="description" class="form-control" placeholder="Enter a description">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Image</label>
+          <input type="url" name="imageurl" accept="image/gif, image/jpg, image/jpeg" class="form-control"
+            placeholder="Image URL">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Private</label>
+          <input type="checkbox" name="private" class="form-check-label">
+        </div>
+        <a href="/createkwiz/questions">
+          <button type="submit" class="btn btn-primary" id="subcreatekwiz">Submit</button>
+        </a>
+      </form>
+    `;
+  };
+
+  const questions = (questionN) => {
+    return `
+    <form action="/createkwiz/questions" method="POST">
+
+        <div class="mb-3">
+          <label class="form-label">Question 1</label>
+          <input type="text" name="q1" class="form-control" placeholder="Enter a title">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Answer A</label>
+          <input type="text" name="ansa" class="form-control" placeholder="Enter a title">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Answer B</label>
+          <input type="text" name="ansb" class="form-control" placeholder="Enter a title">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Answer C</label>
+          <input type="text" name="ansc" class="form-control" placeholder="Enter a title">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Answer D</label>
+          <input type="text" name="ansd" class="form-control" placeholder="Enter a title">
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="newquestion">Create new question</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+      </form>
+      `;
+  };
+
+  $('#createkwiz').click((e) => {
+    e.preventDefault();
+    $('.container').empty().append(createKwiz());
+  });
+
+  $('#subcreatekwiz').click((e) => {
+    e.preventDefault();
+    $('.container').empty().append(createKwiz());
   });
 
 });
