@@ -1,0 +1,12 @@
+$primaryColor: #0019FF;
+$secondaryColor: #000f99;
+$tertiaryColor: #0099FF;
+
+.navbar {
+  background-color: $primaryColor;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.buttoncolor {
+  background-color: $tertiaryColor;
+}

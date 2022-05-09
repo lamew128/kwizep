@@ -42,160 +42,151 @@
 
   <%- include('partials/nav.ejs') %>
 
-  <main class="container">
+    <main class="container">
 
-    <div class="row d-flex justify-content-center">
+      <div class="row d-flex justify-content-center">
 
-      <!-- PROFILE CARD -->
-      <div class="col-md-3 col-10">
-        <div class="row">
-          <div class="col kwizcard profile rounded my-5 fixed">
-            <div class="col">
-              <div class="row d-flex justify-content-center">
+        <!-- PROFILE CARD -->
+        <div class="col-md-3 col-10">
+          <div class="row">
+            <div class="col kwizcard profile rounded my-5 fixed">
+              <div class="col">
+                <div class="row d-flex justify-content-center">
+                </div>
+
+                <div class="profileinfo">
+                  <section class="row">
+                    <p class="h3 text-center">USERNAME</p>
+                  </section>
+                  <section class="row border rounded d-flex justify-content-center m-1">
+                    <h5 class="text-center my-0 p-0">LAST KWIZ RESULT:</h5>
+                    <hr class="w-75">
+                    <p class="text-center my-0 p-0">(WIN/LOSS)</p>
+                    <hr class="w-75">
+                    <p class="text-center my-0 p-0">8 out of 10</p>
+                  </section>
+                  <p class="py-3 m-0">Kwizes created: 3</p>
+                  <hr class="w-100">
+                  <p class="py-3 m-0">Kwizes participated: 8</p>
+                </div>
+
               </div>
-
-              <div class="profileinfo">
-                <section class="row">
-                  <p class="h3 text-center">USERNAME</p>
-                </section>
-                <section class="row border rounded d-flex justify-content-center m-1">
-                  <h5 class="text-center my-0 p-0">LAST KWIZ RESULT:</h5>
-                  <hr class="w-75">
-                  <p class="text-center my-0 p-0">(WIN/LOSS)</p>
-                  <hr class="w-75">
-                  <p class="text-center my-0 p-0">8 out of 10</p>
-                </section>
-                <p class="py-3 m-0">Kwizes created: 3</p>
-                <hr class="w-100">
-                <p class="py-3 m-0">Kwizes participated: 8</p>
-              </div>
-
             </div>
           </div>
+
         </div>
 
-      </div>
+        <!-- QUIZ CARDS -->
+        <div class="col">
+          <div class="row" id="kwizcontainer">
+            <!-- CREATE QUIZ BUTTON -->
+            <div class="row d-flex justify-content-center mb-5">
+              <a href="/createkwiz">
+                <button class="pushable w-50">
+                  <span class="front">
+                    Create new KWIZ!
+                  </span>
+                </button>
+              </a>
+            </div>
 
-      <!-- QUIZ CARDS -->
-      <div class="col">
-        <div class="row" id="quizcards">
-          <!-- CREATE QUIZ BUTTON -->
-          <div class="row d-flex justify-content-center mb-5">
-            <button class="pushable w-50">
-              <span class="front">
-                Create new KWIZ!
-              </span>
-            </button>
+            <article class="col-lg-4 col-md-5 col-10">
+              <div class="card kwizcard">
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJFZ65LwsawfGT8XIQrWoCg-6inXNiMkopHQ&usqp=CAU"
+                  class="card-img-top img-fluid" alt="quizimg">
+                <div class="card-body">
+                  <h5 class="card-title">CANADA KWIZ</h5>
+                  <p class="card-text">Oh Canada! 🇨🇦</p>
+                  <a href="#" class="btn btn-primary">KWIZ!</a>
+                  <!-- SHARING BUTTON INCOMPLETE -->
+                  <button class="btn-primary clipboard rounded">Share this KWIZ!</button>
+                  <!-- SHARING BUTTON INCOMPLETE -->
+                </div>
+              </div>
+            </article>
+
+            <article class="col-lg-4 col-md-5 col-10">
+              <div class="card kwizcard">
+                <img
+                  src="https://images.unsplash.com/photo-1628510118714-d2124aea4b8a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max"
+                  class="card-img-top img-fluid" alt="quizimg">
+                <div class="card-body">
+                  <h5 class="card-title">USA KWIZ</h5>
+                  <p class="card-text">You know everything about america? Find out!</p>
+                  <a href="#" class="btn btn-primary">KWIZ!</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="col-lg-4 col-md-5 col-10">
+              <div class="card kwizcard">
+                <img
+                  src="https://blogdointercambio.west1.com.br/wp-content/uploads/2019/01/268152-toronto-principais-pontos-turisticos-atracoes-e-custo-de-vida-1024x683.jpg"
+                  class="card-img-top img-fluid" alt="quizimg">
+                <div class="card-body">
+                  <h5 class="card-title">TORONTO KWIZ</h5>
+                  <p class="card-text">How much you know about the 6ix?</p>
+                  <a href="#" class="btn btn-primary">KWIZ!</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="col-lg-4 col-md-5 col-10">
+              <div class="card kwizcard">
+                <img src="https://greatpeopleinside.com/wp-content/uploads/2017/05/HR-GR8-technology.jpg"
+                  class="card-img-top img-fluid" alt="quizimg">
+                <div class="card-body">
+                  <h5 class="card-title">TECHNOLOGY KWIZ</h5>
+                  <p class="card-text">Are you a technophile? Let's see!</p>
+                  <a href="#" class="btn btn-primary">KWIZ!</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="col-lg-4 col-md-5 col-10">
+              <div class="card kwizcard">
+                <img
+                  src="https://d5y9g7a5.rocketcdn.me/wp-content/uploads/2020/06/marvel-a-historia-da-editora-nos-quadrinhos-e-no-cinema-1024x512.jpg"
+                  class="card-img-top img-fluid" alt="quizimg">
+                <div class="card-body">
+                  <h5 class="card-title">MARVEL KWIZ</h5>
+                  <p class="card-text">Love Spider-man and company? Test your knowledge!</p>
+                  <a href="#" class="btn btn-primary">KWIZ!</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="col-lg-4 col-md-5 col-10">
+              <div class="card kwizcard">
+                <img src="https://files.tecnoblog.net/wp-content/uploads/2020/06/spotify-dc-comics-warner-700x513.jpg"
+                  class="card-img-top img-fluid" alt="quizimg">
+                <div class="card-body">
+                  <h5 class="card-title">DC KWIZ</h5>
+                  <p class="card-text">Batman, Superman, and the Justice League!</p>
+                  <a href="#" class="btn btn-primary">KWIZ!</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="col-lg-4 col-md-5 col-10">
+              <div class="card kwizcard">
+                <img src="https://thumbs2.imgbox.com/2d/46/Ba6012x0_t.jpg" class="card-img-top img-fluid" alt="quizimg">
+                <div class="card-body">
+                  <h5 class="card-title">GAMES KWIZ</h5>
+                  <p class="card-text">Are you a gamemanic? See if you know everything about videogames!</p>
+                  <a href="#" class="btn btn-primary">KWIZ!</a>
+                </div>
+              </div>
+            </article>
+
           </div>
-
-          <article class="col-lg-4 col-md-5 col-10">
-            <div class="card kwizcard">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJFZ65LwsawfGT8XIQrWoCg-6inXNiMkopHQ&usqp=CAU"
-                class="card-img-top img-fluid" alt="quizimg">
-              <div class="card-body">
-                <h5 class="card-title">CANADA KWIZ</h5>
-                <p class="card-text">Oh Canada! 🇨🇦</p>
-                <a href="#" class="btn btn-primary">KWIZ!</a>
-                <!-- SHARING BUTTON INCOMPLETE -->
-                <button class="btn-primary clipboard rounded">Share this KWIZ!</button>
-                <!-- SHARING BUTTON INCOMPLETE -->
-              </div>
-            </div>
-          </article>
-
-          <article class="col-lg-4 col-md-5 col-10">
-            <div class="card kwizcard">
-              <img
-                src="https://images.unsplash.com/photo-1628510118714-d2124aea4b8a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max"
-                class="card-img-top img-fluid" alt="quizimg">
-              <div class="card-body">
-                <h5 class="card-title">USA KWIZ</h5>
-                <p class="card-text">You know everything about america? Find out!</p>
-                <a href="#" class="btn btn-primary">KWIZ!</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="col-lg-4 col-md-5 col-10">
-            <div class="card kwizcard">
-              <img
-                src="https://blogdointercambio.west1.com.br/wp-content/uploads/2019/01/268152-toronto-principais-pontos-turisticos-atracoes-e-custo-de-vida-1024x683.jpg"
-                class="card-img-top img-fluid" alt="quizimg">
-              <div class="card-body">
-                <h5 class="card-title">TORONTO KWIZ</h5>
-                <p class="card-text">How much you know about the 6ix?</p>
-                <a href="#" class="btn btn-primary">KWIZ!</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="col-lg-4 col-md-5 col-10">
-            <div class="card kwizcard">
-              <img src="https://greatpeopleinside.com/wp-content/uploads/2017/05/HR-GR8-technology.jpg"
-                class="card-img-top img-fluid" alt="quizimg">
-              <div class="card-body">
-                <h5 class="card-title">TECHNOLOGY KWIZ</h5>
-                <p class="card-text">Are you a technophile? Let's see!</p>
-                <a href="#" class="btn btn-primary">KWIZ!</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="col-lg-4 col-md-5 col-10">
-            <div class="card kwizcard">
-              <img
-                src="https://d5y9g7a5.rocketcdn.me/wp-content/uploads/2020/06/marvel-a-historia-da-editora-nos-quadrinhos-e-no-cinema-1024x512.jpg"
-                class="card-img-top img-fluid" alt="quizimg">
-              <div class="card-body">
-                <h5 class="card-title">MARVEL KWIZ</h5>
-                <p class="card-text">Love Spider-man and company? Test your knowledge!</p>
-                <a href="#" class="btn btn-primary">KWIZ!</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="col-lg-4 col-md-5 col-10">
-            <div class="card kwizcard">
-              <img src="https://files.tecnoblog.net/wp-content/uploads/2020/06/spotify-dc-comics-warner-700x513.jpg"
-                class="card-img-top img-fluid" alt="quizimg">
-              <div class="card-body">
-                <h5 class="card-title">DC KWIZ</h5>
-                <p class="card-text">Batman, Superman, and the Justice League!</p>
-                <a href="#" class="btn btn-primary">KWIZ!</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="col-lg-4 col-md-5 col-10">
-            <div class="card kwizcard">
-              <img src="https://thumbs2.imgbox.com/2d/46/Ba6012x0_t.jpg" class="card-img-top img-fluid" alt="quizimg">
-              <div class="card-body">
-                <h5 class="card-title">GAMES KWIZ</h5>
-                <p class="card-text">Are you a gamemanic? See if you know everything about videogames!</p>
-                <a href="#" class="btn btn-primary">KWIZ!</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="col-lg-4 col-md-5 col-10">
-            <div class="card kwizcard">
-              <img src="https://thumbs2.imgbox.com/2d/46/Ba6012x0_t.jpg" class="card-img-top img-fluid" alt="quizimg">
-              <div class="card-body">
-                <h5 class="card-title">GAMES KWIZ</h5>
-                <p class="card-text">Are you a gamemanic? See if you know everything about videogames!</p>
-                <a href="#" class="btn btn-primary">KWIZ!</a>
-              </div>
-            </div>
-          </article>
-
         </div>
       </div>
-    </div>
 
-  </main>
+    </main>
 
-  <i id="scroll-top" class="fa-solid fa-angles-up"></i>
+    <i id="scroll-top" class="fa-solid fa-angles-up"></i>
 
 </body>
 
