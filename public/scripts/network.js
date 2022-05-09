@@ -8,8 +8,8 @@ function getMyDetails() {
 function logOut() {
   return $.ajax({
     method: "POST",
-    url: "/users/logout",
-  });
+    url: "api/users/logout",
+  })
 }
 
 function logIn(data) {
@@ -23,7 +23,7 @@ function logIn(data) {
 function signUp(data) {
   return $.ajax({
     method: "POST",
-    url: "/users",
+    url: "/api/users/register",
     data
   });
 }
