@@ -14,17 +14,11 @@ router.use(bodyParser.urlencoded({ extended: false }));
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
-      .then(data => {
-        const users = data.rows;
-        console.log(users);
-        res.json({ users });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
+    db.getAllUser()
+    .then(users => {
+      res.json({ users });
+    })
+    .catch(e => res.send(e));
   });
 
 
