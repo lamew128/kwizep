@@ -20,14 +20,14 @@ $(document).ready(() => {
 
   const loginPage = () => {
     return `
-      <form action="api/users/login" method="POST">
+      <form id='login-form'>
         <div class="mb-3">
           <label class="form-label">Email address</label>
-          <input type="email" name="email" class="form-control" placeholder="Enter your e-mail">
+          <input id='email' type="email" name="email" class="form-control" placeholder="Enter your e-mail">
         </div>
         <div class="mb-3">
           <label class="form-label">Password</label>
-          <input type="password" name="password" class="form-control" placeholder="Password">
+          <input id='password' type="password" name="password" class="form-control" placeholder="Password">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
@@ -294,6 +294,25 @@ $(document).ready(() => {
     $.post("/createkwiz/questions", data)
       .then(() => window.location.replace('/'));
     n = 0;
+  });
+
+  $(document).on('submit', '#login-form', function(e) {
+    e.preventDefault();
+
+    const data = $(this).serialize();
+    //console.log("data", data);
+    logIn(data)
+      .then(json => {
+        console.log("json",json);
+        if (!json.user) {
+          console.log('fail');
+          return;
+        }
+        console.log("json.user",json.user);
+        $('.container').empty().append(renderContainer()).html();
+        //header.update(json.user);
+        //views_manager.show('listings');
+      });
   });
 
 });
