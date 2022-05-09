@@ -11,6 +11,26 @@ const pool = new Pool({
 pool.query(`SELECT title FROM properties LIMIT 10;`).then(response => {console.log(response)})
 
 /**
+ * Get a single user from the database given their email.
+ * @param {String} email The email of the user.
+ * @return {Promise<{}>} A promise to the user.
+ */
+ const getUserWithEmail = function(email) {
+  return pool
+    .query(
+      `SELECT * FROM users
+       WHERE email = $1`, [email])
+    .then((result) => {
+      console.log(result.rows[0]);
+      return result.rows[0];
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+}
+exports.getUserWithEmail = getUserWithEmail;
+
+/**
  * Logged in user can create a Kwiz
  * @param {object} Kwiz the Kwiz object with creator_id, url, ispublic...as keys
  * @return {Promise<{}>} A promise to the user.

@@ -11,10 +11,7 @@ const app = express();
 const morgan = require("morgan");
 
 // PG database client/connection setup
-const { Pool } = require("pg");
-const dbParams = require("./lib/db.js");
-const db = new Pool(dbParams);
-db.connect();
+const db = require("./lib/db.js");
 
 app.use(cookieSession({
   name: 'session',
