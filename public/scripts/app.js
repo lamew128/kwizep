@@ -144,7 +144,6 @@ $(document).ready(() => {
       </div>
     </div>
 
-    <!-- QUIZ CARDS -->
     <div class="col">
           <div class="row d-flex justify-content-center mb-5">
             <a href="/createkwiz" id="createkwiz">
@@ -173,32 +172,29 @@ $(document).ready(() => {
 
   $('#publickwizes').click((e) => {
     e.preventDefault();
-    // $('#kwizcontainer').empty();
-    $('.container').empty().append(renderContainer()).html();
+    $('.container').empty().append(renderContainer());
     renderCards(database, true);
   });
 
   $('#mykwizes').click((e) => {
     e.preventDefault();
-    // $('#kwizcontainer').empty();
-    $('.container').empty().append(renderContainer()).html();
+    $('.container').empty().append(renderContainer());
     renderCards(database, false);
   });
 
   $('#login').click((e) => {
     e.preventDefault();
-    $('.container').empty().append(loginPage()).html();
+    $('.container').empty().append(loginPage());
   });
 
   $('#register').click((e) => {
     e.preventDefault();
-    $('.container').empty().append(registerPage()).html();
+    $('.container').empty().append(registerPage());
   });
 
   const createKwiz = () => {
     return `
-    <form action="/createkwiz" method="POST">
-
+    <form action="/createkwiz" method="POST" id="subcreatekwiz">
         <div class="mb-3">
           <label class="form-label">Title</label>
           <input type="text" name="title" class="form-control" placeholder="Enter a title">
@@ -217,51 +213,33 @@ $(document).ready(() => {
           <input type="checkbox" name="private" class="form-check-label">
         </div>
         <a href="/createkwiz/questions">
-          <button type="submit" class="btn btn-primary" id="subcreatekwiz">Submit</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
         </a>
       </form>
     `;
   };
 
-  const questions = () => {
+  const questionsForm = () => {
     return `
-    <form action="/createkwiz/questions" method="POST">
+    <form action="/createkwiz/questions" method="POST" id="questionsform">
 
     <section class="questions">
-        <div class="mb-3">
-          <label class="form-label">Question 1</label>
-          <input type="text" name="q1" class="form-control" placeholder="Enter a title">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Answer A</label>
-          <input type="text" name="ansa" class="form-control" placeholder="Enter a title">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Answer B</label>
-          <input type="text" name="ansb" class="form-control" placeholder="Enter a title">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Answer C</label>
-          <input type="text" name="ansc" class="form-control" placeholder="Enter a title">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Answer D</label>
-          <input type="text" name="ansd" class="form-control" placeholder="Enter a title">
-        </div>
+
     </section>
 
-        <button type="button" class="btn btn-primary" id="newquestion">Create new question</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="button" class="btn btn-primary" id="newquestion">Create new question</button>
+    <button type="submit" class="btn btn-primary">Submit</button>
 
-      </form>
-      `;
+    </form>`;
   };
+
+  // ADD CORRECT ANSWER
 
   const questionN = (questionN) => {
     return `
         <div class="mb-3">
           <label class="form-label">Question ${questionN}</label>
-          <input type="text" name="q1" class="form-control" placeholder="Enter a title">
+          <input type="text" name="q${questionN}" class="form-control" placeholder="Enter a title">
         </div>
         <div class="mb-3">
           <label class="form-label">Answer A</label>
@@ -279,24 +257,36 @@ $(document).ready(() => {
           <label class="form-label">Answer D</label>
           <input type="text" name="q${questionN}d" class="form-control" placeholder="Enter a title">
         </div>
+        <button type="button" class="btn btn-primary" id="deleteq${questionN}">Delete question</button>
       `;
   };
 
-  $('#createkwiz').click((e) => {
+  $(document).on('click', '#createkwiz', (e) => {
     e.preventDefault();
-    $('.container').empty().append(questions());
+    $('.container').empty().append(createKwiz());
   });
 
-  $('#subcreatekwiz').click((e) => {
+  let n = 1;
+  $(document).on('submit', '#subcreatekwiz', function(e) {
     e.preventDefault();
-    $('.container').empty().append(questions());
+    const data = $(this).serialize();
+    $.post("/createkwiz", data)
+      .then(() => console.log);
+    $('.container').empty().append(questionsForm());
+    $('.questions').append(questionN(n));
   });
 
-  let n;
-  $('#newquestion').click((e) => {
+  $(document).on('click', '#newquestion', (e) => {
     e.preventDefault();
     n++;
     $('.questions').append(questionN(n));
+  });
+
+  $(document).on('submit', '#questionsform', function(e) {
+    e.preventDefault();
+    const data = $(this).serialize();
+    $.post("/createkwiz/questions", data);
+    n = 0;
   });
 
 });
