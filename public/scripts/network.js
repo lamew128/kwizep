@@ -11,7 +11,7 @@ function logOut() {
   return $.ajax({
     method: "POST",
     url: "/users/logout",
-  })
+  });
 }
 
 function logIn(data) {

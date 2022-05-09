@@ -173,8 +173,6 @@ $(document).ready(() => {
       `;
   };
 
-  
-
   const database = [
     {
       title: 'CANADA',
