@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS quiz_result CASCADE;
 
 CREATE TABLE quiz_take (
   id SERIAL PRIMARY KEY NOT NULL,
+  taker_id INTEGER REFERENCES user(id),
   quiz_id INTEGER REFERENCES quiz(id),
   quiz_answers_id INTEGER REFERENCES quiz_answers_id ON DELETE CASCADE,
 );
