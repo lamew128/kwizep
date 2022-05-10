@@ -2,6 +2,11 @@
 // Client facing scripts here
 
 $(document).ready(() => {
+  let num = 1;
+  let kwizData;
+  let questions;
+  let answers = [];
+  let correct = [];
 
   $('#scroll-top').fadeOut();
 
@@ -35,24 +40,23 @@ $(document).ready(() => {
     $('.container').empty().append(registerPage());
   });
 
-  let n = 1;
   $(document).on('click', '#newquestion', (e) => {
     e.preventDefault();
-    n++;
-    $('#questionscontainer').append(question(n)).html();
+    num++;
+    $('#questionscontainer').append(question(num)).html();
   });
 
   $(document).on('click', '#deletequestion', (e) => {
     e.preventDefault();
-    if (n === 1) {
+    if (num === 1) {
       alert('You must have at least one question!');
     } else {
       $(`#question${n}`).remove();
-      n--;
+      num--;
     }
   });
 
-  $(document).on('submit', '#questionsform', function (e) {
+  $(document).on('submit', '#createkwizform', function (e) {
     e.preventDefault();
     const data = $(this).serialize();
     let submit = true;
@@ -65,10 +69,7 @@ $(document).ready(() => {
     });
     if (submit) {
       //inject createKwiz;
-      createKwiz(data)
-        .then((res) => {
-          $('.container').empty().append(card(res));
-        });
+      createKwiz(data);
       n = 0;
     }
   });
@@ -107,26 +108,19 @@ $(document).ready(() => {
       });
   });
 
-  let kwizData;
-  let questions;
-
-  let answers = [];
-  let correct = [];
-
   $(document).on('click', '.kwizbutton', function (e) {
     e.preventDefault();
-    $.get(`/${$(this).attr('href')}/questions`, (data) => {
+    $.get(`${$(this).attr('href')}/questions`, (data) => {
       kwizId = $(this).attr('href');
       kwizData = data;
       questions = Object.keys(kwizData);
       qnum = 0;
-      // console.log(kwizData);
-      // console.log('kwizData',Object.keys(kwizData));
       $('#questions').empty().append(kwizQuestion(kwizData, questions[qnum])).append(nextQuestionButton());
       qnum++;
     });
   });
 
+  //HELPER FUNCTION
   const getObjKey = (obj, value, correct) => {
     const answer = Object.keys(obj).find(key => obj[key] === value);
     if (answer === correct) {
@@ -157,7 +151,7 @@ $(document).ready(() => {
     }
   });
 
-  $(document).on('submit', '#questions-form', function(e) {
+  $(document).on('submit', '#questions-form', function (e) {
     e.preventDefault();
     const correctAns = kwizData[qnum].qans;
     const answer = $("input:checked").val();
@@ -165,7 +159,11 @@ $(document).ready(() => {
     correct.push(userCorrect);
     answers.push(answer);
     const results = { answers, correct };
-    $.post('/results', results);
+    console.log(answers, correct);
+    $.post('/results', results)
+      .then(() => {
+        window.location.href = '/results';
+      });
   });
 
 });

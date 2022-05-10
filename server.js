@@ -200,7 +200,7 @@ app.post("/createkwiz/questions", (req, res) => {
   res.send(req.body);
 });
 
-app.get("/:id", (req, res) => {
+app.get("/kwiz/:id", (req, res) => {
   db.getUserWithId(req.cookies.id)
     .then((data) => {
       const kwizId = req.params.id;
@@ -209,14 +209,24 @@ app.get("/:id", (req, res) => {
     });
 });
 
-app.get("/:id/questions", (req, res) => {
+app.get("/kwiz/:id/questions", (req, res) => {
   const kwizId = req.params.id;
   res.send(questionsDb[kwizId]);
 });
 
 app.post("/results", (req, res) => {
-  console.log(req.body);
+  res.redirect('/results');
+  // console.log(req.body);
   // res.send(questionsDb[kwizId]);
+});
+
+app.get("/results", (req, res) => {
+  db.getUserWithId(req.cookies.id)
+    .then((data) => {
+      const kwizId = req.params.id;
+      const templateVars = { user: data, id: kwizId };
+      res.render("results", templateVars);
+    });
 });
 
 // \/\/\/\/\/\/\/\/\/\/\/\/\/\/ NEW ADDED EJS ROUTES \/\/\/\/\/\/\/\/\/\/\/\/\/\/
