@@ -46,31 +46,28 @@
 
     <main class="container">
 
-      <form action="/createkwiz" method="POST" id="questionsform">
+      <form id="questionsform">
         <header>
           <div class="mb-3">
             <label class="form-label">Title</label>
-            <input type="text" name="title" class="form-control" placeholder="Enter a title">
+            <input type="text" name="title" class="form-control formfield" placeholder="Enter a title">
           </div>
           <div class="mb-3">
             <label class="form-label">Description</label>
-            <input type="text" name="description" class="form-control" placeholder="Enter a description">
+            <input type="text" name="description" class="form-control formfield" placeholder="Enter a description">
           </div>
           <div class="mb-3">
             <label class="form-label">Image</label>
-            <input type="url" name="imageurl" accept="image/gif, image/jpg, image/jpeg" class="form-control"
+            <input type="url" name="imageurl" accept="image/gif, image/jpg, image/jpeg" class="form-control formfield"
               placeholder="Image URL">
           </div>
           <div class="mb-3">
             <label class="form-label">Private</label>
-            <input type="checkbox" name="private" class="form-check-label">
+            <input type="checkbox" name="private" class="form-check-label formfield">
           </div>
-          <a href="/createkwiz/questions">
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </a>
         </header>
 
-        <article id="questions">
+        <article id="questionscontainer">
 
         </article>
 

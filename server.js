@@ -137,6 +137,7 @@ app.get("/createkwiz", (req, res) => {
 
 app.post("/createkwiz/questions", (req, res) => {
   console.log(req.body);
+  res.send(req.body);
 });
 // \/\/\/\/\/\/\/\/\/\/\/\/\/\/ NEW ADDED EJS ROUTES \/\/\/\/\/\/\/\/\/\/\/\/\/\/
 

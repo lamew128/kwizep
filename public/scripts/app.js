@@ -25,9 +25,9 @@ $(document).ready(() => {
   $(document).on('click', '#logout', (e) => {
     e.preventDefault();
     logOut()
-    .then(() => {
-      location.reload();
-    })
+      .then(() => {
+        location.reload();
+      })
   });
 
   $(document).on('click', '#register', (e) => {
@@ -39,27 +39,27 @@ $(document).ready(() => {
     return `<section id="question${num}">
     <div class="mb-3">
       <label class="form-label">Question ${num} (select the correct answer)</label>
-      <input type="text" name="q1" class="form-control" placeholder="Enter a title">
+      <input type="text" name="q1" class="form-control formfield" placeholder="Enter a title">
     </div>
     <div class="mb-3">
       <label class="form-label">Answer A</label>
-      <input type="radio" name="q${num}ans" value="q${num}a"> <input type="text" name="q${num}a"
-        class="form-control">
+      <input type="radio" name="q${num}ans" value="q${num}a" required> <input type="text" name="q${num}a"
+        class="form-control formfield">
     </div>
     <div class="mb-3">
       <label class="form-label">Answer B</label>
       <input type="radio" name="q${num}ans" value="q${num}b"><input type="text" name="q${num}b"
-        class="form-control">
+        class="form-control formfield">
     </div>
     <div class="mb-3">
       <label class="form-label">Answer C</label>
       <input type="radio" name="q${num}ans" value="q${num}c"><input type="text" name="q${num}c"
-        class="form-control">
+        class="form-control formfield">
     </div>
     <div class="mb-3">
       <label class="form-label">Answer D</label>
       <input type="radio" name="q${num}ans" value="q${num}d"><input type="text" name="q${num}d"
-        class="form-control">
+        class="form-control formfield">
     </div>
   </section>`;
   };
@@ -68,14 +68,13 @@ $(document).ready(() => {
   $(document).on('click', '#newquestion', (e) => {
     e.preventDefault();
     n++;
-    $('#questions').append(question(n)).html();
+    $('#questionscontainer').append(question(n)).html();
   });
 
   $(document).on('click', '#deletequestion', (e) => {
     e.preventDefault();
-    console.log(n);
     $(`#question${n}`).remove();
-    n--;
+    n === 0 ? n : n--;
   });
 
   const card = (data) => {
@@ -95,12 +94,24 @@ $(document).ready(() => {
   $(document).on('submit', '#questionsform', function (e) {
     e.preventDefault();
     const data = $(this).serialize();
-    $.post("/createkwiz/questions", data)
-      .then((res) => {
-        $('.container').empty().append(card(res));
-      });
-    n = 0;
+    let submit = true;
+    $('.formfield').each(function () {
+      if ($(this).val() === '') {
+        console.log($(this).val());
+        alert('You did not fill out one of the fields!');
+        submit = false;
+        return false;
+      }
+    });
+    if (submit) {
+      $.post("/createkwiz/questions", data)
+        .then((res) => {
+          $('.container').empty().append(card(res));
+        });
+      n = 0;
+    }
   });
+
 
   $(document).on('submit', '#login-form', function (e) {
     e.preventDefault();
