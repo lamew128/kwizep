@@ -64,7 +64,7 @@ $(document).ready(() => {
   </section>`;
   };
 
-  let n = 0;
+  let n = 1;
   $(document).on('click', '#newquestion', (e) => {
     e.preventDefault();
     n++;
@@ -73,8 +73,12 @@ $(document).ready(() => {
 
   $(document).on('click', '#deletequestion', (e) => {
     e.preventDefault();
-    $(`#question${n}`).remove();
-    n === 0 ? n : n--;
+    if (n === 1) {
+      alert('You must have at least one question!');
+    } else {
+      $(`#question${n}`).remove();
+      n--;
+    }
   });
 
   const card = (data) => {
@@ -119,14 +123,14 @@ $(document).ready(() => {
     const data = $(this).serialize();
     //console.log("data", data);
     logIn(data)
-    .then((data) => {
-      if(data === "WRONG INFO") {
-        $('.container').append("AAAAAAAAAAA").html();// ADD ERROR MESSAGE (SHOW)
-        console.log("WRONG INFOOOOOOOOOOOOOOOOOOOO");
-        return;
-      }
-      location.reload();
-    })
+      .then((data) => {
+        if (data === "WRONG INFO") {
+          $('.container').append("AAAAAAAAAAA").html();// ADD ERROR MESSAGE (SHOW)
+          console.log("WRONG INFOOOOOOOOOOOOOOOOOOOO");
+          return;
+        }
+        location.reload();
+      });
 
   });
 
@@ -137,7 +141,7 @@ $(document).ready(() => {
     signUp(data)
       //.then(getMyDetails)
       .then((data) => {
-        if(data === "EXIST") {
+        if (data === "EXIST") {
           $('.container').append("AAAAAAAAAAA").html();// ADD ERROR MESSAGE (SHOW)
           console.log("EXISTTTTTTTTTT");
           return;
