@@ -36,27 +36,27 @@ $(document).ready(() => {
     return `<section id="question${num}">
     <div class="mb-3">
       <label class="form-label">Question ${num} (select the correct answer)</label>
-      <input type="text" name="q1" class="form-control" placeholder="Enter a title">
+      <input type="text" name="q1" class="form-control formfield" placeholder="Enter a title">
     </div>
     <div class="mb-3">
       <label class="form-label">Answer A</label>
       <input type="radio" name="q${num}ans" value="q${num}a"> <input type="text" name="q${num}a"
-        class="form-control">
+        class="form-control formfield">
     </div>
     <div class="mb-3">
       <label class="form-label">Answer B</label>
       <input type="radio" name="q${num}ans" value="q${num}b"><input type="text" name="q${num}b"
-        class="form-control">
+        class="form-control formfield">
     </div>
     <div class="mb-3">
       <label class="form-label">Answer C</label>
       <input type="radio" name="q${num}ans" value="q${num}c"><input type="text" name="q${num}c"
-        class="form-control">
+        class="form-control formfield">
     </div>
     <div class="mb-3">
       <label class="form-label">Answer D</label>
       <input type="radio" name="q${num}ans" value="q${num}d"><input type="text" name="q${num}d"
-        class="form-control">
+        class="form-control formfield">
     </div>
   </section>`;
   };
@@ -65,14 +65,14 @@ $(document).ready(() => {
   $(document).on('click', '#newquestion', (e) => {
     e.preventDefault();
     n++;
-    $('#questions').append(question(n)).html();
+    $('#questionscontainer').append(question(n)).html();
   });
 
   $(document).on('click', '#deletequestion', (e) => {
     e.preventDefault();
     console.log(n);
     $(`#question${n}`).remove();
-    n--;
+    n === 0 ? n : n--;
   });
 
   const card = (data) => {
@@ -89,9 +89,13 @@ $(document).ready(() => {
     </article>`;
   };
 
-  $(document).on('submit', '#questionsform', function (e) {
+  $(document).on('submit', '#questionsform', function(e) {
     e.preventDefault();
     const data = $(this).serialize();
+    if ($.trim($("#title, #description", "#image").val()) === "") {
+      alert('you did not fill out one of the fields');
+      return;
+    }
     $.post("/createkwiz/questions", data)
       .then((res) => {
         $('.container').empty().append(card(res));
@@ -99,7 +103,7 @@ $(document).ready(() => {
     n = 0;
   });
 
-  $(document).on('submit', '#login-form', function (e) {
+  $(document).on('submit', '#login-form', function(e) {
     e.preventDefault();
 
     const data = $(this).serialize();
@@ -122,10 +126,8 @@ $(document).ready(() => {
 
     const data = $(this).serialize();
     signUp(data)
-      //.then(getMyDetails)
       .then((json) => {
         console.log("json.user", json.user);
-        user = json.user;
         //header.update(json.user);
         //views_manager.show('listings');
       });
