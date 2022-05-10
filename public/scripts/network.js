@@ -33,15 +33,14 @@ function signUp(data) {
 function createKwiz(data) {
   return $.ajax({
     method: "POST",
-    url: "/quiz/create",
+    url: "/kwiz/create",
     data
   });
 }
 
-function getKwiz(data) {
+function getKwiz(url) {
   return $.ajax({
     method: "GET",
-    url: "/quiz/:id",
-    data
+    url: `${url}/questions`,
   });
 }

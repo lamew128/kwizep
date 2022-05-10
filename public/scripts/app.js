@@ -22,11 +22,13 @@ $(document).ready(() => {
     $(document).scrollTop(0);
   });
 
+  //append login page
   $(document).on('click', '#login', (e) => {
     e.preventDefault();
     $('.container').empty().append(loginPage());
   });
 
+  //logout and refresh
   $(document).on('click', '#logout', (e) => {
     e.preventDefault();
     logOut()
@@ -35,17 +37,20 @@ $(document).ready(() => {
       });
   });
 
+  //append register page
   $(document).on('click', '#register', (e) => {
     e.preventDefault();
     $('.container').empty().append(registerPage());
   });
 
+  //append a new question block
   $(document).on('click', '#newquestion', (e) => {
     e.preventDefault();
     num++;
     $('#questionscontainer').append(question(num)).html();
   });
 
+  //delete the latest question block
   $(document).on('click', '#deletequestion', (e) => {
     e.preventDefault();
     if (num === 1) {
@@ -56,6 +61,7 @@ $(document).ready(() => {
     }
   });
 
+  //create a quiz
   $(document).on('submit', '#createkwizform', function (e) {
     e.preventDefault();
     const data = $(this).serialize();
@@ -74,7 +80,7 @@ $(document).ready(() => {
     }
   });
 
-
+  //submit login form
   $(document).on('submit', '#login-form', function (e) {
     e.preventDefault();
 
@@ -92,6 +98,7 @@ $(document).ready(() => {
 
   });
 
+  //submit register form
   $(document).on('submit', '#register-form', function (e) {
     e.preventDefault();
 
@@ -108,16 +115,18 @@ $(document).ready(() => {
       });
   });
 
+  //start the quiz
   $(document).on('click', '.kwizbutton', function (e) {
     e.preventDefault();
-    $.get(`${$(this).attr('href')}/questions`, (data) => {
+    getKwiz(`${$(this).attr('href')}`)
+    .then((data) => {
       kwizId = $(this).attr('href');
       kwizData = data;
       questions = Object.keys(kwizData);
       qnum = 0;
       $('#questions').empty().append(kwizQuestion(kwizData, questions[qnum])).append(nextQuestionButton());
       qnum++;
-    });
+    })
   });
 
   //HELPER FUNCTION
@@ -129,6 +138,7 @@ $(document).ready(() => {
     return false;
   };
 
+  //next question
   $(document).on('click', '#nextbutton', function (e) {
     e.preventDefault();
     const correctAns = kwizData[qnum].qans;
@@ -151,6 +161,7 @@ $(document).ready(() => {
     }
   });
 
+  //submit the quiz and get the result
   $(document).on('submit', '#questions-form', function (e) {
     e.preventDefault();
     const correctAns = kwizData[qnum].qans;
