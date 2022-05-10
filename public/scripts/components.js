@@ -151,7 +151,7 @@ const registerPage = () => {
 //   }
 // };
 
-const createKwiz = (user) => {
+const createKwiz = () => {
   `
     <form action="/createkwiz" method="POST" id="subcreatekwiz">
         <div class="mb-3">

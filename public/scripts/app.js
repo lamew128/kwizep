@@ -1,53 +1,7 @@
 /* eslint-disable no-undef */
 // Client facing scripts here
-let user;
 
 $(document).ready(() => {
-
-  const database = [
-    {
-      title: 'CANADA',
-      description: 'Oh Canada! 🇨🇦',
-      imageurl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJFZ65LwsawfGT8XIQrWoCg-6inXNiMkopHQ&usqp=CAU',
-      public: true
-    },
-    {
-      title: 'USA',
-      description: 'You know everything about america? Find out!',
-      imageurl: 'https://images.unsplash.com/photo-1628510118714-d2124aea4b8a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max',
-      public: true
-    },
-    {
-      title: 'TORONTO',
-      description: 'How much you know about the 6ix?',
-      imageurl: 'https://blogdointercambio.west1.com.br/wp-content/uploads/2019/01/268152-toronto-principais-pontos-turisticos-atracoes-e-custo-de-vida-1024x683.jpg',
-      public: true
-    },
-    {
-      title: 'TECHNOLOGY',
-      description: `Are you a technophile? Let's see!`,
-      imageurl: 'https://greatpeopleinside.com/wp-content/uploads/2017/05/HR-GR8-technology.jpg',
-      public: false
-    },
-    {
-      title: 'MARVEL',
-      description: 'Love Spider-man and company? Test your knowledge!',
-      imageurl: 'https://d5y9g7a5.rocketcdn.me/wp-content/uploads/2020/06/marvel-a-historia-da-editora-nos-quadrinhos-e-no-cinema-1024x512.jpg',
-      public: false
-    },
-    {
-      title: 'DC',
-      description: 'Are you a gamemanic? See if you know everything about videogames!',
-      imageurl: 'https://files.tecnoblog.net/wp-content/uploads/2020/06/spotify-dc-comics-warner-700x513.jpg',
-      public: false
-    },
-    {
-      title: 'GAMES',
-      description: 'Batman, Superman, and the Justice League!',
-      imageurl: 'https://thumbs2.imgbox.com/2d/46/Ba6012x0_t.jpg',
-      public: false
-    },
-  ];
 
   $('#scroll-top').fadeOut();
 
@@ -61,24 +15,6 @@ $(document).ready(() => {
 
   $('#scroll-top').on('click', () => {
     $(document).scrollTop(0);
-  });
-
-  const renderCards = (database, public) => {
-    for (const kwiz of database) {
-      if (public === kwiz.public) {
-        $('#kwizcontainer').append(createCard(kwiz));
-      }
-    }
-  };
-
-  $(document).on('click', '#publickwizes', (e) => {
-    e.preventDefault();
-    renderCards(database, true);
-  });
-
-  $(document).on('click', '#mykwizes', (e) => {
-    e.preventDefault();
-    renderCards(database, false);
   });
 
   $(document).on('click', '#login', (e) => {
@@ -96,31 +32,42 @@ $(document).ready(() => {
     $('.container').empty().append(registerPage());
   });
 
-  $(document).on('click', '#createkwiz', (e) => {
-    e.preventDefault();
-    $('.container').empty().append(createKwiz(user));
-  });
-
-
-  $(document).on('submit', '#subcreatekwiz', function (e) {
-    e.preventDefault();
-    const data = $(this).serialize();
-    console.log(data);
-
-    $.post("/createkwiz", data);
-    $('.container').empty().append(questionsForm());
-    $('.questions').append(questionN(n));
-  });
-
-  let n = 1;
+  let num = 0;
   $(document).on('click', '#newquestion', (e) => {
     e.preventDefault();
-    n++;
-    $('.questions').append(questionN(n));
+    num++;
+    $('#questions').append(
+      `<section id="question${num}">
+    <div class="mb-3">
+      <label class="form-label">Question ${num} (select the correct answer)</label>
+      <input type="text" name="q1" class="form-control" placeholder="Enter a title">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Answer A</label>
+      <input type="radio" name="q${num}ans" value="q${num}a"> <input type="text" name="q${num}a"
+        class="form-control">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Answer B</label>
+      <input type="radio" name="q${num}ans" value="q${num}b"><input type="text" name="q${num}b"
+        class="form-control">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Answer C</label>
+      <input type="radio" name="q${num}ans" value="q${num}c"><input type="text" name="q${num}c"
+        class="form-control">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Answer D</label>
+      <input type="radio" name="q${num}ans" value="q${num}d"><input type="text" name="q${num}d"
+        class="form-control">
+    </div>
+  </section>`).html();
   });
 
   $(document).on('click', '#deletequestion', (e) => {
     e.preventDefault();
+    console.log(n);
     $(`#question${n}`).remove();
     n--;
   });
@@ -130,7 +77,6 @@ $(document).ready(() => {
     const data = $(this).serialize();
     console.log(data);
     $.post("/createkwiz/questions", data);
-    $('.container').empty().append(createCard(card));
     n = 0;
   });
 

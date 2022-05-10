@@ -99,15 +99,44 @@ app.use("/api/widgets", widgetsRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-
-
 app.get("/", (req, res) => {
   db.getUserWithId(req.cookies.id)
     .then((data) => {
-      const templateVars = { user: data, db: database };
+      const templateVars = { user: data, db: database, public: false };
       res.render("index", templateVars);
     });
 });
+
+// \/\/\/\/\/\/\/\/\/\/\/\/\/\/ NEW ADDED EJS ROUTES \/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+app.get("/mykwizes", (req, res) => {
+  db.getUserWithId(req.cookies.id)
+    .then((data) => {
+      const templateVars = { user: data, db: database, public: false };
+      res.render("index", templateVars);
+    });
+});
+
+app.get("/publickwizes", (req, res) => {
+  db.getUserWithId(req.cookies.id)
+    .then((data) => {
+      const templateVars = { user: data, db: database, public: true };
+      res.render("index", templateVars);
+    });
+});
+
+app.get("/createkwiz", (req, res) => {
+  db.getUserWithId(req.cookies.id)
+    .then((data) => {
+      const templateVars = { user: data };
+      res.render("createkwiz", templateVars);
+    });
+});
+
+app.post("/createkwiz/questions", (req, res) => {
+  console.log(req.body);
+});
+// \/\/\/\/\/\/\/\/\/\/\/\/\/\/ NEW ADDED EJS ROUTES \/\/\/\/\/\/\/\/\/\/\/\/\/\/
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
