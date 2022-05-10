@@ -32,12 +32,8 @@ $(document).ready(() => {
     $('.container').empty().append(registerPage());
   });
 
-  let num = 0;
-  $(document).on('click', '#newquestion', (e) => {
-    e.preventDefault();
-    num++;
-    $('#questions').append(
-      `<section id="question${num}">
+  const question = (num) => {
+    return `<section id="question${num}">
     <div class="mb-3">
       <label class="form-label">Question ${num} (select the correct answer)</label>
       <input type="text" name="q1" class="form-control" placeholder="Enter a title">
@@ -62,7 +58,14 @@ $(document).ready(() => {
       <input type="radio" name="q${num}ans" value="q${num}d"><input type="text" name="q${num}d"
         class="form-control">
     </div>
-  </section>`).html();
+  </section>`;
+  };
+
+  let n = 0;
+  $(document).on('click', '#newquestion', (e) => {
+    e.preventDefault();
+    n++;
+    $('#questions').append(question(n)).html();
   });
 
   $(document).on('click', '#deletequestion', (e) => {
@@ -72,11 +75,27 @@ $(document).ready(() => {
     n--;
   });
 
+  const card = (data) => {
+    return `
+    <article class="col-lg-4 col-md-5 col-10">
+      <div class="card kwizcard">
+        <img src="${data.imageurl} KWIZ" class="card-img-top img-fluid" alt="quizimg">
+          <div class="card-body">
+            <h5 class="card-title">${data.title}</h5>
+            <p class="card-text">${data.description}</p>
+            <a href="#" class="btn btn-primary">KWIZ!</a>
+          </div>
+      </div>
+    </article>`;
+  };
+
   $(document).on('submit', '#questionsform', function (e) {
     e.preventDefault();
     const data = $(this).serialize();
-    console.log(data);
-    $.post("/createkwiz/questions", data);
+    $.post("/createkwiz/questions", data)
+      .then((res) => {
+        $('.container').empty().append(card(res));
+      });
     n = 0;
   });
 
