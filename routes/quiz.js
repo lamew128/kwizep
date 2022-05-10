@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
+const { stringify } = require('querystring');
 router.use(bodyParser.urlencoded({ extended: false }));
 
 module.exports = (db) => {
@@ -12,20 +13,62 @@ module.exports = (db) => {
     const kwiz = req.body;
     // console.log("id is" , req.cookies.id);
     kwiz.userId = req.cookies.id;
-    // console.log(kwiz);
+    console.log(kwiz);
     if (kwiz.private = 'on') {
       kwiz.public = false;
     } else {
       kwiz.public = true;
     }
 
+    let keys = Object.keys(kwiz).sort();
+    let answerKeys = keys.slice(5,keys.length - 2);
+    for (let i = 0; i < answerKeys.length; i++) {
+      let ans = answerKeys[i];
+      console.log(ans);
+      if (ans[ans.length-1] !== 's') {
+        let questionId = ans.substring(1,ans.length - 1);
+        // console.log(questionId);
+        let option = ans[ans.length-1];
+        let correct;
+        let answer = kwiz[ans];
+        if (i !== ans.length - 1 && answerKeys[i+1][ans.length-1] == 's'){
+          correct = true;
+        } else {
+          correct = false;
+        }
+        let answerObj = {};
+        answerObj[questionId] = {};
+        answerObj[questionId].option = option;
+        answerObj[questionId].correct = correct;
+        answerObj[questionId].answer = answer;
+        console.log(answerObj);
+      }
+    }
+
+
+
+
+
+    // [
+    //   'q1a',
+    //   'q1ans', 'q1b',
+    //   'q1c',   'q1d',
+    //   'q2a',   'q2ans',
+    //   'q2b',   'q2c',
+    //   'q2d'
+    // ]
+    // console.log(answerKeys);
+
     db.addKwiz(kwiz)
       .then(() => {
         // console.log("quizId is",kwiz.quizId);
         db.addKwizQuestions(kwiz.q1,kwiz.quizId)})
       .then (() =>{
-        db.addKwizAnswers;
-      });
+
+        db.addKwizAnswers(kwiz.id,questionId,correct,answer,option);
+        }
+        // db.addKwizAnswers(kwiz.quizId,);
+      );
     //bug:only adding the first questionl
     // db.addKwizQuestions(kwiz.q1, quizId);
  });
