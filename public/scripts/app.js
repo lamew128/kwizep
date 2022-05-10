@@ -159,7 +159,6 @@ $(document).ready(() => {
     correct.push(userCorrect);
     answers.push(answer);
     const results = { answers, correct };
-    console.log(answers, correct);
     $.post('/results', results)
       .then(() => {
         window.location.href = '/results';

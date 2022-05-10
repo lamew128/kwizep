@@ -83,7 +83,7 @@ const questionsDb = {
     },
     2: {
       q2: 'QUESTION 2',
-      q2a: 'Q2A',
+      q2a: 'ASKDJHAKJHDSAG',
       q2b: 'Q2B',
       q2c: 'Q2C',
       q2d: 'Q2D',
@@ -150,6 +150,7 @@ app.use(express.static("public"));
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
 const quizRoutes = require("./routes/quiz");
+const { reset } = require("nodemon");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -218,18 +219,23 @@ app.get("/kwiz/:id/questions", (req, res) => {
 });
 
 app.post("/results", (req, res) => {
-  res.redirect('/results');
-  // console.log(req.body);
-  // res.send(questionsDb[kwizId]);
+  console.log(req.body);
+  // req.body = { [user answers <actual asnwers>] , [user correct answers <true/false> ] } => save to DB (INSERT)
+  // create VAR ID for results page (SELECT)
+  // res.send(ID);
 });
 
+// ERD => RESULTS ID / USERID / KWIZID / SCORE (VARCHAR -> eg 7/10) / ANSWERS / CORRECT ANSWERS (FROM QUIZ)...
+
 app.get("/results", (req, res) => {
-  db.getUserWithId(req.cookies.id)
-    .then((data) => {
-      const kwizId = req.params.id;
-      const templateVars = { user: data, id: kwizId };
-      res.render("results", templateVars);
-    });
+  res.render("results");
+  // RESULTS ()
+  // db.getUserWithId(req.cookies.id)
+  //   .then((data) => {
+  //     const kwizId = req.params.id;
+  //     const templateVars = { user: data, id: kwizId };
+  //     res.render("results", templateVars);
+  //   });
 });
 
 // \/\/\/\/\/\/\/\/\/\/\/\/\/\/ NEW ADDED EJS ROUTES \/\/\/\/\/\/\/\/\/\/\/\/\/\/
