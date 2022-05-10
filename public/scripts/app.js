@@ -66,8 +66,9 @@ $(document).ready(() => {
     if (submit) {
       //inject createKwiz;
       createKwiz(data)
-        .then((res) => {
-          $('.container').empty().append(card(res));
+        .then(() => {
+          console.log("created");
+          window.location.replace("/");
         });
       n = 0;
     }

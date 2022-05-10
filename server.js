@@ -189,6 +189,9 @@ app.get("/publickwizes", (req, res) => {
 });
 
 app.get("/createkwiz", (req, res) => {
+  if (!req.cookies.id) {
+    res.redirect('/');
+  }
   db.getUserWithId(req.cookies.id)
     .then((data) => {
       const templateVars = { user: data };
