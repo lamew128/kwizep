@@ -84,45 +84,32 @@ const questionsDb = {
     2: {
       q2: 'QUESTION 2',
       q2a: 'ASKDJHAKJHDSAG',
-      q2b: 'Q2B',
-      q2c: 'Q2C',
-      q2d: 'Q2D',
+      q2b: 'AKLSJDHAK',
+      q2c: 'ASJHHASD',
+      q2d: 'AHAHHA',
       qans: 'q2b'
     },
     3: {
       q3: 'QUESTION 3',
-      q3a: 'Q3A',
-      q3b: 'Q3B',
-      q3c: 'Q3C',
-      q3d: 'Q3D',
+      q3a: 'asduqwgwdkj',
+      q3b: 'asduqwgw',
+      q3c: 'asdkj',
+      q3d: 'aswgwdkj',
       qans: 'q3c'
     },
     4: {
       q4: 'QUESTION 4',
-      q4a: 'Q4A',
-      q4b: 'Q4B',
-      q4c: 'Q4C',
-      q4d: 'Q4D',
+      q4a: 'asdasq13212321',
+      q4b: 'asdasq1221',
+      q4c: 'asdasq123312',
+      q4d: 'asdasq3113131',
       qans: 'q4d'
-    },
-    5: {
-      q5: 'QUESTION 5',
-      q5a: 'Q5A',
-      q5b: 'Q5B',
-      q5c: 'Q5C',
-      q5d: 'Q5D',
-      qans: 'q5a'
-    },
-    6: {
-      q6: 'QUESTION 6',
-      q6a: 'Q6A',
-      q6b: 'Q6B',
-      q6c: 'Q6C',
-      q6d: 'Q6D',
-      qans: 'q6b'
-    },
+    }
   },
 };
+
+const userAnswers = ['q1a', 'q2b', 'q3d', 'q4d'];
+const correct = [questionsDb[1][1][questionsDb[1][1].qans], questionsDb[1][2][questionsDb[1][2].qans], questionsDb[1][3][questionsDb[1][3].qans], questionsDb[1][4][questionsDb[1][4].qans]];
 
 // ---------------------------------------------------------------------------
 
@@ -220,22 +207,16 @@ app.get("/kwiz/:id/questions", (req, res) => {
 
 app.post("/results", (req, res) => {
   console.log(req.body);
-  // req.body = { [user answers <actual asnwers>] , [user correct answers <true/false> ] } => save to DB (INSERT)
-  // create VAR ID for results page (SELECT)
-  // res.send(ID);
+  res.send(req.body);
 });
 
-// ERD => RESULTS ID / USERID / KWIZID / SCORE (VARCHAR -> eg 7/10) / ANSWERS / CORRECT ANSWERS (FROM QUIZ)...
-
 app.get("/results", (req, res) => {
-  res.render("results");
-  // RESULTS ()
-  // db.getUserWithId(req.cookies.id)
-  //   .then((data) => {
-  //     const kwizId = req.params.id;
-  //     const templateVars = { user: data, id: kwizId };
-  //     res.render("results", templateVars);
-  //   });
+  db.getUserWithId(req.cookies.id)
+    .then((data) => {
+      const kwizId = req.params.id;
+      const templateVars = { user: data, db: questionsDb[1], answers: userAnswers, correctAns: correct };
+      res.render("results", templateVars);
+    });
 });
 
 // \/\/\/\/\/\/\/\/\/\/\/\/\/\/ NEW ADDED EJS ROUTES \/\/\/\/\/\/\/\/\/\/\/\/\/\/

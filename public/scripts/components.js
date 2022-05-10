@@ -120,3 +120,4 @@ const nextQuestionButton = () => {
 const submitKwizButton = () => {
   return `<button type="submit">SUBMIT</button`;
 };
+
