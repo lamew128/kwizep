@@ -6,7 +6,7 @@
  */
 
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 const bcrypt = require('bcryptjs');
 const bodyParser = require('body-parser');
 router.use(bodyParser.urlencoded({ extended: false }));
@@ -15,10 +15,10 @@ router.use(bodyParser.urlencoded({ extended: false }));
 module.exports = (db) => {
   router.get("/", (req, res) => {
     db.getAllUser()
-    .then(users => {
-      res.json({ users });
-    })
-    .catch(e => res.send(e));
+      .then(users => {
+        res.json({ users });
+      })
+      .catch(e => res.send(e));
   });
 
 
@@ -27,14 +27,14 @@ module.exports = (db) => {
    * @param {String} email
    * @param {String} password encrypted
    */
-   const login =  function(email, password) {
+  const login = function (email, password) {
     return db.getUserWithEmail(email)
-    .then(user => {
-      if (password === user.password) {
-        return user;
-      }
-      return null;
-    });
+      .then(user => {
+        if (password === user.password) {
+          return user;
+        }
+        return null;
+      });
   }
   exports.login = login;
 
@@ -43,16 +43,16 @@ module.exports = (db) => {
     const email = req.body.email;
     const password = req.body.password;
     login(email, password)
-    .then(user => {
-      if (!user) {
-        res.send({error: "error"});
-        return;
-      }
-      res.cookie('id', user.id);
-      console.log("login success!");
-      res.send({user: {name: user.name, email: user.email, id: user.id}});
-    })
-    .catch(e => res.send(e));
+      .then(user => {
+        if (!user) {
+          res.send({ error: "error" });
+          return;
+        }
+        res.cookie('id', user.id);
+        console.log("login success!");
+        res.send({ user: { name: user.name, email: user.email, id: user.id } });
+      })
+      .catch(e => res.send(e));
   });
 
   router.post('/logout', (req, res) => {
@@ -64,15 +64,15 @@ module.exports = (db) => {
   router.post('/register', (req, res) => {
     const user = req.body;
     db.addUser(user)
-    .then(user => {
-      if (!user) {
-        res.send({error: "error"});
-        return;
-      }
-      res.cookie('id', user.id);
-      res.send("🤗");
-    })
-    .catch(e => res.send(e));
+      .then(user => {
+        if (!user) {
+          res.send({ error: "error" });
+          return;
+        }
+        res.cookie('id', user.id);
+        res.send("🤗");
+      })
+      .catch(e => res.send(e));
   });
 
   return router;

@@ -4,8 +4,6 @@ let user;
 
 $(document).ready(() => {
 
-  $('body').prepend(navbar(user));
-
   const database = [
     {
       title: 'CANADA',
@@ -75,13 +73,11 @@ $(document).ready(() => {
 
   $(document).on('click', '#publickwizes', (e) => {
     e.preventDefault();
-    $('.container').empty().append(renderContainer(user));
     renderCards(database, true);
   });
 
   $(document).on('click', '#mykwizes', (e) => {
     e.preventDefault();
-    $('.container').empty().append(renderContainer(user));
     renderCards(database, false);
   });
 
@@ -92,11 +88,7 @@ $(document).ready(() => {
 
   $(document).on('click', '#logout', (e) => {
     e.preventDefault();
-    logOut()
-      .then(() => user = null)
-      .then(() => $('.container').empty().append(renderContainer(user)))
-      .then(() => $('nav').remove())
-      .then(() => $('body').prepend(navbar(user)));
+    logOut();
   });
 
   $(document).on('click', '#register', (e) => {
@@ -148,17 +140,13 @@ $(document).ready(() => {
     const data = $(this).serialize();
     //console.log("data", data);
     logIn(data)
-      .then(json => {
+      .then((json) => {
         console.log("json", json);
         if (!json.user) {
           console.log('fail');
           return;
         }
         console.log("json.user", json.user);
-        user = json.user;
-        $('.container').empty().append(renderContainer(user));
-        $('nav').remove();
-        $('body').prepend(navbar(user));
         //header.update(json.user);
         //views_manager.show('listings');
       });
@@ -173,9 +161,6 @@ $(document).ready(() => {
       .then((json) => {
         console.log("json.user", json.user);
         user = json.user;
-        $('.container').empty().append(renderContainer(user));
-        $('nav').remove();
-        $('body').prepend(navbar(user));
         //header.update(json.user);
         //views_manager.show('listings');
       });

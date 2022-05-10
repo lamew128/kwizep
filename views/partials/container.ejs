@@ -1,0 +1,44 @@
+<% if (user) { %>
+<div class="row d-flex justify-content-center">
+
+  <!-- PROFILE CARD -->
+  <div class="col-md-3 col-10">
+    <div class="row">
+      <div class="col kwizcard profile rounded my-5 fixed">
+        <div class="col">
+          <div class="row d-flex justify-content-center">
+          </div>
+          <div class="profileinfo">
+            <section class="row">
+              <p class="h3 text-center"><%= user.name %></p>
+            </section>
+            <section class="row border rounded d-flex justify-content-center m-1">
+              <h5 class="text-center my-0 p-0">LAST KWIZ RESULT:</h5>
+              <hr class="w-75">
+              <p class="text-center my-0 p-0">8 out of 10</p>
+            </section>
+            <p class="py-3 m-0">Kwizes created: 3</p>
+            <hr class="w-100">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="row d-flex justify-content-center mb-5">
+      <a href="/createkwiz" id="createkwiz">
+        <button class="pushable w-50">
+          <span class="front">
+            Create new KWIZ!
+          </span>
+        </button>
+      </a>
+    </div>
+    <div class="row" id="kwizcontainer">
+      <%- include('./cards') %>
+    </div>
+  </div>
+</div>
+
+<% } %>

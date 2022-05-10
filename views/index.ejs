@@ -42,61 +42,17 @@
 
 <body>
 
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/"><img src="" alt="logo" width="auto" height="20px"></a>
-      <button class="navbar-toggler p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon buttoncolor rounded"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <% if (name) { %>
-            <li class="nav-item">
-              <a class="nav-link" id="mykwizes" href="/mykwizes">My Kwizes</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="publickwizes" href="/publickwizes">Kwizes Listing</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="logout">LOGOUT</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-<% } else { %>
-  <li class="nav-item">
-    <a class="nav-link" id="login">LOGIN</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="register">REGISTER</a>
-  </li>
-</ul>
-</div>
-</div>
-</nav>
-  <% } %>
+  <%- include('partials/nav') %>
 
     <main class="container">
 
       <div class="row d-flex justify-content-center">
 
-        <!-- PROFILE CARD -->
-
         <div class="col">
 
-          <div class="row d-flex justify-content-center mb-5">
-            <a href="/createkwiz" id="createkwiz">
-              <button class="pushable w-50">
-                <span class="front">
-                  Create new KWIZ!
-                </span>
-              </button>
-            </a>
-          </div>
-
           <div class="row" id="kwizcontainer">
+
+            <%- include('partials/container') %> %>
 
           </div>
         </div>

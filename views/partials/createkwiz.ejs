@@ -1,0 +1,61 @@
+<form action="/createkwiz" method="POST" id="subcreatekwiz">
+  <div class="mb-3">
+    <label class="form-label">Title</label>
+    <input type="text" name="title" class="form-control" placeholder="Enter a title">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Description</label>
+    <input type="text" name="description" class="form-control" placeholder="Enter a description">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Image</label>
+    <input type="url" name="imageurl" accept="image/gif, image/jpg, image/jpeg" class="form-control"
+      placeholder="Image URL">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Private</label>
+    <input type="checkbox" name="private" class="form-check-label">
+  </div>
+  <a href="/createkwiz/questions">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </a>
+</form>
+
+<form action="/createkwiz/questions" method="POST" id="questionsform">
+
+  <section class="questions">
+
+  </section>
+
+  <button type="button" class="btn btn-primary" id="newquestion">Create new question</button>
+  <button type="button" class="btn btn-primary" id="deletequestion">Delete question</button>
+  <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>
+
+<section id="question${questionN}">
+  <div class="mb-3">
+    <label class="form-label">Question ${questionN} (select the correct answer)</label>
+    <input type="text" name="q1" class="form-control" placeholder="Enter a title">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Answer A</label>
+    <input type="radio" name="q${questionN}ans" value="q${questionN}a"> <input type="text" name="q${questionN}a"
+      class="form-control">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Answer B</label>
+    <input type="radio" name="q${questionN}ans" value="q${questionN}b"><input type="text" name="q${questionN}b"
+      class="form-control">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Answer C</label>
+    <input type="radio" name="q${questionN}ans" value="q${questionN}c"><input type="text" name="q${questionN}c"
+      class="form-control">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Answer D</label>
+    <input type="radio" name="q${questionN}ans" value="q${questionN}d"><input type="text" name="q${questionN}d"
+      class="form-control">
+  </div>
+</section>
