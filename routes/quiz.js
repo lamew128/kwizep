@@ -19,9 +19,9 @@ module.exports = (db) => {
     } else {
       kwiz.public = true;
     }
-
     let keys = Object.keys(kwiz).sort();
     let answerKeys = keys.slice(5,keys.length - 2);
+    let answerArr = [];
     for (let i = 0; i < answerKeys.length; i++) {
       let ans = answerKeys[i];
       console.log(ans);
@@ -36,20 +36,17 @@ module.exports = (db) => {
         } else {
           correct = false;
         }
+
         let answerObj = {};
-        answerObj[questionId] = {};
-        answerObj[questionId].option = option;
-        answerObj[questionId].correct = correct;
-        answerObj[questionId].answer = answer;
-        console.log(answerObj);
+        answerObj.questionId = questionId;
+        answerObj.option = option;
+        answerObj.correct = correct;
+        answerObj.answer = answer;
+        answerArr.push(answerObj);
       }
+
     }
-
-
-
-
-
-    // [
+   // ansarr looks like[
     //   'q1a',
     //   'q1ans', 'q1b',
     //   'q1c',   'q1d',
@@ -57,19 +54,17 @@ module.exports = (db) => {
     //   'q2b',   'q2c',
     //   'q2d'
     // ]
-    // console.log(answerKeys);
+
 
     db.addKwiz(kwiz)
       .then(() => {
         // console.log("quizId is",kwiz.quizId);
         db.addKwizQuestions(kwiz.q1,kwiz.quizId)})
       .then (() =>{
-
-        db.addKwizAnswers(kwiz.id,questionId,correct,answer,option);
+        db.addKwizAnswers(answerArr);
         }
-        // db.addKwizAnswers(kwiz.quizId,);
       );
-    //bug:only adding the first questionl
+    //bug:the last answer cannot be converted to the answer arr
     // db.addKwizQuestions(kwiz.q1, quizId);
  });
 
