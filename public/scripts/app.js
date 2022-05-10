@@ -80,10 +80,7 @@ $(document).ready(() => {
     }
   });
 
-<<<<<<< HEAD
   //submit login form
-=======
->>>>>>> feature-results
   $(document).on('submit', '#login-form', function (e) {
     e.preventDefault();
 
@@ -122,14 +119,14 @@ $(document).ready(() => {
   $(document).on('click', '.kwizbutton', function (e) {
     e.preventDefault();
     getKwiz(`${$(this).attr('href')}`)
-    .then((data) => {
-      kwizId = $(this).attr('href');
-      kwizData = data;
-      questions = Object.keys(kwizData);
-      qnum = 0;
-      $('#questions').empty().append(kwizQuestion(kwizData, questions[qnum])).append(nextQuestionButton());
-      qnum++;
-    })
+      .then((data) => {
+        kwizId = $(this).attr('href');
+        kwizData = data;
+        questions = Object.keys(kwizData);
+        qnum = 0;
+        $('#questions').empty().append(kwizQuestion(kwizData, questions[qnum])).append(nextQuestionButton());
+        qnum++;
+      })
   });
 
   //HELPER FUNCTIONS
@@ -140,14 +137,10 @@ $(document).ready(() => {
     return false;
   };
 
-<<<<<<< HEAD
-  //next question
-=======
   const getKey = (obj, value) => {
     return Object.keys(obj).find(key => obj[key] === value);
   };
 
->>>>>>> feature-results
   $(document).on('click', '#nextbutton', function (e) {
     e.preventDefault();
     const correctAns = kwizData[qnum].qans;
