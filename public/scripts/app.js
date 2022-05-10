@@ -108,7 +108,8 @@ $(document).ready(() => {
       }
     });
     if (submit) {
-      $.post("/createkwiz/questions", data)
+      //inject createKwiz;
+      createKwiz(data)
         .then((res) => {
           $('.container').empty().append(card(res));
         });
