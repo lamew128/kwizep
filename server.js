@@ -5,7 +5,7 @@ require("dotenv").config();
 const PORT = process.env.PORT || 3000;
 const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
-cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const app = express();
 const morgan = require("morgan");
@@ -21,48 +21,109 @@ app.use(bodyParser.json());
 // ---------------------------------------------------------------------------
 const database = [
   {
+    id: 1,
     title: 'CANADA',
     description: 'Oh Canada! 🇨🇦',
     imageurl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJFZ65LwsawfGT8XIQrWoCg-6inXNiMkopHQ&usqp=CAU',
     public: true
   },
   {
+    id: 2,
     title: 'USA',
     description: 'You know everything about america? Find out!',
     imageurl: 'https://images.unsplash.com/photo-1628510118714-d2124aea4b8a?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max',
     public: true
   },
   {
+    id: 3,
     title: 'TORONTO',
     description: 'How much you know about the 6ix?',
     imageurl: 'https://blogdointercambio.west1.com.br/wp-content/uploads/2019/01/268152-toronto-principais-pontos-turisticos-atracoes-e-custo-de-vida-1024x683.jpg',
     public: true
   },
   {
+    id: 4,
     title: 'TECHNOLOGY',
     description: `Are you a technophile? Let's see!`,
     imageurl: 'https://greatpeopleinside.com/wp-content/uploads/2017/05/HR-GR8-technology.jpg',
     public: false
   },
   {
+    id: 5,
     title: 'MARVEL',
     description: 'Love Spider-man and company? Test your knowledge!',
     imageurl: 'https://d5y9g7a5.rocketcdn.me/wp-content/uploads/2020/06/marvel-a-historia-da-editora-nos-quadrinhos-e-no-cinema-1024x512.jpg',
     public: false
   },
   {
+    id: 6,
     title: 'DC',
     description: 'Are you a gamemanic? See if you know everything about videogames!',
     imageurl: 'https://files.tecnoblog.net/wp-content/uploads/2020/06/spotify-dc-comics-warner-700x513.jpg',
     public: false
   },
   {
+    id: 7,
     title: 'GAMES',
     description: 'Batman, Superman, and the Justice League!',
     imageurl: 'https://thumbs2.imgbox.com/2d/46/Ba6012x0_t.jpg',
     public: false
   },
 ];
+
+const questionsDb = {
+  1: {
+    1: {
+      q1: 'QUESTION 1',
+      q1a: 'Q1A',
+      q1b: 'Q1B',
+      q1c: 'Q1C',
+      q1d: 'Q1D',
+      qans: 'q1a'
+    },
+    2: {
+      q2: 'QUESTION 2',
+      q2a: 'Q2A',
+      q2b: 'Q2B',
+      q2c: 'Q2C',
+      q2d: 'Q2D',
+      qans: 'q1b'
+    },
+    3: {
+      q3: 'QUESTION 3',
+      q3a: 'Q3A',
+      q3b: 'Q3B',
+      q3c: 'Q3C',
+      q3d: 'Q3D',
+      qans: 'q1c'
+    },
+    4: {
+      q4: 'QUESTION 4',
+      q4a: 'Q4A',
+      q4b: 'Q4B',
+      q4c: 'Q4C',
+      q4d: 'Q4D',
+      qans: 'q1d'
+    },
+    5: {
+      q5: 'QUESTION 5',
+      q5a: 'Q5A',
+      q5b: 'Q5B',
+      q5c: 'Q5C',
+      q5d: 'Q5D',
+      qans: 'q1a'
+    },
+    6: {
+      q6: 'QUESTION 6',
+      q6a: 'Q6A',
+      q6b: 'Q6B',
+      q6c: 'Q6C',
+      q6d: 'Q6D',
+      qans: 'q1b'
+    },
+  },
+};
+
 // ---------------------------------------------------------------------------
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -139,6 +200,22 @@ app.post("/createkwiz/questions", (req, res) => {
   console.log(req.body);
   res.send(req.body);
 });
+
+app.get("/:id", (req, res) => {
+  db.getUserWithId(req.cookies.id)
+    .then((data) => {
+      const kwizId = req.params.id;
+      const templateVars = { user: data, id: kwizId };
+      res.render("kwiz", templateVars);
+    });
+});
+
+app.get("/:id/questions", (req, res) => {
+  const kwizId = req.params.id;
+  console.log(questionsDb[kwizId]);
+  res.send(questionsDb[kwizId]);
+});
+
 // \/\/\/\/\/\/\/\/\/\/\/\/\/\/ NEW ADDED EJS ROUTES \/\/\/\/\/\/\/\/\/\/\/\/\/\/
 
 app.listen(PORT, () => {

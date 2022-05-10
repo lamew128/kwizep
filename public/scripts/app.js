@@ -27,42 +27,13 @@ $(document).ready(() => {
     logOut()
       .then(() => {
         location.reload();
-      })
+      });
   });
 
   $(document).on('click', '#register', (e) => {
     e.preventDefault();
     $('.container').empty().append(registerPage());
   });
-
-  const question = (num) => {
-    return `<section id="question${num}">
-    <div class="mb-3">
-      <label class="form-label">Question ${num} (select the correct answer)</label>
-      <input type="text" name="q1" class="form-control formfield" placeholder="Enter a title">
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Answer A</label>
-      <input type="radio" name="q${num}ans" value="q${num}a" required> <input type="text" name="q${num}a"
-        class="form-control formfield">
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Answer B</label>
-      <input type="radio" name="q${num}ans" value="q${num}b"><input type="text" name="q${num}b"
-        class="form-control formfield">
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Answer C</label>
-      <input type="radio" name="q${num}ans" value="q${num}c"><input type="text" name="q${num}c"
-        class="form-control formfield">
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Answer D</label>
-      <input type="radio" name="q${num}ans" value="q${num}d"><input type="text" name="q${num}d"
-        class="form-control formfield">
-    </div>
-  </section>`;
-  };
 
   let n = 1;
   $(document).on('click', '#newquestion', (e) => {
@@ -81,27 +52,12 @@ $(document).ready(() => {
     }
   });
 
-  const card = (data) => {
-    return `
-    <article class="col-lg-4 col-md-5 col-10">
-      <div class="card kwizcard">
-        <img src="${data.imageurl} KWIZ" class="card-img-top img-fluid" alt="quizimg">
-          <div class="card-body">
-            <h5 class="card-title">${data.title}</h5>
-            <p class="card-text">${data.description}</p>
-            <a href="#" class="btn btn-primary">KWIZ!</a>
-          </div>
-      </div>
-    </article>`;
-  };
-
   $(document).on('submit', '#questionsform', function (e) {
     e.preventDefault();
     const data = $(this).serialize();
     let submit = true;
     $('.formfield').each(function () {
       if ($(this).val() === '') {
-        console.log($(this).val());
         alert('You did not fill out one of the fields!');
         submit = false;
         return false;
@@ -146,9 +102,45 @@ $(document).ready(() => {
           console.log("EXISTTTTTTTTTT");
           return;
         }
-
         location.reload();
       });
   });
+
+  let kwizData;
+  let questions;
+  $(document).on('click', '.kwizbutton', function (e) {
+    e.preventDefault();
+    $.get(`/${$(this).attr('href')}/questions`, (data) => {
+      kwizData = data;
+      questions = Object.keys(kwizData);
+      qnum = 0;
+      // console.log(kwizData);
+      // console.log('kwizData',Object.keys(kwizData));
+      $('#questions').empty().append(kwizQuestion(kwizData, questions[qnum])).append(nextQuestionButton());
+      qnum++;
+    });
+  });
+
+  $(document).on('click', '#nextbutton', function (e) {
+    e.preventDefault();
+    if (!$("input:radio").is(":checked")) {
+      alert('Nothing is checked!');
+    } else {
+      if (qnum === questions.length - 1) {
+        $('#questions').empty().append(kwizQuestion(kwizData, questions[qnum])).append(submitKwizButton());
+      } else {
+        $('#questions').empty().append(kwizQuestion(kwizData, questions[qnum])).append(nextQuestionButton());
+        qnum++;
+      }
+    }
+  });
+
+  $(document).on('click', '#submitbutton', function (e) {
+    e.preventDefault();
+    $.post()
+  });
+
+  // ADD BUTTON TO GO TO NEXT QUESTION
+  // 6 questions. NEXT BUTTON BECOMES SUBMIT.
 
 });
