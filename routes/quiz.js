@@ -12,12 +12,17 @@ module.exports = (db) => {
     const kwiz = req.body;
     // console.log("id is" , req.cookies.id);
     kwiz.userId = req.cookies.id;
-    // console.log(kwiz);
+    console.log(kwiz);
     if (kwiz.private = 'on') {
       kwiz.public = false;
     } else {
       kwiz.public = true;
     }
+    let keys = Object.keys(kwiz);
+    keys = keys.sort();
+    console.log(keys);
+    let answerKeys = keys.slice(4,keys.length - 2);
+    console.log(answerKeys);
 
     db.addKwiz(kwiz)
       .then(() => {
