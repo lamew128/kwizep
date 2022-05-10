@@ -33,7 +33,7 @@ $(document).ready(() => {
     e.preventDefault();
     logOut()
       .then(() => {
-        location.reload();
+        window.location.href = '/';
       });
   });
 
@@ -80,22 +80,24 @@ $(document).ready(() => {
     }
   });
 
+<<<<<<< HEAD
   //submit login form
+=======
+>>>>>>> feature-results
   $(document).on('submit', '#login-form', function (e) {
     e.preventDefault();
 
     const data = $(this).serialize();
-    //console.log("data", data);
     logIn(data)
       .then((data) => {
         if (data === "WRONG INFO") {
-          $('.container').append("AAAAAAAAAAA").html();// ADD ERROR MESSAGE (SHOW)
-          console.log("WRONG INFOOOOOOOOOOOOOOOOOOOO");
+          alert('Wrong password!');
+          // $('.container').append("AAAAAAAAAAA").html();// ADD ERROR MESSAGE (SHOW)
+          // console.log("WRONG INFOOOOOOOOOOOOOOOOOOOO");
           return;
         }
         location.reload();
       });
-
   });
 
   //submit register form
@@ -107,11 +109,12 @@ $(document).ready(() => {
       //.then(getMyDetails)
       .then((data) => {
         if (data === "EXIST") {
-          $('.container').append("AAAAAAAAAAA").html();// ADD ERROR MESSAGE (SHOW)
-          console.log("EXISTTTTTTTTTT");
+          alert('This user already exists!')
+          // $('.container').append("AAAAAAAAAAA").html();// ADD ERROR MESSAGE (SHOW)
+          // console.log("EXISTTTTTTTTTT");
           return;
         }
-        location.reload();
+        window.location.href = '/publickwizes';
       });
   });
 
@@ -129,21 +132,27 @@ $(document).ready(() => {
     })
   });
 
-  //HELPER FUNCTION
-  const getObjKey = (obj, value, correct) => {
-    const answer = Object.keys(obj).find(key => obj[key] === value);
+  //HELPER FUNCTIONS
+  const correctAnswer = (answer, correct) => {
     if (answer === correct) {
       return true;
     }
     return false;
   };
 
+<<<<<<< HEAD
   //next question
+=======
+  const getKey = (obj, value) => {
+    return Object.keys(obj).find(key => obj[key] === value);
+  };
+
+>>>>>>> feature-results
   $(document).on('click', '#nextbutton', function (e) {
     e.preventDefault();
     const correctAns = kwizData[qnum].qans;
-    const answer = $("input:checked").val();
-    const userCorrect = getObjKey(kwizData[qnum], answer, correctAns);
+    const answer = getKey(kwizData[qnum], $("input:checked").val());
+    const userCorrect = correctAnswer(answer, correctAns);
 
     if (!$("input:radio").is(":checked")) {
       alert('Nothing is checked!');
@@ -165,12 +174,11 @@ $(document).ready(() => {
   $(document).on('submit', '#questions-form', function (e) {
     e.preventDefault();
     const correctAns = kwizData[qnum].qans;
-    const answer = $("input:checked").val();
-    const userCorrect = getObjKey(kwizData[qnum], answer, correctAns);
+    const answer = getKey(kwizData[qnum], $("input:checked").val());
+    const userCorrect = correctAnswer(answer, correctAns);
     correct.push(userCorrect);
     answers.push(answer);
     const results = { answers, correct };
-    console.log(answers, correct);
     $.post('/results', results)
       .then(() => {
         window.location.href = '/results';

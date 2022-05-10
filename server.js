@@ -71,6 +71,49 @@ const database = [
   },
 ];
 
+<<<<<<< HEAD
+=======
+const questionsDb = {
+  1: {
+    1: {
+      q1: 'QUESTION 1',
+      q1a: 'AAAAAAAAAA',
+      q1b: 'BBBBBBBBBB',
+      q1c: 'CCCCCCCC',
+      q1d: 'DDDDDDDDD',
+      qans: 'q1a'
+    },
+    2: {
+      q2: 'QUESTION 2',
+      q2a: 'ASKDJHAKJHDSAG',
+      q2b: 'AKLSJDHAK',
+      q2c: 'ASJHHASD',
+      q2d: 'AHAHHA',
+      qans: 'q2b'
+    },
+    3: {
+      q3: 'QUESTION 3',
+      q3a: 'asduqwgwdkj',
+      q3b: 'asduqwgw',
+      q3c: 'asdkj',
+      q3d: 'aswgwdkj',
+      qans: 'q3c'
+    },
+    4: {
+      q4: 'QUESTION 4',
+      q4a: 'asdasq13212321',
+      q4b: 'asdasq1221',
+      q4c: 'asdasq123312',
+      q4d: 'asdasq3113131',
+      qans: 'q4d'
+    }
+  },
+};
+
+const userAnswers = ['q1a', 'q2b', 'q3d', 'q4d'];
+const correct = [questionsDb[1][1][questionsDb[1][1].qans], questionsDb[1][2][questionsDb[1][2].qans], questionsDb[1][3][questionsDb[1][3].qans], questionsDb[1][4][questionsDb[1][4].qans]];
+
+>>>>>>> feature-results
 // ---------------------------------------------------------------------------
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -97,6 +140,7 @@ app.use(express.static("public"));
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
 const quizRoutes = require("./routes/quiz");
+const { reset } = require("nodemon");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -165,16 +209,15 @@ app.post("/createkwiz/questions", (req, res) => {
 // });
 
 app.post("/results", (req, res) => {
-  res.redirect('/results');
-  // console.log(req.body);
-  // res.send(questionsDb[kwizId]);
+  console.log(req.body);
+  res.send(req.body);
 });
 
 app.get("/results", (req, res) => {
   db.getUserWithId(req.cookies.id)
     .then((data) => {
       const kwizId = req.params.id;
-      const templateVars = { user: data, id: kwizId };
+      const templateVars = { user: data, db: questionsDb[1], answers: userAnswers, correctAns: correct };
       res.render("results", templateVars);
     });
 });
