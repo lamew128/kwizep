@@ -108,7 +108,12 @@ $(document).ready(() => {
     const data = $(this).serialize();
     //console.log("data", data);
     logIn(data)
-    .then(() => {
+    .then((data) => {
+      if(data === "WRONG INFO") {
+        $('.container').append("AAAAAAAAAAA").html();// ADD ERROR MESSAGE (SHOW)
+        console.log("WRONG INFOOOOOOOOOOOOOOOOOOOO");
+        return;
+      }
       location.reload();
     })
 
@@ -120,11 +125,13 @@ $(document).ready(() => {
     const data = $(this).serialize();
     signUp(data)
       //.then(getMyDetails)
-      .then((json) => {
-        console.log("json.user", json.user);
-        user = json.user;
-        //header.update(json.user);
-        //views_manager.show('listings');
+      .then((data) => {
+        if(data === "EXIST") {
+          $('.container').append("AAAAAAAAAAA").html();// ADD ERROR MESSAGE (SHOW)
+          console.log("EXISTTTTTTTTTT");
+          return;
+        }
+
         location.reload();
       });
   });

@@ -29,3 +29,19 @@ function signUp(data) {
     data
   });
 }
+
+function createKwiz(data) {
+  return $.ajax({
+    method: "POST",
+    url: "/quiz/create",
+    data
+  });
+}
+
+function getKwiz(data) {
+  return $.ajax({
+    method: "GET",
+    url: "/quiz/:id",
+    data
+  });
+}

@@ -7,7 +7,6 @@
 
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcryptjs');
 const bodyParser = require('body-parser');
 router.use(bodyParser.urlencoded({ extended: false }));
 
@@ -29,12 +28,18 @@ module.exports = (db) => {
    */
   const login = function (email, password) {
     return db.getUserWithEmail(email)
-      .then(user => {
-        if (password === user.password) {
-          return user;
-        }
-        return null;
-      });
+    .then((email) => {
+      if(!email) {
+        console.log("NO EMAIL");
+        return;
+      }
+      if (password === email.password) {
+        return email;
+      }
+      console.log("wrong password");
+      return null;
+    })
+
   }
   exports.login = login;
 
@@ -45,14 +50,17 @@ module.exports = (db) => {
     login(email, password)
       .then(user => {
         if (!user) {
-          res.send({ error: "error" });
-          return;
+          console.log("wrong info");
+          res.send("WRONG INFO");
+          //return "WRONG INFO";
         }
         res.cookie('id', user.id);
         console.log("login success!");
-        res.send({ user: { name: user.name, email: user.email, id: user.id } });
+        res.send({ user: { name: user.name, email: user.email, id: user.id }});
       })
-      .catch(e => res.send(e));
+      .catch(e => {
+        return;
+      });
   });
 
   router.post('/logout', (req, res) => {
@@ -67,7 +75,14 @@ module.exports = (db) => {
   // Create a new user
   router.post('/register', (req, res) => {
     const user = req.body;
-    db.addUser(user)
+    db.getUserWithEmail(user.email)
+    .then((email) => {
+      if(email) {
+        console.log("exist");
+        res.send("EXIST");
+        //return;
+      }
+      db.addUser(user)
       .then(user => {
         if (!user) {
           res.send({ error: "error" });
@@ -76,7 +91,10 @@ module.exports = (db) => {
         res.cookie('id', user.id);
         res.send("🤗");
       })
-      .catch(e => res.send(e));
+      .catch(e => {
+        return;
+      });
+    })
   });
 
   return router;
