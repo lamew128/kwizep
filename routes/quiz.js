@@ -6,18 +6,28 @@ router.use(bodyParser.urlencoded({ extended: false }));
 module.exports = (db) => {
 
  router.post('/create', (req, res) => {
+  //  let quizId;
+  //  console.log(quizId);
      // Add a new kwiz
     const kwiz = req.body;
-    console.log("id is" , req.cookies.id);
+    // console.log("id is" , req.cookies.id);
     kwiz.userId = req.cookies.id;
-    console.log(kwiz);
+    // console.log(kwiz);
     if (kwiz.private = 'on') {
       kwiz.public = false;
     } else {
       kwiz.public = true;
     }
-    db.addKwiz(kwiz);
-  });
+
+    db.addKwiz(kwiz)
+      .then(() => {
+        console.log("quizId is",kwiz.quizId);
+        db.addKwizQuestions(kwiz.q1,kwiz.quizId)});
+    //bug:only adding the first questionl
+    // db.addKwizQuestions(kwiz.q1, quizId);
+ });
+
+
 
   router.get('/:id', (req, res) => {
     const quizId = req.params.id;
