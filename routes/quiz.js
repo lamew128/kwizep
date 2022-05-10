@@ -21,8 +21,11 @@ module.exports = (db) => {
 
     db.addKwiz(kwiz)
       .then(() => {
-        console.log("quizId is",kwiz.quizId);
-        db.addKwizQuestions(kwiz.q1,kwiz.quizId)});
+        // console.log("quizId is",kwiz.quizId);
+        db.addKwizQuestions(kwiz.q1,kwiz.quizId)})
+      .then (() =>{
+        db.addKwizAnswers;
+      });
     //bug:only adding the first questionl
     // db.addKwizQuestions(kwiz.q1, quizId);
  });
