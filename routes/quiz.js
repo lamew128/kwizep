@@ -20,7 +20,7 @@ module.exports = (db) => {
     }
     let keys = Object.keys(kwiz).sort();
     let answerKeys = keys.slice(4,keys.length - 2);
-    console.log({answerKeys},{keys});
+    //console.log({answerKeys},{keys});
     let answerArr = [];
     for (let i = 0; i < answerKeys.length; i++) {
       let ans = answerKeys[i];
@@ -45,14 +45,16 @@ module.exports = (db) => {
         answerArr.push(answerObj);
       }
     }
-    console.log(answerArr);
+    //console.log(answerArr);
     db.addKwiz(kwiz)
       .then(() => {
-        // console.log("quizId is",kwiz.quizId);
         db.addKwizQuestions(kwiz.q1,kwiz.quizId)})
       .then (() =>{
         db.addKwizAnswers(kwiz.quizId,answerArr);
-        });
+        })
+        .then(() => {
+          res.send({});
+        })
     // bug:the last answer cannot be converted to the answer arr
     // db.addKwizQuestions(kwiz.q1, quizId);
  });
