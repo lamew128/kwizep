@@ -45,22 +45,22 @@ const question = (num) => {
   </div>
   <div class="mb-3">
     <label class="form-label">Answer A</label>
-    <input type="radio" name="${qnum}ans" value="${qnum}a" required> <input type="text" name="${qnum}a"
+    <input type="radio" name="${num}ans" value="${num}a" required> <input type="text" name="${num}a"
       class="form-control formfield">
   </div>
   <div class="mb-3">
     <label class="form-label">Answer B</label>
-    <input type="radio" name="${qnum}ans" value="${qnum}b"><input type="text" name="${qnum}b"
+    <input type="radio" name="${num}ans" value="${num}b"><input type="text" name="${num}b"
       class="form-control formfield">
   </div>
   <div class="mb-3">
     <label class="form-label">Answer C</label>
-    <input type="radio" name="${qnum}ans" value="${qnum}c"><input type="text" name="${qnum}c"
+    <input type="radio" name="${num}ans" value="${num}c"><input type="text" name="${num}c"
       class="form-control formfield">
   </div>
   <div class="mb-3">
     <label class="form-label">Answer D</label>
-    <input type="radio" name="${qnum}ans" value="${qnum}d"><input type="text" name="${qnum}d"
+    <input type="radio" name="${num}ans" value="${num}d"><input type="text" name="${num}d"
       class="form-control formfield">
   </div>
 </section>`;
@@ -106,8 +106,8 @@ const kwizQuestion = (data, question) => {
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="${qnum}" id="$${data[question][`${qnum}d`]}" value="$${data[question][`${qnum}d`]}" required>
-            <label class="form-check-label" for="$${data[question][`${qnum}d`]}">
+            <input class="form-check-input" type="radio" name="${qnum}" id="${data[question][`${qnum}d`]}" value="${data[question][`${qnum}d`]}" required>
+            <label class="form-check-label" for="${data[question][`${qnum}d`]}">
               ${data[question][`${qnum}d`]}
             </label>
           </div>`;
@@ -118,5 +118,5 @@ const nextQuestionButton = () => {
 };
 
 const submitKwizButton = () => {
-  return `<button id="submitbutton">SUBMIT</button`;
+  return `<button type="submit">SUBMIT</button`;
 };

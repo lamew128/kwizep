@@ -75,10 +75,10 @@ const questionsDb = {
   1: {
     1: {
       q1: 'QUESTION 1',
-      q1a: 'Q1A',
-      q1b: 'Q1B',
-      q1c: 'Q1C',
-      q1d: 'Q1D',
+      q1a: 'AAAAAAAAAA',
+      q1b: 'BBBBBBBBBB',
+      q1c: 'CCCCCCCC',
+      q1d: 'DDDDDDDDD',
       qans: 'q1a'
     },
     2: {
@@ -87,7 +87,7 @@ const questionsDb = {
       q2b: 'Q2B',
       q2c: 'Q2C',
       q2d: 'Q2D',
-      qans: 'q1b'
+      qans: 'q2b'
     },
     3: {
       q3: 'QUESTION 3',
@@ -95,7 +95,7 @@ const questionsDb = {
       q3b: 'Q3B',
       q3c: 'Q3C',
       q3d: 'Q3D',
-      qans: 'q1c'
+      qans: 'q3c'
     },
     4: {
       q4: 'QUESTION 4',
@@ -103,7 +103,7 @@ const questionsDb = {
       q4b: 'Q4B',
       q4c: 'Q4C',
       q4d: 'Q4D',
-      qans: 'q1d'
+      qans: 'q4d'
     },
     5: {
       q5: 'QUESTION 5',
@@ -111,7 +111,7 @@ const questionsDb = {
       q5b: 'Q5B',
       q5c: 'Q5C',
       q5d: 'Q5D',
-      qans: 'q1a'
+      qans: 'q5a'
     },
     6: {
       q6: 'QUESTION 6',
@@ -119,7 +119,7 @@ const questionsDb = {
       q6b: 'Q6B',
       q6c: 'Q6C',
       q6d: 'Q6D',
-      qans: 'q1b'
+      qans: 'q6b'
     },
   },
 };
@@ -197,7 +197,6 @@ app.get("/createkwiz", (req, res) => {
 });
 
 app.post("/createkwiz/questions", (req, res) => {
-  console.log(req.body);
   res.send(req.body);
 });
 
@@ -212,7 +211,11 @@ app.get("/:id", (req, res) => {
 
 app.get("/:id/questions", (req, res) => {
   const kwizId = req.params.id;
-  console.log(questionsDb[kwizId]);
+  res.send(questionsDb[kwizId]);
+});
+
+app.get("/results", (req, res) => {
+  const kwizId = req.params.id;
   res.send(questionsDb[kwizId]);
 });
 

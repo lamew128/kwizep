@@ -109,9 +109,14 @@ $(document).ready(() => {
 
   let kwizData;
   let questions;
+
+  let answers = [];
+  let correct = [];
+
   $(document).on('click', '.kwizbutton', function (e) {
     e.preventDefault();
     $.get(`/${$(this).attr('href')}/questions`, (data) => {
+      kwizId = $(this).attr('href');
       kwizData = data;
       questions = Object.keys(kwizData);
       qnum = 0;
@@ -122,23 +127,47 @@ $(document).ready(() => {
     });
   });
 
+  const getObjKey = (obj, value, correct) => {
+    const answer = Object.keys(obj).find(key => obj[key] === value);
+    if (answer === correct) {
+      return true;
+    }
+    return false;
+  };
+
   $(document).on('click', '#nextbutton', function (e) {
     e.preventDefault();
+    const correctAns = kwizData[qnum].qans;
+    const answer = $("input:checked").val();
+    const userCorrect = getObjKey(kwizData[qnum], answer, correctAns);
+
     if (!$("input:radio").is(":checked")) {
       alert('Nothing is checked!');
     } else {
       if (qnum === questions.length - 1) {
+        correct.push(userCorrect);
+        answers.push(answer);
         $('#questions').empty().append(kwizQuestion(kwizData, questions[qnum])).append(submitKwizButton());
       } else {
+        correct.push(userCorrect);
+        answers.push(answer);
         $('#questions').empty().append(kwizQuestion(kwizData, questions[qnum])).append(nextQuestionButton());
-        qnum++;
       }
+      qnum++;
     }
   });
 
-  $(document).on('click', '#submitbutton', function (e) {
+  $(document).on('submit', '#questions-form', function (e) {
     e.preventDefault();
-    $.post()
+    const correctAns = kwizData[qnum].qans;
+    const answer = $("input:checked").val();
+    const userCorrect = getObjKey(kwizData[qnum], answer, correctAns);
+    correct.push(userCorrect);
+    answers.push(answer);
+    const results = { answers: answers, correct: correct };
+    console.log('correct', correct);
+    console.log('answers', answers);
+    $.post(`/results`, results);
   });
 
   // ADD BUTTON TO GO TO NEXT QUESTION
