@@ -10,14 +10,14 @@ function getMyDetails() {
 function logOut() {
   return $.ajax({
     method: "POST",
-    url: "api/users/logout",
+    url: "/users/logout",
   })
 }
 
 function logIn(data) {
   return $.ajax({
     method: "POST",
-    url: "/api/users/login",
+    url: "/users/login",
     data
   });
 }
@@ -25,7 +25,7 @@ function logIn(data) {
 function signUp(data) {
   return $.ajax({
     method: "POST",
-    url: "/api/users/register",
+    url: "/users/register",
     data
   });
 }
