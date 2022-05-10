@@ -151,32 +151,32 @@ const registerPage = () => {
 //   }
 // };
 
-const createKwiz = (user) => {
-  `
-    <form action="/createkwiz" method="POST" id="subcreatekwiz">
-        <div class="mb-3">
-          <label class="form-label">Title</label>
-          <input type="text" name="title" class="form-control" placeholder="Enter a title">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Description</label>
-          <input type="text" name="description" class="form-control" placeholder="Enter a description">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Image</label>
-          <input type="url" name="imageurl" accept="image/gif, image/jpg, image/jpeg" class="form-control"
-            placeholder="Image URL">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Private</label>
-          <input type="checkbox" name="private" class="form-check-label">
-        </div>
-        <a href="/createkwiz/questions">
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </a>
-      </form>
-    `;
-};
+// const createKwiz = () => {
+//   `
+//     <form action="/createkwiz" method="POST" id="subcreatekwiz">
+//         <div class="mb-3">
+//           <label class="form-label">Title</label>
+//           <input type="text" name="title" class="form-control" placeholder="Enter a title">
+//         </div>
+//         <div class="mb-3">
+//           <label class="form-label">Description</label>
+//           <input type="text" name="description" class="form-control" placeholder="Enter a description">
+//         </div>
+//         <div class="mb-3">
+//           <label class="form-label">Image</label>
+//           <input type="url" name="imageurl" accept="image/gif, image/jpg, image/jpeg" class="form-control"
+//             placeholder="Image URL">
+//         </div>
+//         <div class="mb-3">
+//           <label class="form-label">Private</label>
+//           <input type="checkbox" name="private" class="form-check-label">
+//         </div>
+//         <a href="/createkwiz/questions">
+//           <button type="submit" class="btn btn-primary">Submit</button>
+//         </a>
+//       </form>
+//     `;
+// };
 
 const questionsForm = () => {
   return `
