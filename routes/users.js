@@ -57,7 +57,11 @@ module.exports = (db) => {
 
   router.post('/logout', (req, res) => {
     res.clearCookie('id');
-    res.send({});
+    db.getUserWithId(req.cookies.id)
+        .then(function() {
+          const templateVars = {user: null, db: null};
+          res.render("index", templateVars);
+    });
   });
 
   // Create a new user

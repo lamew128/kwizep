@@ -24,7 +24,10 @@ $(document).ready(() => {
 
   $(document).on('click', '#logout', (e) => {
     e.preventDefault();
-    logOut();
+    logOut()
+    .then(() => {
+      location.reload();
+    })
   });
 
   $(document).on('click', '#register', (e) => {
@@ -109,16 +112,10 @@ $(document).ready(() => {
     const data = $(this).serialize();
     //console.log("data", data);
     logIn(data)
-      .then((json) => {
-        console.log("json", json);
-        if (!json.user) {
-          console.log('fail');
-          return;
-        }
-        console.log("json.user", json.user);
-        //header.update(json.user);
-        //views_manager.show('listings');
-      });
+    .then(() => {
+      location.reload();
+    })
+
   });
 
   $(document).on('submit', '#register-form', function (e) {
@@ -130,6 +127,7 @@ $(document).ready(() => {
         console.log("json.user", json.user);
         //header.update(json.user);
         //views_manager.show('listings');
+        location.reload();
       });
   });
 
