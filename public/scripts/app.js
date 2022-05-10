@@ -157,20 +157,15 @@ $(document).ready(() => {
     }
   });
 
-  $(document).on('submit', '#questions-form', function (e) {
+  $(document).on('submit', '#questions-form', function(e) {
     e.preventDefault();
     const correctAns = kwizData[qnum].qans;
     const answer = $("input:checked").val();
     const userCorrect = getObjKey(kwizData[qnum], answer, correctAns);
     correct.push(userCorrect);
     answers.push(answer);
-    const results = { answers: answers, correct: correct };
-    console.log('correct', correct);
-    console.log('answers', answers);
-    $.post(`/results`, results);
+    const results = { answers, correct };
+    $.post('/results', results);
   });
-
-  // ADD BUTTON TO GO TO NEXT QUESTION
-  // 6 questions. NEXT BUTTON BECOMES SUBMIT.
 
 });

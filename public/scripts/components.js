@@ -40,27 +40,27 @@ const question = (num) => {
   return `
   <section id="question${num}">
   <div class="mb-3">
-    <label class="form-label">Question ${num} (select the correct answer)</label>
+    <label class="form-label">Question q${num} (select the correct answer)</label>
     <input type="text" name="q1" class="form-control formfield" placeholder="Enter a title">
   </div>
   <div class="mb-3">
     <label class="form-label">Answer A</label>
-    <input type="radio" name="${num}ans" value="${num}a" required> <input type="text" name="${num}a"
+    <input type="radio" name="q${num}ans" value="q${num}a" required> <input type="text" name="q${num}a"
       class="form-control formfield">
   </div>
   <div class="mb-3">
     <label class="form-label">Answer B</label>
-    <input type="radio" name="${num}ans" value="${num}b"><input type="text" name="${num}b"
+    <input type="radio" name="q${num}ans" value="q${num}b"><input type="text" name="q${num}b"
       class="form-control formfield">
   </div>
   <div class="mb-3">
     <label class="form-label">Answer C</label>
-    <input type="radio" name="${num}ans" value="${num}c"><input type="text" name="${num}c"
+    <input type="radio" name="q${num}ans" value="q${num}c"><input type="text" name="q${num}c"
       class="form-control formfield">
   </div>
   <div class="mb-3">
     <label class="form-label">Answer D</label>
-    <input type="radio" name="${num}ans" value="${num}d"><input type="text" name="${num}d"
+    <input type="radio" name="q${num}ans" value="q${num}d"><input type="text" name="q${num}d"
       class="form-control formfield">
   </div>
 </section>`;

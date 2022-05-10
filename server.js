@@ -214,9 +214,9 @@ app.get("/:id/questions", (req, res) => {
   res.send(questionsDb[kwizId]);
 });
 
-app.get("/results", (req, res) => {
-  const kwizId = req.params.id;
-  res.send(questionsDb[kwizId]);
+app.post("/results", (req, res) => {
+  console.log(req.body);
+  // res.send(questionsDb[kwizId]);
 });
 
 // \/\/\/\/\/\/\/\/\/\/\/\/\/\/ NEW ADDED EJS ROUTES \/\/\/\/\/\/\/\/\/\/\/\/\/\/
