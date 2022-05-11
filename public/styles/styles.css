@@ -112,14 +112,13 @@ hr {
   transform: translateY(-2px);
 }
 
-#login {
+#login, #register, #logout {
   cursor: pointer;
 }
 
-#register {
-  cursor: pointer;
-}
-
-#logout {
-  cursor: pointer;
+#questions {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
 }

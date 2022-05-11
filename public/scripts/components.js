@@ -87,27 +87,27 @@ const kwizQuestion = (data, question) => {
             <label class="form-label">Question ${question} - ${data[question][qnum]}</label>
           </div>
           <div class="form-check">
+          <label class="form-check-label" for="${data[question][`${qnum}a`]}">
             <input class="form-check-input" type="radio" name="${qnum}" id="${data[question][`${qnum}a`]}" value="${data[question][`${qnum}a`]}" required>
-            <label class="form-check-label" for="${data[question][`${qnum}a`]}">
-              ${data[question][`${qnum}a`]}
+              <span>${data[question][`${qnum}a`]}</span>
             </label>
           </div>
           <div class="form-check">
+          <label class="form-check-label" for="${data[question][`${qnum}b`]}">
             <input class="form-check-input" type="radio" name="${qnum}" id="${data[question][`${qnum}b`]}" value="${data[question][`${qnum}b`]}" required>
-            <label class="form-check-label" for="${data[question][`${qnum}b`]}">
-              ${data[question][`${qnum}b`]}
+              <span>${data[question][`${qnum}b`]}</span>
             </label>
           </div>
           <div class="form-check">
+          <label class="form-check-label" for="${data[question][`${qnum}c`]}">
             <input class="form-check-input" type="radio" name="${qnum}" id="${data[question][`${qnum}c`]}" value="${data[question][`${qnum}c`]}" required>
-            <label class="form-check-label" for="${data[question][`${qnum}c`]}">
-              ${data[question][`${qnum}c`]}
+              <span>${data[question][`${qnum}c`]}</span>
             </label>
           </div>
           <div class="form-check">
+          <label class="form-check-label" for="${data[question][`${qnum}d`]}">
             <input class="form-check-input" type="radio" name="${qnum}" id="${data[question][`${qnum}d`]}" value="${data[question][`${qnum}d`]}" required>
-            <label class="form-check-label" for="${data[question][`${qnum}d`]}">
-              ${data[question][`${qnum}d`]}
+              <span>${data[question][`${qnum}d`]}</span>
             </label>
           </div>`;
 };
