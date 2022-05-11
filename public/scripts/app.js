@@ -153,7 +153,7 @@ $(document).ready(() => {
   $(document).on('click', '#nextbutton', function (e) {
     e.preventDefault();
     const correctAns = kwizData[kwizId][qnum].qans;
-    console.log("correctAns",correctAns);
+    console.log("correctAns", correctAns);
     const answer = getKey(kwizData[kwizId][qnum], $("input:checked").val());
     const userCorrect = correctAnswer(answer, correctAns);
 
@@ -182,16 +182,41 @@ $(document).ready(() => {
     correct.push(userCorrect);
     answers.push(answer);
     const results = { kwizId, answers, correct };
-    console.log("results",results);
+    console.log("results", results);
     generateResult(results)
-    .then(() => {
+      .then(() => {
 
-    });
+      });
 
     // $.post('/results', results)
     //   .then(() => {
     //     window.location.href = '/results';
     //   });
   });
+
+  //copy link
+
+  const copyToClipboard = function (text) {
+    const $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val(text).select();
+    document.execCommand("copy");
+    $temp.remove();
+  };
+
+  $(document).on('click', '#sharebutton', function (e) {
+    e.preventDefault();
+
+    const $link =  $(this).siblings().attr('href');
+    copyToClipboard(`${window.location.origin}${$link}`);
+
+    const $share = $(this).closest("div").nextAll("div[id]:first");
+    $share.text('Copied to the clipboard!').addClass('text-center');
+    $share.slideDown();
+    setTimeout(() => {
+      $share.slideUp();
+    }, 5000);
+  });
+
 
 });

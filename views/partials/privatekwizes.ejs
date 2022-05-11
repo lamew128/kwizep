@@ -14,8 +14,9 @@
           </div>
           <div class="row mb-2 d-flex mz justify-content-evenly">
             <a href="/kwiz/<%= card.id %>" class="btn btn-primary cardbtn">TAKE KWIZ!</a>
-            <a href="/kwiz/<%= card.id %>" class="btn btn-primary cardbtn">SHARE!</a>
+            <button id="sharebutton" class="btn btn-primary cardbtn">SHARE!</button>
           </div>
+          <div id="sharelink"></div>
         </div>
       </article>
       <% } %>
