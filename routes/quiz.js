@@ -81,7 +81,7 @@ module.exports = (db) => {
     let correctArr = data['correct[]'];
     let userId = req.cookies.id;
     // console.log("dataaaaaaaaa",data);
-    db.generateKwizResponse (userId,kwizId,answerArr);
+    db.generateKwizResponse (userId,kwizId,correctArr)
   });
 
 
