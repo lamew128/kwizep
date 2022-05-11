@@ -76,8 +76,32 @@ module.exports = (db) => {
 
   router.post('/result', (req, res) => {
     let data = req.body;
-    console.log("dataaaaaaaaa",data);
+    let kwizId = data.kwizId;
+    let answerArr = data['answers[]'];
+    let correctArr = data['correct[]'];
+    if(!Array.isArray(correctArr)) {
+      correctArr = [correctArr];
+    }
+    console.log("correctArr",correctArr);
+    let userId = req.cookies.id;
+    // console.log("dataaaaaaaaa",data);
+    db.generateKwizResponse (userId,kwizId,correctArr)
+    .then(function() {
+      //res.redirect(`/kwiz/result/${kwizId}`);
+      res.send({});
+    })
   });
+
+  router.get('/result/:id', (req, res) => {
+    //db.getResult...
+    db.getUserWithId(req.cookies.id)
+      .then(function (data) {
+        const kwizId = req.params.id;
+        const templateVars = { user: data, id: kwizId, answers: {} };
+        res.render("results", templateVars);
+      });
+  })
+
 
   return router;
 
