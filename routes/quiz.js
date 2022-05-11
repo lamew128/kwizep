@@ -94,15 +94,12 @@ module.exports = (db) => {
   });
 
   router.get('/result/:id', (req, res) => {
-    //db.getResult...
-    db.getUserWithId(req.cookies.id)
-      .then(function (data) {
-        const kwizId = req.params.id;
-        const templateVars = { user: data, id: kwizId, answers: {} };
+    db.getKwizResult(req.params.id)
+      .then(function(data) {
+        const templateVars = { user: data.user, title: data.title, image: data.url, score: data.score };
         res.render("results", templateVars);
       });
   })
-
 
   return router;
 
