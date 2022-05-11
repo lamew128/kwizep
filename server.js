@@ -128,11 +128,11 @@ app.get("/mykwizes", (req, res) => {
   db.getUserWithId(req.cookies.id)
     .then((user) => {
       db.showMyKwizzes(user.id)
-      .then((data) =>{
-        console.log("DATAAAAAAAAAAAAAAAAAA:",data);
-        const templateVars = { user: user, db: data, public: false };
-        res.render("index", templateVars);
-      })
+        .then((data) => {
+          console.log("DATAAAAAAAAAAAAAAAAAA:", data);
+          const templateVars = { user: user, db: data, public: false };
+          res.render("index", templateVars);
+        });
     });
 });
 
@@ -140,10 +140,10 @@ app.get("/publickwizes", (req, res) => {
   db.getUserWithId(req.cookies.id)
     .then((user) => {
       db.showPublicKwizzes()
-      .then((data) => {
-        const templateVars = { user: user, db: data, public: true };
-        res.render("index", templateVars);
-      })
+        .then((data) => {
+          const templateVars = { user: user, db: data, public: true };
+          res.render("index", templateVars);
+        });
     });
 });
 

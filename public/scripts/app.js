@@ -76,11 +76,10 @@ $(document).ready(() => {
     if (submit) {
       //inject createKwiz;
       createKwiz(data)
-      .then(() => {
-        n = 0;
-        location.href = '/publickwizes';
-      })
-
+        .then(() => {
+          n = 0;
+          location.href = '/publickwizes';
+        });
     }
   });
 
