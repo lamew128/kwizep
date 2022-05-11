@@ -124,9 +124,10 @@ $(document).ready(() => {
     getKwiz(`${$(this).attr('href')}`)
       .then((data) => {
         kwizData = data;
-        questions = Object.keys(kwizData);
+        kwizId = Object.keys(kwizData)[0];
+        questions = Object.keys(kwizData[kwizId]);
         qnum = 0;
-        $('#questions').empty().append(kwizQuestion(kwizData, questions[qnum]));
+        $('#questions').empty().append(kwizQuestion(kwizData, kwizId, questions[qnum]));
         if (qnum === questions.length - 1) {
           $('#questions').append(submitKwizButton());
         } else {
@@ -151,9 +152,9 @@ $(document).ready(() => {
   //next question
   $(document).on('click', '#nextbutton', function (e) {
     e.preventDefault();
-    const correctAns = kwizData[qnum].qans;
+    const correctAns = kwizData[kwizId][qnum].qans;
     console.log("correctAns",correctAns);
-    const answer = getKey(kwizData[qnum], $("input:checked").val());
+    const answer = getKey(kwizData[kwizId][qnum], $("input:checked").val());
     const userCorrect = correctAnswer(answer, correctAns);
 
     if (!$("input:radio").is(":checked")) {
@@ -162,11 +163,11 @@ $(document).ready(() => {
       if (qnum === questions.length - 1) {
         correct.push(userCorrect);
         answers.push(answer);
-        $('#questions').empty().append(kwizQuestion(kwizData, questions[qnum])).append(submitKwizButton());
+        $('#questions').empty().append(kwizQuestion(kwizData, kwizId, questions[qnum])).append(submitKwizButton());
       } else {
         correct.push(userCorrect);
         answers.push(answer);
-        $('#questions').empty().append(kwizQuestion(kwizData, questions[qnum])).append(nextQuestionButton());
+        $('#questions').empty().append(kwizQuestion(kwizData, kwizId, questions[qnum])).append(nextQuestionButton());
       }
       qnum++;
     }
@@ -175,8 +176,8 @@ $(document).ready(() => {
   //submit the quiz and get the result
   $(document).on('submit', '#questions-form', function (e) {
     e.preventDefault();
-    const correctAns = kwizData[qnum].qans;
-    const answer = getKey(kwizData[qnum], $("input:checked").val());
+    const correctAns = kwizData[kwizId][qnum].qans;
+    const answer = getKey(kwizData[kwizId][qnum], $("input:checked").val());
     const userCorrect = correctAnswer(answer, correctAns);
     correct.push(userCorrect);
     answers.push(answer);

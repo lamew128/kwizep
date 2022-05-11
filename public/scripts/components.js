@@ -80,34 +80,34 @@ const card = (data) => {
   </article>`;
 };
 
-const kwizQuestion = (data, question) => {
+const kwizQuestion = (data, id, question) => {
   const qnum = `q${question}`;
   return `
          <div class="mb-3">
-            <label class="form-label">Question ${question} - ${data[question][qnum]}</label>
+            <label class="form-label">Question ${question} - ${data[id][question][qnum]}</label>
           </div>
           <div class="form-check">
-          <label class="form-check-label" for="${data[question][`${qnum}a`]}">
-            <input class="form-check-input" type="radio" name="${qnum}" id="${data[question][`${qnum}a`]}" value="${data[question][`${qnum}a`]}" required>
-              <span>${data[question][`${qnum}a`]}</span>
+          <label class="form-check-label" for="${data[id][question][`${qnum}a`]}">
+            <input class="form-check-input" type="radio" name="${qnum}" id="${data[id][question][`${qnum}a`]}" value="${data[id][question][`${qnum}a`]}" required>
+              <span>${data[id][question][`${qnum}a`]}</span>
             </label>
           </div>
           <div class="form-check">
-          <label class="form-check-label" for="${data[question][`${qnum}b`]}">
-            <input class="form-check-input" type="radio" name="${qnum}" id="${data[question][`${qnum}b`]}" value="${data[question][`${qnum}b`]}" required>
-              <span>${data[question][`${qnum}b`]}</span>
+          <label class="form-check-label" for="${data[id][question][`${qnum}b`]}">
+            <input class="form-check-input" type="radio" name="${qnum}" id="${data[id][question][`${qnum}b`]}" value="${data[id][question][`${qnum}b`]}" required>
+              <span>${data[id][question][`${qnum}b`]}</span>
             </label>
           </div>
           <div class="form-check">
-          <label class="form-check-label" for="${data[question][`${qnum}c`]}">
-            <input class="form-check-input" type="radio" name="${qnum}" id="${data[question][`${qnum}c`]}" value="${data[question][`${qnum}c`]}" required>
-              <span>${data[question][`${qnum}c`]}</span>
+          <label class="form-check-label" for="${data[id][question][`${qnum}c`]}">
+            <input class="form-check-input" type="radio" name="${qnum}" id="${data[id][question][`${qnum}c`]}" value="${data[id][question][`${qnum}c`]}" required>
+              <span>${data[id][question][`${qnum}c`]}</span>
             </label>
           </div>
           <div class="form-check">
-          <label class="form-check-label" for="${data[question][`${qnum}d`]}">
-            <input class="form-check-input" type="radio" name="${qnum}" id="${data[question][`${qnum}d`]}" value="${data[question][`${qnum}d`]}" required>
-              <span>${data[question][`${qnum}d`]}</span>
+          <label class="form-check-label" for="${data[id][question][`${qnum}d`]}">
+            <input class="form-check-input" type="radio" name="${qnum}" id="${data[id][question][`${qnum}d`]}" value="${data[id][question][`${qnum}d`]}" required>
+              <span>${data[id][question][`${qnum}d`]}</span>
             </label>
           </div>`;
 };
