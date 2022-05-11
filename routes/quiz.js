@@ -82,13 +82,14 @@ module.exports = (db) => {
     if(!Array.isArray(correctArr)) {
       correctArr = [correctArr];
     }
-    console.log('correctArr is', correctArr);
+    //console.log('correctArr is', correctArr);
     let userId = req.cookies.id;
-    // console.log("dataaaaaaaaa",data);
+    //console.log("dataaaaaaaaa",data);
     db.generateKwizResponse (userId,kwizId,correctArr)
-    .then(function() {
+    .then((rows) => {
       //res.redirect(`/kwiz/result/${kwizId}`);
-      res.send({});
+      console.log("rowsssssssssssssss", rows);
+      res.send(rows);
     })
   });
 
