@@ -82,7 +82,6 @@ const card = (data) => {
 
 const kwizQuestion = (data, question) => {
   const qnum = `q${question}`;
-  console.log(data);
   return `
          <div class="mb-3">
             <label class="form-label">Question ${question} - ${data[question][qnum]}</label>
@@ -120,3 +119,4 @@ const nextQuestionButton = () => {
 const submitKwizButton = () => {
   return `<button type="submit">SUBMIT</button`;
 };
+

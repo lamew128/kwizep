@@ -25,7 +25,7 @@ const database = [
     title: 'CANADA',
     description: 'Oh Canada! 🇨🇦',
     imageurl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJFZ65LwsawfGT8XIQrWoCg-6inXNiMkopHQ&usqp=CAU',
-    public: true
+    public: false
   },
   {
     id: 2,
@@ -71,59 +71,6 @@ const database = [
   },
 ];
 
-const questionsDb = {
-  1: {
-    1: {
-      q1: 'QUESTION 1',
-      q1a: 'AAAAAAAAAA',
-      q1b: 'BBBBBBBBBB',
-      q1c: 'CCCCCCCC',
-      q1d: 'DDDDDDDDD',
-      qans: 'q1a'
-    },
-    2: {
-      q2: 'QUESTION 2',
-      q2a: 'Q2A',
-      q2b: 'Q2B',
-      q2c: 'Q2C',
-      q2d: 'Q2D',
-      qans: 'q2b'
-    },
-    3: {
-      q3: 'QUESTION 3',
-      q3a: 'Q3A',
-      q3b: 'Q3B',
-      q3c: 'Q3C',
-      q3d: 'Q3D',
-      qans: 'q3c'
-    },
-    4: {
-      q4: 'QUESTION 4',
-      q4a: 'Q4A',
-      q4b: 'Q4B',
-      q4c: 'Q4C',
-      q4d: 'Q4D',
-      qans: 'q4d'
-    },
-    5: {
-      q5: 'QUESTION 5',
-      q5a: 'Q5A',
-      q5b: 'Q5B',
-      q5c: 'Q5C',
-      q5d: 'Q5D',
-      qans: 'q5a'
-    },
-    6: {
-      q6: 'QUESTION 6',
-      q6a: 'Q6A',
-      q6b: 'Q6B',
-      q6c: 'Q6C',
-      q6d: 'Q6D',
-      qans: 'q6b'
-    },
-  },
-};
-
 // ---------------------------------------------------------------------------
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -150,12 +97,13 @@ app.use(express.static("public"));
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
 const quizRoutes = require("./routes/quiz");
+const { reset } = require("nodemon");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/users", usersRoutes(db));
 app.use("/widgets", widgetsRoutes(db));
-app.use("/quiz", quizRoutes(db));
+app.use("/kwiz", quizRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -174,17 +122,24 @@ app.get("/", (req, res) => {
 
 app.get("/mykwizes", (req, res) => {
   db.getUserWithId(req.cookies.id)
-    .then((data) => {
-      const templateVars = { user: data, db: database, public: false };
-      res.render("index", templateVars);
+    .then((user) => {
+      db.showMyKwizzes(user.id)
+      .then((data) =>{
+        console.log("DATAAAAAAAAAAAAAAAAAA:",data);
+        const templateVars = { user: user, db: data, public: false };
+        res.render("index", templateVars);
+      })
     });
 });
 
 app.get("/publickwizes", (req, res) => {
   db.getUserWithId(req.cookies.id)
-    .then((data) => {
-      const templateVars = { user: data, db: database, public: true };
-      res.render("index", templateVars);
+    .then((user) => {
+      db.showPublicKwizzes()
+      .then((data) => {
+        const templateVars = { user: user, db: data, public: true };
+        res.render("index", templateVars);
+      })
     });
 });
 
@@ -203,24 +158,19 @@ app.post("/createkwiz/questions", (req, res) => {
   res.send(req.body);
 });
 
-app.get("/:id", (req, res) => {
-  db.getUserWithId(req.cookies.id)
-    .then((data) => {
-      const kwizId = req.params.id;
-      const templateVars = { user: data, id: kwizId };
-      res.render("kwiz", templateVars);
-    });
-});
-
-app.get("/:id/questions", (req, res) => {
-  const kwizId = req.params.id;
-  res.send(questionsDb[kwizId]);
-});
-
 app.post("/results", (req, res) => {
   console.log(req.body);
-  // res.send(questionsDb[kwizId]);
+  res.send(req.body);
 });
+
+// app.get("/results", (req, res) => {
+//   db.getUserWithId(req.cookies.id)
+//     .then((data) => {
+//       const kwizId = req.params.id;
+//       const templateVars = { user: data, db: questionsDb[1], answers: userAnswers, correctAns: correct };
+//       res.render("results", templateVars);
+//     });
+// });
 
 // \/\/\/\/\/\/\/\/\/\/\/\/\/\/ NEW ADDED EJS ROUTES \/\/\/\/\/\/\/\/\/\/\/\/\/\/
 

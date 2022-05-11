@@ -2,6 +2,11 @@
 // Client facing scripts here
 
 $(document).ready(() => {
+  let num = 1;
+  let kwizData;
+  let questions;
+  let answers = [];
+  let correct = [];
 
   $('#scroll-top').fadeOut();
 
@@ -17,42 +22,47 @@ $(document).ready(() => {
     $(document).scrollTop(0);
   });
 
+  //append login page
   $(document).on('click', '#login', (e) => {
     e.preventDefault();
     $('.container').empty().append(loginPage());
   });
 
+  //logout and refresh
   $(document).on('click', '#logout', (e) => {
     e.preventDefault();
     logOut()
       .then(() => {
-        location.reload();
+        window.location.href = '/';
       });
   });
 
+  //append register page
   $(document).on('click', '#register', (e) => {
     e.preventDefault();
     $('.container').empty().append(registerPage());
   });
 
-  let n = 1;
+  //append a new question block
   $(document).on('click', '#newquestion', (e) => {
     e.preventDefault();
-    n++;
-    $('#questionscontainer').append(question(n)).html();
+    num++;
+    $('#questionscontainer').append(question(num)).html();
   });
 
+  //delete the latest question block
   $(document).on('click', '#deletequestion', (e) => {
     e.preventDefault();
-    if (n === 1) {
+    if (num === 1) {
       alert('You must have at least one question!');
     } else {
       $(`#question${n}`).remove();
-      n--;
+      num--;
     }
   });
 
-  $(document).on('submit', '#questionsform', function (e) {
+  //create a quiz
+  $(document).on('submit', '#createkwizform', function (e) {
     e.preventDefault();
     const data = $(this).serialize();
     let submit = true;
@@ -66,32 +76,32 @@ $(document).ready(() => {
     if (submit) {
       //inject createKwiz;
       createKwiz(data)
-        .then(() => {
-          console.log("created");
-          window.location.replace("/");
-        });
-      n = 0;
+      .then(() => {
+        n = 0;
+        location.href = '/publickwizes';
+      })
+
     }
   });
 
-
+  //submit login form
   $(document).on('submit', '#login-form', function (e) {
     e.preventDefault();
 
     const data = $(this).serialize();
-    //console.log("data", data);
     logIn(data)
       .then((data) => {
         if (data === "WRONG INFO") {
-          $('.container').append("AAAAAAAAAAA").html();// ADD ERROR MESSAGE (SHOW)
-          console.log("WRONG INFOOOOOOOOOOOOOOOOOOOO");
+          alert('Wrong password!');
+          // $('.container').append("AAAAAAAAAAA").html();// ADD ERROR MESSAGE (SHOW)
+          // console.log("WRONG INFOOOOOOOOOOOOOOOOOOOO");
           return;
         }
         location.reload();
       });
-
   });
 
+  //submit register form
   $(document).on('submit', '#register-form', function (e) {
     e.preventDefault();
 
@@ -100,47 +110,46 @@ $(document).ready(() => {
       //.then(getMyDetails)
       .then((data) => {
         if (data === "EXIST") {
-          $('.container').append("AAAAAAAAAAA").html();// ADD ERROR MESSAGE (SHOW)
-          console.log("EXISTTTTTTTTTT");
+          alert('This user already exists!')
+          // $('.container').append("AAAAAAAAAAA").html();// ADD ERROR MESSAGE (SHOW)
+          // console.log("EXISTTTTTTTTTT");
           return;
         }
-        location.reload();
+        window.location.href = '/publickwizes';
       });
   });
 
-  let kwizData;
-  let questions;
-
-  let answers = [];
-  let correct = [];
-
+  //start the quiz
   $(document).on('click', '.kwizbutton', function (e) {
     e.preventDefault();
-    $.get(`/${$(this).attr('href')}/questions`, (data) => {
-      kwizId = $(this).attr('href');
-      kwizData = data;
-      questions = Object.keys(kwizData);
-      qnum = 0;
-      // console.log(kwizData);
-      // console.log('kwizData',Object.keys(kwizData));
-      $('#questions').empty().append(kwizQuestion(kwizData, questions[qnum])).append(nextQuestionButton());
-      qnum++;
-    });
+    getKwiz(`${$(this).attr('href')}`)
+      .then((data) => {
+        kwizId = $(this).attr('href');
+        kwizData = data;
+        questions = Object.keys(kwizData);
+        qnum = 0;
+        $('#questions').empty().append(kwizQuestion(kwizData, questions[qnum])).append(nextQuestionButton());
+        qnum++;
+      })
   });
 
-  const getObjKey = (obj, value, correct) => {
-    const answer = Object.keys(obj).find(key => obj[key] === value);
+  //HELPER FUNCTIONS
+  const correctAnswer = (answer, correct) => {
     if (answer === correct) {
       return true;
     }
     return false;
   };
 
+  const getKey = (obj, value) => {
+    return Object.keys(obj).find(key => obj[key] === value);
+  };
+
   $(document).on('click', '#nextbutton', function (e) {
     e.preventDefault();
     const correctAns = kwizData[qnum].qans;
-    const answer = $("input:checked").val();
-    const userCorrect = getObjKey(kwizData[qnum], answer, correctAns);
+    const answer = getKey(kwizData[qnum], $("input:checked").val());
+    const userCorrect = correctAnswer(answer, correctAns);
 
     if (!$("input:radio").is(":checked")) {
       alert('Nothing is checked!');
@@ -158,15 +167,19 @@ $(document).ready(() => {
     }
   });
 
-  $(document).on('submit', '#questions-form', function(e) {
+  //submit the quiz and get the result
+  $(document).on('submit', '#questions-form', function (e) {
     e.preventDefault();
     const correctAns = kwizData[qnum].qans;
-    const answer = $("input:checked").val();
-    const userCorrect = getObjKey(kwizData[qnum], answer, correctAns);
+    const answer = getKey(kwizData[qnum], $("input:checked").val());
+    const userCorrect = correctAnswer(answer, correctAns);
     correct.push(userCorrect);
     answers.push(answer);
     const results = { answers, correct };
-    $.post('/results', results);
+    $.post('/results', results)
+      .then(() => {
+        window.location.href = '/results';
+      });
   });
 
 });

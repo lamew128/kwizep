@@ -24,7 +24,7 @@ module.exports = (db) => {
   /**
    * Check if a user exists with a given username and password
    * @param {String} email
-   * @param {String} password encrypted
+   * @param {String} password
    */
   const login = function (email, password) {
     return db.getUserWithEmail(email)

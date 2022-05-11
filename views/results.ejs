@@ -41,25 +41,50 @@
 </head>
 
 <body>
-
   <%- include('partials/nav') %>
 
     <main class="container">
 
-      <form id="questions-form">
+      <table class="table" id="results">
 
-        <section id="questions">
+        <thead>
+          <tr>
+            <th scope="col">Question #</th>
+            <th scope="col">Your answer</th>
+            <th scope="col">Correct Answer</th>
+          </tr>
+        </thead>
 
-          <button href="/kwiz/<%= id %>" class="kwizbutton">START KWIZ!</button>
+        <tbody>
 
-        </section>
-
-      </form>
+          <% for (let i=0; i < answers.length; i++) { %>
+            <% if (db[i+1][answers[i]] === correctAns[i]) { %>
+              <tr class="table-success">
+                <th scope="row"><%= i+1 %></th>
+                <td>
+                  <%= db[i+1][answers[i]] %>
+                </td>
+                <td>
+                  <%= correctAns[i] %>
+                </td>
+              </tr>
+              <% } else { %>
+                <tr class="table-danger">
+                  <th scope="row"><%= i+1 %></th>
+                  <td>
+                    <%= db[i+1][answers[i]] %>
+                  </td>
+                  <td>
+                    <%= correctAns[i] %>
+                  </td>
+                </tr>
+                <% } %>
+                  <% } %>
+                  
+        </tbody>
 
     </main>
 
-    <i id="scroll-top" class="fa-solid fa-angles-up"></i>
-
 </body>
 
-</html>
+</table>
