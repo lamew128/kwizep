@@ -76,8 +76,14 @@ module.exports = (db) => {
 
   router.post('/result', (req, res) => {
     let data = req.body;
-    console.log("dataaaaaaaaa",data);
+    let kwizId = data.kwizId;
+    let answerArr = data['answers[]'];
+    let correctArr = data['correct[]'];
+    let userId = req.cookies.id;
+    // console.log("dataaaaaaaaa",data);
+    db.generateKwizResponse (userId,kwizId,answerArr);
   });
+
 
   return router;
 
