@@ -3,7 +3,7 @@ $secondaryColor: #000f99;
 $tertiaryColor: #0099FF;
 
 .container {
-  margin-top: 70px;
+  margin-top: 80px;
 }
 
 body {
@@ -36,6 +36,7 @@ hr {
   color: white;
   @include threeD;
   font-family: 'Orbitron', sans-serif;
+  width: -webkit-fill-available;
 
   .card-title {
     font-weight: bold;

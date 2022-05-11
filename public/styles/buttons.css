@@ -34,13 +34,9 @@
   left: 0;
 }
 
-#nextbutton {
+.kwizbtn {
   width: fit-content;
   align-self: center;
-}
-
-/* From uiverse.io by @alexmaracinaru */
-#nextbutton {
   cursor: pointer;
   font-weight: 700;
   font-family: Helvetica, "sans-serif";
@@ -54,21 +50,25 @@
   font-size: 15px;
 }
 
-#nextbutton:hover {
+.kwizbtn:hover {
   background: #0019FF;
   color: white;
 }
 
-#nextbutton > svg {
+.kwizbtn > svg {
   width: 34px;
   margin-left: 10px;
   transition: transform 0.3s ease-in-out;
 }
 
-#nextbutton:hover svg {
+.kwizbtn:hover svg {
   transform: translateX(5px);
 }
 
-#nextbutton:active {
+.kwizbtn:active {
   transform: scale(0.95);
+}
+
+.cardbtn {
+  flex-basis: fit-content;
 }
