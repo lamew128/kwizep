@@ -17,7 +17,6 @@ module.exports = (db) => {
     } else {
       kwiz.public = true;
     }
-
     const keys = Object.keys(kwiz).sort();
     const answerKeys = keys.slice(4, keys.length - 2);
 
