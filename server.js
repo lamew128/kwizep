@@ -122,9 +122,13 @@ app.get("/", (req, res) => {
 
 app.get("/mykwizes", (req, res) => {
   db.getUserWithId(req.cookies.id)
-    .then((data) => {
-      const templateVars = { user: data, db: database, public: false };
-      res.render("index", templateVars);
+    .then((user) => {
+      db.showMyKwizzes(user.id)
+      .then((data) =>{
+        console.log("DATAAAAAAAAAAAAAAAAAA:",data);
+        const templateVars = { user: user, db: data, public: false };
+        res.render("index", templateVars);
+      })
     });
 });
 
