@@ -56,12 +56,6 @@ module.exports = (db) => {
   });
 
 
-  router.get('/:quizId', (req, res) => {
-    db.takeKwiz(req.params.quizId);
-    //add complete server response
-  });
-
-
   router.get('/:id', (req, res) => {
     db.getUserWithId(req.cookies.id)
       .then((data) => {
@@ -74,8 +68,7 @@ module.exports = (db) => {
 
 
   router.get('/:id/questions', (req, res) => {
-    //db.Kwiz(req.params.id)..
-
+    db.takeKwiz(req.params.quizId);
     const kwizId = req.params.id;
     res.send(questionsDb[kwizId]);
   });
