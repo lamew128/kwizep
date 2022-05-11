@@ -185,7 +185,7 @@ $(document).ready(() => {
     console.log("results", results);
     generateResult(results)
       .then(() => {
-
+   
       });
 
     // $.post('/results', results)
@@ -207,7 +207,7 @@ $(document).ready(() => {
   $(document).on('click', '#sharebutton', function (e) {
     e.preventDefault();
 
-    const $link =  $(this).siblings().attr('href');
+    const $link = $(this).siblings().attr('href');
     copyToClipboard(`${window.location.origin}${$link}`);
 
     const $share = $(this).closest("div").nextAll("div[id]:first");
@@ -217,6 +217,10 @@ $(document).ready(() => {
       $share.slideUp();
     }, 5000);
   });
+
+
+
+  // ERD => id, user_id = null, q#, user_answer, correct_answer
 
 
 });
