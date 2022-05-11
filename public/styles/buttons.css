@@ -38,3 +38,37 @@
   width: fit-content;
   align-self: center;
 }
+
+/* From uiverse.io by @alexmaracinaru */
+#nextbutton {
+  cursor: pointer;
+  font-weight: 700;
+  font-family: Helvetica, "sans-serif";
+  transition: all 0.2s;
+  padding: 10px 20px;
+  border-radius: 100px;
+  background: #0099FF;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+}
+
+#nextbutton:hover {
+  background: #0019FF;
+  color: white;
+}
+
+#nextbutton > svg {
+  width: 34px;
+  margin-left: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+#nextbutton:hover svg {
+  transform: translateX(5px);
+}
+
+#nextbutton:active {
+  transform: scale(0.95);
+}
