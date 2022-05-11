@@ -6,7 +6,7 @@ CREATE TABLE quiz_take (
   id SERIAL PRIMARY KEY NOT NULL,
   taker_id INTEGER REFERENCES users(id),
   quiz_id INTEGER REFERENCES quiz(id),
-  quiz_answers_id Integer Array
+  quiz_answers_id INTEGER
 
 );
 
