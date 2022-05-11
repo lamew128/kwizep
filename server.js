@@ -128,6 +128,7 @@ app.get("/mykwizes", (req, res) => {
 });
 
 app.get("/publickwizes", (req, res) => {
+  db.showPublicKwizzes();
   db.getUserWithId(req.cookies.id)
     .then((data) => {
       const templateVars = { user: data, db: database, public: true };
