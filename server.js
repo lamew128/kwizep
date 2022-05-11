@@ -97,6 +97,7 @@ app.use(express.static("public"));
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
 const quizRoutes = require("./routes/quiz");
+const { reset } = require("nodemon");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -151,34 +152,19 @@ app.post("/createkwiz/questions", (req, res) => {
   res.send(req.body);
 });
 
-// app.get("/kwiz/:id", (req, res) => {
+app.post("/results", (req, res) => {
+  console.log(req.body);
+  res.send(req.body);
+});
+
+// app.get("/results", (req, res) => {
 //   db.getUserWithId(req.cookies.id)
 //     .then((data) => {
 //       const kwizId = req.params.id;
-//       const templateVars = { user: data, id: kwizId };
-//       res.render("kwiz", templateVars);
+//       const templateVars = { user: data, db: questionsDb[1], answers: userAnswers, correctAns: correct };
+//       res.render("results", templateVars);
 //     });
 // });
-
-// app.get("/kwiz/:id/questions", (req, res) => {
-//   const kwizId = req.params.id;
-//   res.send(questionsDb[kwizId]);
-// });
-
-app.post("/results", (req, res) => {
-  res.redirect('/results');
-  // console.log(req.body);
-  // res.send(questionsDb[kwizId]);
-});
-
-app.get("/results", (req, res) => {
-  db.getUserWithId(req.cookies.id)
-    .then((data) => {
-      const kwizId = req.params.id;
-      const templateVars = { user: data, id: kwizId };
-      res.render("results", templateVars);
-    });
-});
 
 // \/\/\/\/\/\/\/\/\/\/\/\/\/\/ NEW ADDED EJS ROUTES \/\/\/\/\/\/\/\/\/\/\/\/\/\/
 

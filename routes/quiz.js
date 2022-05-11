@@ -6,32 +6,32 @@ router.use(bodyParser.urlencoded({ extended: false }));
 
 module.exports = (db) => {
 
- router.post('/create', (req, res) => {
-  //  let quizId;
-  //  console.log(quizId);
-     // Add a new kwiz
+  router.post('/create', (req, res) => {
+    //  let quizId;
+    //  console.log(quizId);
+    // Add a new kwiz
     const kwiz = req.body;
     kwiz.userId = req.cookies.id;
-    console.log({kwiz});
+    console.log({ kwiz });
     if (kwiz.private === 'on') {
       kwiz.public = false;
     } else {
       kwiz.public = true;
     }
     let keys = Object.keys(kwiz).sort();
-    let answerKeys = keys.slice(4,keys.length - 2);
+    let answerKeys = keys.slice(4, keys.length - 2);
     //console.log({answerKeys},{keys});
     let answerArr = [];
     for (let i = 0; i < answerKeys.length; i++) {
       let ans = answerKeys[i];
       // console.log(ans);
-      if (ans[ans.length-1] !== 's') {
-        let questionId = ans.substring(1,ans.length - 1);
+      if (ans[ans.length - 1] !== 's') {
+        let questionId = ans.substring(1, ans.length - 1);
         // console.log(questionId);
-        let option = ans[ans.length-1];
+        let option = ans[ans.length - 1];
         let correct;
         let answer = kwiz[ans];
-        if (i !== answerKeys.length - 1 && answerKeys[i+1][answerKeys[i+1].length-1] == 's'){
+        if (i !== answerKeys.length - 1 && answerKeys[i + 1][answerKeys[i + 1].length - 1] == 's') {
           correct = true;
         } else {
           correct = false;
@@ -48,26 +48,27 @@ module.exports = (db) => {
     //console.log(answerArr);
     db.addKwiz(kwiz)
       .then(() => {
-        db.addKwizQuestions(kwiz.q1,kwiz.quizId)})
-      .then (() =>{
-        db.addKwizAnswers(kwiz.quizId,answerArr);
-        })
-        .then(() => {
-          res.send({});
-        })
+        db.addKwizQuestions(kwiz.q1, kwiz.quizId);
+      })
+      .then(() => {
+        db.addKwizAnswers(kwiz.quizId, answerArr);
+      })
+      .then(() => {
+        res.send({});
+      });
     // bug:the last answer cannot be converted to the answer arr
     // db.addKwizQuestions(kwiz.q1, quizId);
- });
+  });
 
 
 
   router.get('/:id', (req, res) => {
     db.getUserWithId(req.cookies.id)
-    .then((data) => {
-      const kwizId = req.params.id;
-      const templateVars = { user: data, id: kwizId };
-      res.render("kwiz", templateVars);
-    });
+      .then((data) => {
+        const kwizId = req.params.id;
+        const templateVars = { user: data, id: kwizId };
+        res.render("kwiz", templateVars);
+      });
   });
 
   const questionsDb = {
