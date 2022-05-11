@@ -83,9 +83,11 @@ const card = (data) => {
 const kwizQuestion = (data, id, question) => {
   const qnum = `q${question}`;
   return `
+  <article class="kwizquestions p-3 m-5">
          <div class="mb-3">
             <label class="form-label">Question ${question} - ${data[id][question][qnum]}</label>
           </div>
+          <hr class="mb-2">
           <div class="form-check">
           <label class="form-check-label" for="${data[id][question][`${qnum}a`]}">
             <input class="form-check-input" type="radio" name="${qnum}" id="${data[id][question][`${qnum}a`]}" value="${data[id][question][`${qnum}a`]}" required>
@@ -109,12 +111,13 @@ const kwizQuestion = (data, id, question) => {
             <input class="form-check-input" type="radio" name="${qnum}" id="${data[id][question][`${qnum}d`]}" value="${data[id][question][`${qnum}d`]}" required>
               <span>${data[id][question][`${qnum}d`]}</span>
             </label>
-          </div>`;
+          </div>
+  </article>`;
 };
 
 const nextQuestionButton = () => {
   return `
-  <button class="kwizbtn" id="nextbutton">
+  <button class="kwizbtn m-5" id="nextbutton">
   <span>Next Question!</span>
   <svg width="34" height="34" viewBox="0 0 74 74" fill="none" xmlns="http://www.w3.org/2000/svg">
     <circle cx="37" cy="37" r="35.5" stroke="black" stroke-width="3"></circle>

@@ -56,3 +56,20 @@ label span:before {
   align-items: center;
   padding: 20px;
 }
+
+.kwizquestions {
+  background-color: azure;
+  width: 80vw;
+  border-style: double;
+  border-width: 10px;
+  border-color: #000f99;
+  border-radius: 20px;
+  position: relative;
+  box-shadow: 20px 20px rgba(0, 0, 255, 0.15);
+  transition: all 1s ease;
+}
+
+.kwizquestions:hover {
+  border-radius: 20px 20px 50% 50%/20px 20px 5% 5%;
+  box-shadow: 20px 10px rgba(0, 0, 255, 0.25);
+}

@@ -53,11 +53,12 @@ $primaryFont: 'Orbitron', sans-serif;
   transition: all .2s;
   padding: 10px 20px;
   border-radius: 100px;
-  background: $tertiaryColor;
+  background: lightblue;
   border: 1px solid transparent;
   display: flex;
   align-items: center;
-  font-size: 15px;
+  font-size: 3vw;
+  color:#000f99;
  }
 
  .kwizbtn:hover {

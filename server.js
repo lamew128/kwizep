@@ -73,6 +73,7 @@ app.get("/", (req, res) => {
 app.get("/mykwizes", (req, res) => {
   if (!req.cookies.id) {
     res.redirect('/');
+    return;
   }
   db.getUserWithId(req.cookies.id)
     .then((user) => {
@@ -86,6 +87,10 @@ app.get("/mykwizes", (req, res) => {
 });
 
 app.get("/publickwizes", (req, res) => {
+  if (!req.cookies.id) {
+    res.redirect('/');
+    return;
+  }
   db.getUserWithId(req.cookies.id)
     .then((user) => {
       db.showPublicKwizzes()
