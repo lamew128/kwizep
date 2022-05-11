@@ -61,6 +61,12 @@ $primaryFont: 'Orbitron', sans-serif;
   color:#000f99;
  }
 
+ @media screen and (min-width: 1024px) {
+  .kwizbtn {
+     font-size: 2vw;
+  }
+}
+
  .kwizbtn:hover {
   background: $primaryColor;
   color: white;
