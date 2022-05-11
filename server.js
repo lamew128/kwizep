@@ -71,6 +71,7 @@ const database = [
   },
 ];
 
+
 // ---------------------------------------------------------------------------
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -121,6 +122,9 @@ app.get("/", (req, res) => {
 // \/\/\/\/\/\/\/\/\/\/\/\/\/\/ NEW ADDED EJS ROUTES \/\/\/\/\/\/\/\/\/\/\/\/\/\/
 
 app.get("/mykwizes", (req, res) => {
+  if (!req.cookies.id) {
+    res.redirect('/');
+  }
   db.getUserWithId(req.cookies.id)
     .then((user) => {
       db.showMyKwizzes(user.id)

@@ -56,7 +56,7 @@ $(document).ready(() => {
     if (num === 1) {
       alert('You must have at least one question!');
     } else {
-      $(`#question${n}`).remove();
+      $(`#question${num}`).remove();
       num--;
     }
   });
@@ -110,7 +110,7 @@ $(document).ready(() => {
       //.then(getMyDetails)
       .then((data) => {
         if (data === "EXIST") {
-          alert('This user already exists!')
+          alert('This user already exists!');
           // $('.container').append("AAAAAAAAAAA").html();// ADD ERROR MESSAGE (SHOW)
           // console.log("EXISTTTTTTTTTT");
           return;
@@ -130,7 +130,7 @@ $(document).ready(() => {
         qnum = 0;
         $('#questions').empty().append(kwizQuestion(kwizData, questions[qnum])).append(nextQuestionButton());
         qnum++;
-      })
+      });
   });
 
   //HELPER FUNCTIONS
