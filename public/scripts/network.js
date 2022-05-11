@@ -41,6 +41,15 @@ function createKwiz(data) {
 function getKwiz(url) {
   return $.ajax({
     method: "GET",
-    url: `${url}/questions`,
+    url: `${url}/questions`
   });
 }
+
+function generateResult(data) {
+  return $.ajax({
+    method: "POST",
+    url: `/kwiz/result`,
+    data
+  });
+}
+

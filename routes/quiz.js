@@ -17,7 +17,6 @@ module.exports = (db) => {
     } else {
       kwiz.public = true;
     }
-
     const keys = Object.keys(kwiz).sort();
     const answerKeys = keys.slice(4, keys.length - 2);
 
@@ -57,12 +56,6 @@ module.exports = (db) => {
   });
 
 
-  router.get('/:quizId', (req, res) => {
-    db.takeKwiz(req.params.quizId);
-    //add complete server response
-  });
-
-
   router.get('/:id', (req, res) => {
     db.getUserWithId(req.cookies.id)
       .then((data) => {
@@ -75,11 +68,22 @@ module.exports = (db) => {
 
 
   router.get('/:id/questions', (req, res) => {
-    //db.Kwiz(req.params.id)..
-
-    const kwizId = req.params.id;
-    res.send(questionsDb[kwizId]);
+    db.takeKwiz(req.params.id)
+    .then((data) => {
+      res.send(data);
+    })
   });
+
+  router.post('/result', (req, res) => {
+    let data = req.body;
+    let kwizId = data.kwizId;
+    let answerArr = data['answers[]'];
+    let correctArr = data['correct[]'];
+    let userId = req.cookies.id;
+    // console.log("dataaaaaaaaa",data);
+    db.generateKwizResponse (userId,kwizId,answerArr);
+  });
+
 
   return router;
 
