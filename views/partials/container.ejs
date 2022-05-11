@@ -29,7 +29,7 @@
     </div>
 
     <div class="col-md-9 col-12">
-      <div class="row d-flex text-center mb-2">
+      <div class="row d-flex text-center mb-4">
         <a href="/createkwiz" id="createkwiz">
           <button class="pushable w-50">
             <span class="front">
@@ -39,12 +39,12 @@
         </a>
       </div>
       <% if (public) { %>
-        <div class="row" id="kwizcontainer">
+        <div class="row" id="kwizcontainer d-flex justify-content-center">
           <%- include('./publickwizes') %>
         </div>
         <% } %>
           <% if (!public) { %>
-            <div class="row" id="kwizcontainer">
+            <div class="row" id="kwizcontainer d-flex justify-content-center">
               <%- include('./privatekwizes') %>
             </div>
             <% } %>

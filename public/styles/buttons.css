@@ -71,4 +71,5 @@
 
 .cardbtn {
   flex-basis: fit-content;
+  font-size: 1.5vh;
 }
