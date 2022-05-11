@@ -185,13 +185,8 @@ $(document).ready(() => {
     console.log("results", results);
     generateResult(results)
       .then(() => {
-
+        window.location.href = `/kwiz/result/${kwizId}`;
       });
-
-    // $.post('/results', results)
-    //   .then(() => {
-    //     window.location.href = '/results';
-    //   });
   });
 
   //copy link
