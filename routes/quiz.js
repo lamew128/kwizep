@@ -74,6 +74,11 @@ module.exports = (db) => {
     })
   });
 
+  router.post('/result', (req, res) => {
+    let data = req.body;
+    console.log("dataaaaaaaaa",data);
+  });
+
   return router;
 
   //STORE CORRECT OR NOT AS BOOLEAN IN AN ARRAY

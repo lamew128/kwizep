@@ -181,11 +181,17 @@ $(document).ready(() => {
     const userCorrect = correctAnswer(answer, correctAns);
     correct.push(userCorrect);
     answers.push(answer);
-    const results = { answers, correct };
-    $.post('/results', results)
-      .then(() => {
-        window.location.href = '/results';
-      });
+    const results = { kwizId, answers, correct };
+    console.log("results",results);
+    generateResult(results)
+    .then(() => {
+
+    });
+
+    // $.post('/results', results)
+    //   .then(() => {
+    //     window.location.href = '/results';
+    //   });
   });
 
 });
