@@ -111,3 +111,15 @@ hr {
 .pushable:active .front {
   transform: translateY(-2px);
 }
+
+#login {
+  cursor: pointer;
+}
+
+#register {
+  cursor: pointer;
+}
+
+#logout {
+  cursor: pointer;
+}

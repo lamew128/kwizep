@@ -39,9 +39,9 @@ const registerPage = () => {
 const question = (num) => {
   return `
   <section id="question${num}">
-  <div class="mb-3">
-    <label class="form-label">Question q${num} (select the correct answer)</label>
-    <input type="text" name="q1" class="form-control formfield" placeholder="Enter a title">
+  <div class="form-floating mb-3">
+    <input type="text" name="q1" class="form-control formfield" id="floatingInput" placeholder="Question 1">
+    <label for="floatingInput">Question ${num} (select the correct answer below)</label>
   </div>
   <div class="mb-3">
     <label class="form-label">Answer A</label>
@@ -58,7 +58,7 @@ const question = (num) => {
     <input type="radio" name="q${num}ans" value="q${num}c"><input type="text" name="q${num}c"
       class="form-control formfield">
   </div>
-  <div class="mb-3">
+  <div class="mb-5">
     <label class="form-label">Answer D</label>
     <input type="radio" name="q${num}ans" value="q${num}d"><input type="text" name="q${num}d"
       class="form-control formfield">

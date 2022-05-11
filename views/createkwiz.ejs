@@ -49,29 +49,33 @@
       <form id="createkwizform">
         <header>
           <div class="mb-3">
-            <label class="form-label">Title</label>
+            <label class="form-label fw-bold">Title</label>
             <input type="text" name="title" class="form-control formfield" placeholder="Enter a title">
           </div>
           <div class="mb-3">
-            <label class="form-label">Description</label>
-            <input type="text" name="description" class="form-control formfield" placeholder="Enter a description">
+            <label class="form-label fw-bold">Description</label>
+            <input type="text" name="description" class="form-control formfield"
+              placeholder="Enter a short description">
           </div>
           <div class="mb-3">
-            <label class="form-label">Image</label>
-            <input type="url" name="imageurl" class="form-control formfield"
-              placeholder="Image URL">
+            <label class="form-label fw-bold">Image</label>
+            <input type="url" name="imageurl" class="form-control formfield" placeholder="Image URL">
           </div>
-          <div class="mb-3">
-            <label class="form-label">Private</label>
-            <input type="checkbox" name="private" class="form-check-label formfield">
+          <div class="form-check mb-3">
+            <input name="private" class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+            <label class="form-check-label fw-bold" for="flexCheckChecked">
+              Private
+            </label>
           </div>
         </header>
 
         <article id="questionscontainer">
+
+
           <section id="question1">
-            <div class="mb-3">
-              <label class="form-label">Question 1 (select the correct answer)</label>
-              <input type="text" name="q1" class="form-control formfield" placeholder="Enter a title">
+            <div class="form-floating mb-3">
+              <input type="text" name="q1" class="form-control formfield" id="floatingInput" placeholder="Question 1">
+              <label for="floatingInput">Question 1 (select the correct answer below)</label>
             </div>
             <div class="mb-3">
               <label class="form-label">Answer A</label>
@@ -80,31 +84,30 @@
             </div>
             <div class="mb-3">
               <label class="form-label">Answer B</label>
-              <input type="radio" name="q1ans" value="q1b"><input type="text" name="q1b"
-                class="form-control formfield">
+              <input type="radio" name="q1ans" value="q1b"><input type="text" name="q1b" class="form-control formfield">
             </div>
             <div class="mb-3">
               <label class="form-label">Answer C</label>
-              <input type="radio" name="q1ans" value="q1c"><input type="text" name="q1c"
-                class="form-control formfield">
+              <input type="radio" name="q1ans" value="q1c"><input type="text" name="q1c" class="form-control formfield">
             </div>
-            <div class="mb-3">
+            <div class="mb-5">
               <label class="form-label">Answer D</label>
-              <input type="radio" name="q1ans" value="q1d"><input type="text" name="q1d"
-                class="form-control formfield">
+              <input type="radio" name="q1ans" value="q1d"><input type="text" name="q1d" class="form-control formfield">
             </div>
           </section>
         </article>
 
-        <button type="button" class="btn btn-primary" id="newquestion">Create new question</button>
-        <button type="button" class="btn btn-primary" id="deletequestion">Delete question</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="mb-5">
+          <button type="button" class="btn btn-primary" id="newquestion">Create new question</button>
+          <button type="button" class="btn btn-primary" id="deletequestion">Delete question</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
 
       </form>
 
-    </main>
+      </main">
 
-    <i id="scroll-top" class="fa-solid fa-angles-up"></i>
+      <i id="scroll-top" class="fa-solid fa-angles-up"></i>
 
 </body>
 
