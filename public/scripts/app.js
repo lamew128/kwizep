@@ -75,8 +75,12 @@ $(document).ready(() => {
     });
     if (submit) {
       //inject createKwiz;
-      createKwiz(data);
-      n = 0;
+      createKwiz(data)
+      .then(() => {
+        n = 0;
+        location.href = '/publickwizes';
+      })
+
     }
   });
 

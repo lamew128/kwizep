@@ -12,7 +12,7 @@ module.exports = (db) => {
     // Add a new kwiz
     const kwiz = req.body;
     kwiz.userId = req.cookies.id;
-    console.log({ kwiz });
+    //console.log({ kwiz });
     if (kwiz.private === 'on') {
       kwiz.public = false;
     } else {
