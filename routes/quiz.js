@@ -82,26 +82,24 @@ module.exports = (db) => {
     if(!Array.isArray(correctArr)) {
       correctArr = [correctArr];
     }
-    console.log('correctArr is', correctArr);
+    //console.log('correctArr is', correctArr);
     let userId = req.cookies.id;
-    // console.log("dataaaaaaaaa",data);
+    //console.log("dataaaaaaaaa",data);
     db.generateKwizResponse (userId,kwizId,correctArr)
-    .then(function() {
+    .then((rows) => {
       //res.redirect(`/kwiz/result/${kwizId}`);
-      res.send({});
+      console.log("rowsssssssssssssss", rows);
+      res.send(rows);
     })
   });
 
   router.get('/result/:id', (req, res) => {
-    //db.getResult...
-    db.getUserWithId(req.cookies.id)
-      .then(function (data) {
-        const kwizId = req.params.id;
-        const templateVars = { user: data, id: kwizId, answers: {} };
+    db.getKwizResult(req.params.id)
+      .then(function(data) {
+        const templateVars = { user: data.user, title: data.title, image: data.url, score: data.score };
         res.render("results", templateVars);
       });
   })
-
 
   return router;
 

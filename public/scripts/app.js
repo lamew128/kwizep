@@ -184,8 +184,9 @@ $(document).ready(() => {
     const results = { kwizId, answers, correct };
     console.log("results", results);
     generateResult(results)
-      .then(() => {
-        window.location.href = `/kwiz/result/${kwizId}`;
+      .then((data) => {
+        console.log("appjs",data);
+        window.location.href = `${data[0].url}`;
       });
   });
 
