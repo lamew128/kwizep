@@ -6,14 +6,17 @@ router.use(bodyParser.urlencoded({ extended: false }));
 
 module.exports = (db) => {
 
- router.post('/create', (req) => {
+ router.post('/create', (req,res) => {
   //  let quizId;
   //  console.log(quizId);
      // Add a new kwiz
     const kwiz = req.body;
     kwiz.userId = req.cookies.id;
-    kwiz.public = !(kwiz.private === 'on');
-
+    if (kwiz.private === 'on') {
+      kwiz.public = false;
+    } else {
+      kwiz.public = true;
+    }
     const keys = Object.keys(kwiz).sort();
     const answerKeys = keys.slice(4,keys.length - 2);
 
