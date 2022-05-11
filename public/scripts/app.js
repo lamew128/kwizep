@@ -123,11 +123,15 @@ $(document).ready(() => {
     e.preventDefault();
     getKwiz(`${$(this).attr('href')}`)
       .then((data) => {
-        kwizId = $(this).attr('href');
         kwizData = data;
         questions = Object.keys(kwizData);
         qnum = 0;
-        $('#questions').empty().append(kwizQuestion(kwizData, questions[qnum])).append(nextQuestionButton());
+        $('#questions').empty().append(kwizQuestion(kwizData, questions[qnum]));
+        if (qnum === questions.length - 1) {
+          $('#questions').append(submitKwizButton());
+        } else {
+          $('#questions').append(nextQuestionButton());
+        }
         qnum++;
       });
   });
@@ -144,9 +148,11 @@ $(document).ready(() => {
     return Object.keys(obj).find(key => obj[key] === value);
   };
 
+  //next question
   $(document).on('click', '#nextbutton', function (e) {
     e.preventDefault();
     const correctAns = kwizData[qnum].qans;
+    console.log("correctAns",correctAns);
     const answer = getKey(kwizData[qnum], $("input:checked").val());
     const userCorrect = correctAnswer(answer, correctAns);
 

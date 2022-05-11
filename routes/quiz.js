@@ -68,9 +68,10 @@ module.exports = (db) => {
 
 
   router.get('/:id/questions', (req, res) => {
-    db.takeKwiz(req.params.quizId);
-    const kwizId = req.params.id;
-    res.send(questionsDb[kwizId]);
+    db.takeKwiz(req.params.id)
+    .then((data) => {
+      res.send(data);
+    })
   });
 
   return router;
