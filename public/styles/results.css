@@ -1,0 +1,33 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.results {
+  padding: 2%;
+  background-color: azure;
+  width: 80vw;
+  height: 60vh;
+  border-style: double;
+  border-width: 10px;
+  border-color: #000f99;
+  border-radius: 20px;
+  box-shadow: 20px 20px rgba(0, 0, 255, 0.5);
+  inline-size: fit-content;
+  min-width: 50vw;
+  max-width: 80vw;
+  font-family: "Orbitron", sans-serif;
+}
+
+.hr {
+  width: 80%;
+  height: 10px;
+}
+
+.img {
+  width: 30%;
+  height: auto;
+}

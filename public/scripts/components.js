@@ -66,20 +66,6 @@ const question = (num) => {
 </section>`;
 };
 
-const card = (data) => {
-  return `
-  <article class="col-lg-4 col-md-5 col-10">
-    <div class="card kwizcard">
-      <img src="${data.imageurl} KWIZ" class="card-img-top img-fluid" alt="quizimg">
-        <div class="card-body">
-          <h5 class="card-title">${data.title}</h5>
-          <p class="card-text">${data.description}</p>
-          <a href="#" class="btn btn-primary">KWIZ!</a>
-        </div>
-    </div>
-  </article>`;
-};
-
 const kwizQuestion = (data, id, question) => {
   const qnum = `q${question}`;
   return `

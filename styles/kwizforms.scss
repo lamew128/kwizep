@@ -3,84 +3,83 @@ $secondaryColor: #000f99;
 $tertiaryColor: #0099FF;
 
 $primary-color: $primaryColor; // Change color here. C'mon, try it!
-$text-color: mix( #0019FF, $primary-color, 64%);
+$text-color: mix(#0019FF, $primary-color, 64%);
 
 form {
-	display: flex;
-	flex-wrap: wrap;
-	flex-direction: column;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
 
 label {
-	display: flex;
-	font-weight: 500;
-	position: relative;
-	overflow: hidden;
-	margin-bottom: 0.375em;
+  display: flex;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0.375em;
 
-	input {
-		position: absolute;
-		left: -9999px;
-		&:checked + span {
-			background-color: mix(lightblue, $primary-color, 84%);
-			&:before {
-				box-shadow: inset 0 0 0 0.4375em $primary-color;
-			}
-		}
-	}
-	span {
-		display: flex;
-		align-items: center;
-		padding: 0.375em 0.75em 0.375em 0.375em;
-		border-radius: 99em;
-		transition: 0.25s ease;
-		&:hover {
-			background-color: mix(#fff, $primary-color, 84%);
-		}
-		&:before {
-			display: flex;
-			flex-shrink: 0;
-			content: "";
-			background-color: #fff;
-			width: 1.5em;
-			height: 1.5em;
-			border-radius: 50%;
-			margin-right: 0.375em;
-			transition: 0.25s ease;
-			box-shadow: inset 0 0 0 0.125em $primary-color;
-		}
-	}
+  input {
+    position: absolute;
+    left: -9999px;
+
+    &:checked+span {
+      background-color: mix(lightblue, $primary-color, 84%);
+
+      &:before {
+        box-shadow: inset 0 0 0 0.4375em $primary-color;
+      }
+    }
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+    padding: 0.375em 0.75em 0.375em 0.375em;
+    border-radius: 99em;
+    transition: 0.25s ease;
+
+    &:hover {
+      background-color: mix(#fff, $primary-color, 84%);
+    }
+
+    &:before {
+      display: flex;
+      flex-shrink: 0;
+      content: "";
+      background-color: #fff;
+      width: 1.5em;
+      height: 1.5em;
+      border-radius: 50%;
+      margin-right: 0.375em;
+      transition: 0.25s ease;
+      box-shadow: inset 0 0 0 0.125em $primary-color;
+    }
+  }
 }
 
 .container {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
 .kwizquestions {
-  background-color:azure;
+  background-color: azure;
   width: 80vw;
   border-style: double;
   border-width: 10px;
   border-color: $secondaryColor;
   border-radius: 20px;
-
-    position: relative;
-    // border-radius: 0% 0% 0% 0% / 0% 0% 0% 0% ;
-    box-shadow: 20px 20px rgba(0, 0, 255, 0.15);
-    transition: all 1s ease;
-
-}
-
-.kwizquestions:hover {
-  border-radius: 20px 20px 50% 50% / 20px 20px 5% 5% ;
-  box-shadow: 20px 10px rgba(0,0,255,.25);
+  box-shadow: 20px 20px rgba(0, 0, 255, 0.5);
+  inline-size: fit-content;
+  min-width: 50vw;
+  max-width: 80vw;
+  font-family: 'Orbitron', sans-serif;
 }
