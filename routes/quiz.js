@@ -69,37 +69,39 @@ module.exports = (db) => {
 
   router.get('/:id/questions', (req, res) => {
     db.takeKwiz(req.params.id)
-    .then((data) => {
-      res.send(data);
-    })
+      .then((data) => {
+        res.send(data);
+      })
   });
 
   router.post('/result', (req, res) => {
     let data = req.body;
+    // console.log('POST DATA!!!!!!!!',data);
     let kwizId = data.kwizId;
     let answerArr = data['answers[]'];
     let correctArr = data['correct[]'];
-    if(!Array.isArray(correctArr)) {
+    if (!Array.isArray(correctArr)) {
       correctArr = [correctArr];
     }
     //console.log('correctArr is', correctArr);
-    let userId = req.cookies.id;
+    let userId = req.cookies.id || 1;
     //console.log("dataaaaaaaaa",data);
-    db.generateKwizResponse (userId,kwizId,correctArr)
-    .then((rows) => {
-      //res.redirect(`/kwiz/result/${kwizId}`);
-      console.log("rowsssssssssssssss", rows);
-      res.send(rows);
-    })
+    db.generateKwizResponse(userId, kwizId, correctArr)
+      .then((rows) => {
+        //res.redirect(`/kwiz/result/${kwizId}`);
+        console.log("rowsssssssssssssss", rows);
+        res.send(rows);
+      });
   });
 
   router.get('/result/:id', (req, res) => {
-    db.getKwizResult(req.params.id)
-      .then(function(data) {
-        const templateVars = { user: data.user, title: data.title, image: data.url, score: data.score };
+    let user = req.cookies.id;
+    db.getKwizResult(req.params.id) // => if user = undefined ? user = guest
+      .then(function (data) {
+        const templateVars = { user, username: data.user, title: data.title, image: data.url, score: data.score };
         res.render("results", templateVars);
       });
-  })
+  });
 
   return router;
 

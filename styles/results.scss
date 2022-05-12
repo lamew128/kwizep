@@ -11,27 +11,42 @@ $tertiaryColor: #0099FF;
 }
 
 .results {
-  padding: 2%;
-  background-color: azure;
-  width: 80vw;
+  padding: 20px;
   height: 60vh;
-  border-style: double;
+  border-style: solid;
   border-width: 10px;
   border-color: $secondaryColor;
   border-radius: 20px;
-  box-shadow: 20px 20px rgba(0, 0, 255, 0.5);
+  box-shadow: 10px 10px rgba(0, 0, 255, 0.3);
   inline-size: fit-content;
-  min-width: 50vw;
-  max-width: 80vw;
   font-family: 'Orbitron', sans-serif;
+  color: white;
 }
 
-.hr {
-  width: 80%;
-  height: 10px;
+.imagebackground {
+  background-color:rgba(0, 0, 255, 0.5);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  border-radius: 20px;
 }
 
-.img {
-  width: 30%;
-  height: auto;
+.row {
+  padding: inherit;
+}
+
+.resultsbody {
+  text-align: -webkit-center;
+}
+
+.textresults {
+  span {
+    display: inline-block;
+    line-height: 0.9em;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+    background-size: cover;
+    fill-opacity: 0.5;
+  }
 }
