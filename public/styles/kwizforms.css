@@ -68,4 +68,5 @@ label span:before {
   inline-size: fit-content;
   min-width: 50vw;
   max-width: 80vw;
+  font-family: "Orbitron", sans-serif;
 }

@@ -1,9 +1,11 @@
 <% if (user) { %>
   <% for (const card of db) { %>
     <% if (!card.public) { %>
-      <article class="col-lg-4 col-md-5 col-12 d-flex align-items-stretch">
+      <article class="col-xl-4 col-lg-5 col-md-6 col-12 d-flex align-items-stretch">
         <div class="row card kwizcard">
-          <img src="<%= card.imageurl %>" class="card-img-top img-fluid" alt="quizimg">
+          <object class="text-center" data="<%= card.imageurl %>" type="image/png">
+            <img src="/images/no-image-icon-15.png" alt="Photo not available">
+          </object>
           <div class="card-body">
             <h5 class="card-title">
               <%= card.title %> KWIZ
