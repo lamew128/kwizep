@@ -1,15 +1,72 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
-const { stringify } = require('querystring');
 router.use(bodyParser.urlencoded({ extended: false }));
 
 module.exports = (db) => {
 
+  //show all private kwiz created by the current logged in user
+  router.get("/mykwizes", (req, res) => {
+    if (!req.cookies.id) {
+      res.redirect('/');
+      return;
+    }
+    db.getUserWithId(req.cookies.id)
+      .then((user) => {
+        Promise.all([
+          db.showMyKwizzes(user.id),
+          db.countMyKwiz(req.cookies.id),
+          db.myLastKwiz(req.cookies.id)
+        ])
+          .then((data) => {
+            let dataScore = 0;
+            if (data[2]) {
+              dataScore = data[2].score;
+            }
+            const templateVars = { user: user, db: data[0], count: data[1].count, score: dataScore, public: false };
+            res.render("index", templateVars);
+          });
+      });
+  });
+
+  //show all public kwiz
+  router.get("/publickwizes", (req, res) => {
+    if (!req.cookies.id) {
+      res.redirect('/');
+      return;
+    }
+    db.getUserWithId(req.cookies.id)
+      .then((user) => {
+        Promise.all([
+          db.showPublicKwizzes(),
+          db.countMyKwiz(req.cookies.id),
+          db.myLastKwiz(req.cookies.id)
+        ])
+          .then((data) => {
+            let dataScore = 0;
+            if (data[2]) {
+              dataScore = data[2].score;
+            }
+            const templateVars = { user: user, db: data[0], count: data[1].count, score: dataScore, public: true };
+            res.render("index", templateVars);
+          });
+      });
+  });
+
+  //go to the create kwiz page
+  router.get("/createkwiz", (req, res) => {
+    if (!req.cookies.id) {
+      res.redirect('/');
+    }
+    db.getUserWithId(req.cookies.id)
+      .then((data) => {
+        const templateVars = { user: data };
+        res.render("createkwiz", templateVars);
+      });
+  });
+
+  //create a kwiz
   router.post('/create', (req, res) => {
-    //  let quizId;
-    //  console.log(quizId);
-    // Add a new kwiz
     const kwiz = req.body;
     kwiz.userId = req.cookies.id;
     if (kwiz.private) {
@@ -47,7 +104,6 @@ module.exports = (db) => {
         answerArr.push([answerObj]);
       }
     }
-    // console.log(answerArr);
     db.addKwiz(kwiz)
       .then(() => db.addKwizQuestions(kwiz.q1, kwiz.quizId, answerArr))
       .then(() => {
@@ -55,7 +111,7 @@ module.exports = (db) => {
       });
   });
 
-
+  //go to the quiz page with the quiz id
   router.get('/:id', (req, res) => {
     db.getUserWithId(req.cookies.id)
       .then((data) => {
@@ -65,46 +121,38 @@ module.exports = (db) => {
       });
   });
 
-
-
+  //store the questions after clicking the start quiz button
   router.get('/:id/questions', (req, res) => {
     db.takeKwiz(req.params.id)
       .then((data) => {
         res.send(data);
-      })
+      });
   });
 
+  //create result page after submitting a quiz (insert)
   router.post('/result', (req, res) => {
     let data = req.body;
-    // console.log('POST DATA!!!!!!!!',data);
     let kwizId = data.kwizId;
-    let answerArr = data['answers[]'];
     let correctArr = data['correct[]'];
     if (!Array.isArray(correctArr)) {
       correctArr = [correctArr];
     }
-    //console.log('correctArr is', correctArr);
     let userId = req.cookies.id || 1;
-    //console.log("dataaaaaaaaa",data);
     db.generateKwizResponse(userId, kwizId, correctArr)
       .then((rows) => {
-        //res.redirect(`/kwiz/result/${kwizId}`);
-        console.log("rowsssssssssssssss", rows);
         res.send(rows);
       });
   });
 
+  //go to the result page with an id
   router.get('/result/:id', (req, res) => {
     let user = req.cookies.id;
     db.getKwizResult(req.params.id) // => if user = undefined ? user = guest
-      .then(function (data) {
+      .then(function(data) {
         const templateVars = { user, username: data.user, title: data.title, image: data.url, score: data.score, quizId: data.quiz_id };
         res.render("results", templateVars);
       });
   });
 
   return router;
-
-  //STORE CORRECT OR NOT AS BOOLEAN IN AN ARRAY
-  //RENDER THE QUIZ INCREMENTAL
 };

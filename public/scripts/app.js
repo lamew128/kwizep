@@ -74,11 +74,10 @@ $(document).ready(() => {
       }
     });
     if (submit) {
-      //inject createKwiz;
       createKwiz(data)
         .then(() => {
           n = 0;
-          location.href = '/publickwizes';
+          location.href = '/kwiz/publickwizes';
         });
     }
   });
@@ -92,11 +91,9 @@ $(document).ready(() => {
       .then((data) => {
         if (data === "WRONG INFO") {
           alert('Wrong password!');
-          // $('.container').append("AAAAAAAAAAA").html();// ADD ERROR MESSAGE (SHOW)
-          // console.log("WRONG INFOOOOOOOOOOOOOOOOOOOO");
           return;
         }
-        location.reload();
+        window.location.href = '/kwiz/publickwizes';
       });
   });
 
@@ -106,15 +103,12 @@ $(document).ready(() => {
 
     const data = $(this).serialize();
     signUp(data)
-      //.then(getMyDetails)
       .then((data) => {
         if (data === "EXIST") {
           alert('This user already exists!');
-          // $('.container').append("AAAAAAAAAAA").html();// ADD ERROR MESSAGE (SHOW)
-          // console.log("EXISTTTTTTTTTT");
           return;
         }
-        window.location.href = '/publickwizes';
+        window.location.href = '/kwiz/publickwizes';
       });
   });
 

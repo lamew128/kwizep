@@ -42,7 +42,6 @@ app.use(express.static("public"));
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
 const quizRoutes = require("./routes/quiz");
-const { reset } = require("nodemon");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -52,14 +51,11 @@ app.use("/kwiz", quizRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 // Home page
-// Warning: avoid creating more routes in this file!
-// Separate them into separate routes files (see above).
-
 app.get("/", (req, res) => {
   db.getUserWithId(req.cookies.id)
     .then((user) => {
       if (user) {
-        res.redirect('/publickwizes');
+        res.redirect('/kwiz/publickwizes');
       }
       if (!user) {
         const templateVars = { user: user };
@@ -68,85 +64,6 @@ app.get("/", (req, res) => {
     });
 });
 
-// \/\/\/\/\/\/\/\/\/\/\/\/\/\/ NEW ADDED EJS ROUTES \/\/\/\/\/\/\/\/\/\/\/\/\/\/
-
-app.get("/mykwizes", (req, res) => {
-  if (!req.cookies.id) {
-    res.redirect('/');
-    return;
-  }
-  db.getUserWithId(req.cookies.id)
-    .then((user) => {
-      Promise.all([
-        db.showMyKwizzes(user.id),
-        db.countMyKwiz(req.cookies.id),
-        db.myLastKwiz(req.cookies.id)
-      ])
-        .then((data) => {
-          let dataScore = 0;
-          if (data[2]) {
-            dataScore = data[2].score;
-          }
-          const templateVars = { user: user, db: data[0], count: data[1].count, score: dataScore, public: false };
-          res.render("index", templateVars);
-        });
-    });
-});
-
-app.get("/publickwizes", (req, res) => {
-  if (!req.cookies.id) {
-    res.redirect('/');
-    return;
-  }
-  db.getUserWithId(req.cookies.id)
-    .then((user) => {
-      Promise.all([
-        db.showPublicKwizzes(),
-        db.countMyKwiz(req.cookies.id),
-        db.myLastKwiz(req.cookies.id)
-      ])
-        .then((data) => {
-          let dataScore = 0;
-          if (data[2]) {
-            dataScore = data[2].score;
-          }
-          const templateVars = { user: user, db: data[0], count: data[1].count, score: dataScore, public: true };
-          res.render("index", templateVars);
-        });
-    });
-});
-
-app.get("/createkwiz", (req, res) => {
-  if (!req.cookies.id) {
-    res.redirect('/');
-  }
-  db.getUserWithId(req.cookies.id)
-    .then((data) => {
-      const templateVars = { user: data };
-      res.render("createkwiz", templateVars);
-    });
-});
-
-app.post("/createkwiz/questions", (req, res) => {
-  res.send(req.body);
-});
-
-app.post("/results", (req, res) => {
-  console.log(req.body);
-  res.send(req.body);
-});
-
-// app.get("/results", (req, res) => {
-//   db.getUserWithId(req.cookies.id)
-//     .then((data) => {
-//       const kwizId = req.params.id;
-//       const templateVars = { user: data, db: questionsDb[1], answers: userAnswers, correctAns: correct };
-//       res.render("results", templateVars);
-//     });
-// });
-
-// \/\/\/\/\/\/\/\/\/\/\/\/\/\/ NEW ADDED EJS ROUTES \/\/\/\/\/\/\/\/\/\/\/\/\/\/
-
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
+  console.log(`App listening on port ${PORT}`);
 });

@@ -26,21 +26,18 @@ module.exports = (db) => {
    * @param {String} email
    * @param {String} password
    */
-  const login = function (email, password) {
+  const login = function(email, password) {
     return db.getUserWithEmail(email)
-    .then((email) => {
-      if(!email) {
-        console.log("NO EMAIL");
-        return;
-      }
-      if (password === email.password) {
-        return email;
-      }
-      console.log("wrong password");
-      return null;
-    })
-
-  }
+      .then((email) => {
+        if (!email) {
+          return;//no email
+        }
+        if (password === email.password) {
+          return email;//wrong passwod
+        }
+        return null;
+      });
+  };
   exports.login = login;
 
   //login
@@ -59,42 +56,41 @@ module.exports = (db) => {
         res.send({ user: { name: user.name, email: user.email, id: user.id }});
       })
       .catch(e => {
-        return;
+        return e;
       });
   });
 
+  //logout
   router.post('/logout', (req, res) => {
     res.clearCookie('id');
     db.getUserWithId(req.cookies.id)
-        .then(function() {
-          const templateVars = {user: null, db: null};
-          res.render("index", templateVars);
-    });
+      .then(function() {
+        const templateVars = {user: null, db: null};
+        res.render("index", templateVars);
+      });
   });
 
-  // Create a new user
+  //Create a new user
   router.post('/register', (req, res) => {
     const user = req.body;
     db.getUserWithEmail(user.email)
-    .then((email) => {
-      if(email) {
-        console.log("exist");
-        res.send("EXIST");
-        //return;
-      }
-      db.addUser(user)
-      .then(user => {
-        if (!user) {
-          res.send({ error: "error" });
-          return;
+      .then((email) => {
+        if (email) {
+          res.send("EXIST");
         }
-        res.cookie('id', user.id);
-        res.send("🤗");
-      })
-      .catch(e => {
-        return;
+        db.addUser(user)
+          .then(user => {
+            if (!user) {
+              res.send({ error: "error" });
+              return;
+            }
+            res.cookie('id', user.id);
+            res.send("");
+          })
+          .catch(e => {
+            return e;
+          });
       });
-    })
   });
 
   return router;
