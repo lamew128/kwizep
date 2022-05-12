@@ -1,0 +1,37 @@
+$primaryColor: #0019FF;
+$secondaryColor: #000f99;
+$tertiaryColor: #0099FF;
+
+.createkwizheader {
+  border: 5px solid $secondaryColor;
+  border-radius: 20px;
+  background-color: rgba(173, 216, 230, 0.9);
+  padding: 20px;
+  font-family: 'Orbitron', sans-serif;
+
+  p {
+    color: $secondaryColor;
+  }
+}
+
+.formfield {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-width: 10px;
+  border: 0;
+  border-bottom: 5px solid #000f99;
+  border-right: 5px solid #000f99;
+}
+
+#questionscontainer {
+  width: 80%;
+  section {
+    border: 5px solid $secondaryColor;
+    border-radius: 20px;
+    background-color: rgba(173, 216, 230, 0.9);
+    padding: 20px;
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 2rem;
+  }
+}

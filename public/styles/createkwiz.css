@@ -1,0 +1,32 @@
+.createkwizheader {
+  border: 5px solid #000f99;
+  border-radius: 20px;
+  background-color: rgba(173, 216, 230, 0.9);
+  padding: 20px;
+  font-family: "Orbitron", sans-serif;
+}
+.createkwizheader p {
+  color: #000f99;
+}
+
+.formfield {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-width: 10px;
+  border: 0;
+  border-bottom: 5px solid #000f99;
+  border-right: 5px solid #000f99;
+}
+
+#questionscontainer {
+  width: 80%;
+}
+#questionscontainer section {
+  border: 5px solid #000f99;
+  border-radius: 20px;
+  background-color: rgba(173, 216, 230, 0.9);
+  padding: 20px;
+  font-family: "Orbitron", sans-serif;
+  margin-bottom: 2rem;
+}

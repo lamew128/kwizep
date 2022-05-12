@@ -12,7 +12,9 @@ $tertiaryColor: #0099FF;
 
 body {
   background-color: $primaryColor;
-  background-image: url("https://www.transparenttextures.com/patterns/diagmonds-light.png");
+  background-image: url("/images/quiz-background.webp");
+  background-repeat: no-repeat;
+  background-size:auto;
 }
 
 hr {

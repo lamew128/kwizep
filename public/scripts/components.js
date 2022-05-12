@@ -2,37 +2,41 @@
 
 const loginPage = () => {
   return `
-    <form id="login-form">
+  <div class="row justify-content-center">
+    <form id="login-form" class="appform">
       <div class="mb-3">
         <label class="form-label">Email address</label>
-        <input id='email' type="email" name="email" class="form-control" placeholder="Enter your e-mail">
+        <input id='email' type="email" name="email" class="form-control" placeholder="Enter your e-mail" required>
       </div>
       <div class="mb-3">
         <label class="form-label">Password</label>
-        <input id='password' type="password" name="password" class="form-control" placeholder="Password">
+        <input id='password' type="password" name="password" class="form-control" placeholder="Password required">
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+    </div>
     `;
 };
 
 const registerPage = () => {
   return `
-  <form id="register-form">
+  <div class="row justify-content-center">
+  <form id="register-form" class="appform">
     <div class="mb-3">
       <label class="form-label">Name</label>
-      <input type="name" name="name" class="form-control" placeholder="Enter your name">
+      <input type="name" name="name" class="form-control" placeholder="Enter your name" required>
     </div>
     <div class="mb-3">
       <label class="form-label">Email address</label>
-      <input type="email" name="email" class="form-control" placeholder="Enter your e-mail">
+      <input type="email" name="email" class="form-control" placeholder="Enter your e-mail" required>
     </div>
     <div class="mb-3">
       <label class="form-label">Password</label>
-      <input type="password" name="password" class="form-control" placeholder="Password">
+      <input type="password" name="password" class="form-control" placeholder="Password" required>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
+  </div>
   `;
 };
 

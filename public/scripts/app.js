@@ -102,6 +102,8 @@ $(document).ready(() => {
     e.preventDefault();
 
     const data = $(this).serialize();
+    console.log($('input').val());
+
     signUp(data)
       .then((data) => {
         if (data === "EXIST") {
@@ -205,13 +207,22 @@ $(document).ready(() => {
     $share.slideDown();
     setTimeout(() => {
       $share.slideUp();
-    }, 5000);
+    }, 3000);
   });
 
 
   $(document).on('click', '#shareresults', function (e) {
     e.preventDefault();
+
     copyToClipboard(window.location.href);
+
+    const $share = $(this).siblings();
+
+    $share.text('Copied to the clipboard!');
+    $share.slideDown();
+    setTimeout(() => {
+      $share.slideUp();
+    }, 3000);
   });
 
 });
