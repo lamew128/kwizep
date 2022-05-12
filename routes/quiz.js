@@ -12,6 +12,10 @@ module.exports = (db) => {
     // Add a new kwiz
     const kwiz = req.body;
     kwiz.userId = req.cookies.id;
+    let questionArr = kwiz.q1;
+    if (!Array.isArray(questionArr)) {
+      questionArr = [questionArr];
+    }
     if (kwiz.private) {
       kwiz.public = false;
     } else {
@@ -49,7 +53,7 @@ module.exports = (db) => {
     }
     // console.log(answerArr);
     db.addKwiz(kwiz)
-      .then(() => db.addKwizQuestions(kwiz.q1, kwiz.quizId, answerArr))
+      .then(() => db.addKwizQuestions(questionArr, kwiz.quizId, answerArr))
       .then(() => {
         res.send({});
       });
