@@ -51,14 +51,17 @@ $tertiaryColor: #0099FF;
     background-color: rgba(0, 0, 0, 0.8);
     background-size: cover;
     fill-opacity: 0.5;
-    font-size: 4vw;
+    font-size:calc(12px + 3vw);
   }
 }
 
 @media screen and (max-width: 767px) {
   .textresults {
-    span {
-      
-    }
+    span {}
   }
+}
+
+.anchortrybtn {
+  text-decoration: none;
+  inline-size: fit-content;
 }

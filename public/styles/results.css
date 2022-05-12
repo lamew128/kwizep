@@ -46,5 +46,10 @@
   background-color: rgba(0, 0, 0, 0.8);
   background-size: cover;
   fill-opacity: 0.5;
-  font-size: 4vw;
+  font-size: calc(12px + 3vw);
+}
+
+.anchortrybtn {
+  text-decoration: none;
+  inline-size: fit-content;
 }
