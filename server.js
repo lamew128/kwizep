@@ -83,7 +83,11 @@ app.get("/mykwizes", (req, res) => {
         db.myLastKwiz(req.cookies.id)
       ])
         .then((data) => {
-          const templateVars = { user: user, db: data[0], count: data[1].count, score: data[2].score, public: false };
+          let dataScore = 0;
+          if (data[2]) {
+            dataScore = data[2].score;
+          }
+          const templateVars = { user: user, db: data[0], count: data[1].count, score: dataScore, public: false };
           res.render("index", templateVars);
         });
     });
@@ -102,7 +106,11 @@ app.get("/publickwizes", (req, res) => {
         db.myLastKwiz(req.cookies.id)
       ])
         .then((data) => {
-          const templateVars = { user: user, db: data[0], count: data[1].count, score: data[2].score, public: true };
+          let dataScore = 0;
+          if (data[2]) {
+            dataScore = data[2].score;
+          }
+          const templateVars = { user: user, db: data[0], count: data[1].count, score: dataScore, public: true };
           res.render("index", templateVars);
         });
     });

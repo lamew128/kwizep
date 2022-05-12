@@ -9,6 +9,7 @@
 .results {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   padding: 20px;
   height: 60vh;
   border-style: solid;
