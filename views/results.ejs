@@ -69,16 +69,17 @@
                   <p class="display-5 textresults"><span>KWIZ: <%= title %></span></p>
                 </div>
                 <div class="row">
-                  <p class="display-5 textresults"><span>FINAL SCORE: <%= score %> %</span></p>
+                  <p class="display-5 textresults"><span>FINAL SCORE: <%= score %>%</span></p>
                 </div>
-                <a href="/kwiz/<%= quizId %>" style="color: red">Try this KWIZ!</a>
+
               </div>
             </div>
           </section>
         </div>
 
-        <div class="row justify-content-center">
-          <button class="kwizbtn mt-5" id="shareresults">SHARE THIS RESULT!</button>
+        <div class="row mt-5 justify-content-center">
+          <button class="kwizbtn" id="shareresults">SHARE THIS RESULT!</button>
+          <a class="anchortrybtn" href="/kwiz/<%= quizId %>"><button class="kwizbtn">Try this KWIZ!</button></a>
         </div>
 
       </div>
