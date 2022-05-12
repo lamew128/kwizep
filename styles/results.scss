@@ -11,6 +11,7 @@ $tertiaryColor: #0099FF;
 }
 
 .results {
+  padding: 2%;
   background-color: azure;
   width: 80vw;
   height: 60vh;
@@ -28,4 +29,9 @@ $tertiaryColor: #0099FF;
 .hr {
   width: 80%;
   height: 10px;
+}
+
+.img {
+  width: 30%;
+  height: auto;
 }
