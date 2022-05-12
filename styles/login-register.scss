@@ -2,19 +2,44 @@ $primaryColor: #0019FF;
 $secondaryColor: #000f99;
 $tertiaryColor: #0099FF;
 
-.createkwizheader {
+.appform {
   border: 5px solid $secondaryColor;
   border-radius: 20px;
   background-color: rgba(173, 216, 230, 0.9);
   padding: 20px;
   font-family: 'Orbitron', sans-serif;
+  text-align: center;
+  margin: 5%;
 
   p {
     color: $secondaryColor;
   }
 }
 
-.formfield {
+
+@media screen and (max-width:480px) {
+  .appform {
+    width: 90%;
+  }
+}
+@media screen and (min-width:481px) {
+  .appform {
+    width: 75%;
+  }
+}
+@media screen and (min-width:769px) {
+  .appform {
+    width: 60%;
+  }
+}
+@media screen and (min-width:1025px) {
+  .appform {
+    width: 40%;
+  }
+}
+
+
+.form-control {
   background-color: rgba(255, 255, 255, 0.3);
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
@@ -24,14 +49,6 @@ $tertiaryColor: #0099FF;
   border-right: 5px solid #000f99;
 }
 
-#questionscontainer {
-  width: 80%;
-  section {
-    border: 5px solid $secondaryColor;
-    border-radius: 20px;
-    background-color: rgba(173, 216, 230, 0.9);
-    padding: 20px;
-    font-family: 'Orbitron', sans-serif;
-    margin-bottom: 2rem;
-  }
+.form-control:focus {
+  box-shadow: none;
 }

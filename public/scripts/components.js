@@ -2,7 +2,8 @@
 
 const loginPage = () => {
   return `
-    <form id="login-form">
+  <div class="row justify-content-center">
+    <form id="login-form" class="appform">
       <div class="mb-3">
         <label class="form-label">Email address</label>
         <input id='email' type="email" name="email" class="form-control" placeholder="Enter your e-mail">
@@ -13,12 +14,14 @@ const loginPage = () => {
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+    </div>
     `;
 };
 
 const registerPage = () => {
   return `
-  <form id="register-form">
+  <div class="row justify-content-center">
+  <form id="register-form" class="appform">
     <div class="mb-3">
       <label class="form-label">Name</label>
       <input type="name" name="name" class="form-control" placeholder="Enter your name">
@@ -33,6 +36,7 @@ const registerPage = () => {
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
+  </div>
   `;
 };
 

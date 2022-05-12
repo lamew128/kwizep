@@ -16,6 +16,7 @@
   border-width: 10px;
   border: 0;
   border-bottom: 5px solid #000f99;
+  border-right: 5px solid #000f99;
 }
 
 #questionscontainer {
