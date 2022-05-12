@@ -50,30 +50,27 @@
 
     <main class="container">
 
-      <section class="results col">
-        <header class="row">
-          <div class="display-5 fw-bold text-center">RESULTS</div>
-        </header>
-        <div class="row resultsbody d-flex">
-          <div class="col">
-            <hr class="hr">
-            <div class="row">
-              USER: <%= username %>
-            </div>
-            <div class="row">
-              TITLE: <%= title %>
-            </div>
-            <div class="row img">
-              IMAGE: <img src="<%= image %>" alt="image not loaded" />
-            </div>
-            <div class="row">
-              SCORE: <%= score %>
+      <div class="imagebackground" style="background-image: url('<%= image %>')">
+        <section class="results col" style="width: inherit;">
+          <header class="row">
+            <div class="display-5 fw-bold text-center textresults"><span>RESULTS</span></div>
+          </header>
+          <hr>
+          <div class="row resultsbody">
+            <div class="col">
+              <div class="row">
+                <p class="display-5 textresults"><span><%= username %></span></p>
+              </div>
+              <div class="row">
+                <p class="display-5 textresults"><span>KWIZ: <%= title %></span></p>
+              </div>
+              <div class="row">
+                <p class="display-5 textresults"><span>FINAL SCORE: <%= score %> %</span></p>
+              </div>
             </div>
           </div>
-        </div>
-
-
-      </section>
+        </section>
+      </div>
 
     </main>
 
