@@ -8,7 +8,9 @@
 
 body {
   background-color: #0019FF;
-  background-image: url("https://www.transparenttextures.com/patterns/diagmonds-light.png");
+  background-image: url("/images/quiz-background.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 hr {

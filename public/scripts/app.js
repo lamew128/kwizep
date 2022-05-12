@@ -92,8 +92,6 @@ $(document).ready(() => {
       .then((data) => {
         if (data === "WRONG INFO") {
           alert('Wrong password!');
-          // $('.container').append("AAAAAAAAAAA").html();// ADD ERROR MESSAGE (SHOW)
-          // console.log("WRONG INFOOOOOOOOOOOOOOOOOOOO");
           return;
         }
         location.reload();
@@ -110,8 +108,6 @@ $(document).ready(() => {
       .then((data) => {
         if (data === "EXIST") {
           alert('This user already exists!');
-          // $('.container').append("AAAAAAAAAAA").html();// ADD ERROR MESSAGE (SHOW)
-          // console.log("EXISTTTTTTTTTT");
           return;
         }
         window.location.href = '/publickwizes';

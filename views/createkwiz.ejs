@@ -27,6 +27,7 @@
   <link rel="stylesheet" href="/styles/styles.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
   <link rel="stylesheet" href="/styles/navbar.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/createkwiz.css" type="text/css" />
 
   <!-- External JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
@@ -49,57 +50,66 @@
     <main class="container">
 
       <form id="createkwizform">
-        <header>
-          <div class="mb-3">
-            <label class="form-label fw-bold">Title</label>
-            <input type="text" name="title" class="form-control formfield" placeholder="Enter a title">
-          </div>
-          <div class="mb-3">
-            <label class="form-label fw-bold">Description</label>
-            <input type="text" name="description" class="form-control formfield"
-              placeholder="Enter a short description">
-          </div>
-          <div class="mb-3">
-            <label class="form-label fw-bold">Image</label>
-            <input type="url" name="imageurl" class="form-control formfield" placeholder="Image URL">
-          </div>
-          <div class="form-check mb-3">
-            <input name="private" class="form-check-input" type="checkbox" value="true" id="private">
-            <label class="form-check-label fw-bold" for="private">
-              Private
-            </label>
-          </div>
-        </header>
-
-        <article id="questionscontainer">
-
-
-          <section id="question1">
-            <div class="form-floating mb-3">
-              <input type="text" name="q1" class="form-control formfield" id="floatingInput" placeholder="Question 1">
-              <label for="floatingInput">Question 1 (select the correct answer below)</label>
+        <div class="row">
+          <header class="createkwizheader mb-3">
+            <p class="display-5 fw-bold">Create New Kwiz</p>
+            <div class="mb-3">
+              <label class="form-label fw-bold">Title</label>
+              <input type="text" name="title" class="form-control formfield header" placeholder="Enter a title">
             </div>
             <div class="mb-3">
-              <label class="form-label">Answer A</label>
-              <input type="radio" name="q1ans" value="q1a" required> <input type="text" name="q1a"
-                class="form-control formfield">
+              <label class="form-label fw-bold">Description</label>
+              <input type="text" name="description" class="form-control formfield header"
+                placeholder="Enter a short description">
             </div>
             <div class="mb-3">
-              <label class="form-label">Answer B</label>
-              <input type="radio" name="q1ans" value="q1b"><input type="text" name="q1b" class="form-control formfield">
+              <label class="form-label fw-bold">Image</label>
+              <input type="url" name="imageurl" class="form-control formfield header"
+                placeholder="Image URL - Make sure it is an image address">
             </div>
-            <div class="mb-3">
-              <label class="form-label">Answer C</label>
-              <input type="radio" name="q1ans" value="q1c"><input type="text" name="q1c" class="form-control formfield">
+            <div class="form-check mb-3">
+              <input name="private" class="form-check-input" type="checkbox" value="true" id="private">
+              <label class="form-check-label fw-bold" for="private">
+                Private
+              </label>
             </div>
-            <div class="mb-5">
-              <label class="form-label">Answer D</label>
-              <input type="radio" name="q1ans" value="q1d"><input type="text" name="q1d" class="form-control formfield">
-            </div>
-          </section>
-        </article>
+          </header>
+        </div>
 
-        <div class="mb-5">
+        <div class="row justify-content-center">
+          <article id="questionscontainer">
+
+            <section id="question1">
+              <div class="form-floating mb-3">
+                <input type="text" name="q1" class="form-control formfield" id="floatingInput" placeholder="Question 1">
+                <label for="floatingInput">Question 1 (select the correct answer below)</label>
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-bold">Answer A</label>
+                <input type="radio" name="q1ans" value="q1a" required> <input type="text" name="q1a"
+                  class="form-control formfield">
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-bold">Answer B</label>
+                <input type="radio" name="q1ans" value="q1b"><input type="text" name="q1b"
+                  class="form-control formfield">
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-bold">Answer C</label>
+                <input type="radio" name="q1ans" value="q1c"><input type="text" name="q1c"
+                  class="form-control formfield">
+              </div>
+              <div class="mb-5">
+                <label class="form-label fw-bold">Answer D</label>
+                <input type="radio" name="q1ans" value="q1d"><input type="text" name="q1d"
+                  class="form-control formfield">
+              </div>
+            </section>
+
+          </article>
+        </div>
+
+        <div class="mb-5 text-center">
           <button type="button" class="btn btn-primary" id="newquestion">Create new question</button>
           <button type="button" class="btn btn-primary" id="deletequestion">Delete question</button>
           <button type="submit" class="btn btn-primary">Submit</button>
