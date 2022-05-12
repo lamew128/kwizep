@@ -7,9 +7,6 @@ router.use(bodyParser.urlencoded({ extended: false }));
 module.exports = (db) => {
 
   router.post('/create', (req, res) => {
-    //  let quizId;
-    //  console.log(quizId);
-    // Add a new kwiz
     const kwiz = req.body;
     kwiz.userId = req.cookies.id;
     if (kwiz.private) {
@@ -86,9 +83,9 @@ module.exports = (db) => {
     //console.log('correctArr is', correctArr);
     let userId = req.cookies.id || 1;
     //console.log("dataaaaaaaaa",data);
-    db.generateKwizResponse(userId, kwizId, correctArr)
+    db.generateKwizResponse(userId, kwizId, answerArr)
       .then((rows) => {
-        //res.redirect(`/kwiz/result/${kwizId}`);
+        res.redirect(`/kwiz/result/${kwizId}`);
         console.log("rowsssssssssssssss", rows);
         res.send(rows);
       });
