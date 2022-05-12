@@ -13,6 +13,7 @@ $tertiaryColor: #0099FF;
 .results {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   padding: 20px;
   height: 60vh;
   border-style: solid;
@@ -26,7 +27,7 @@ $tertiaryColor: #0099FF;
 }
 
 .imagebackground {
-  background-color:rgba(0, 0, 255, 0.5);
+  background-color: rgba(0, 0, 255, 0.5);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -51,5 +52,13 @@ $tertiaryColor: #0099FF;
     background-size: cover;
     fill-opacity: 0.5;
     font-size: 4vw;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .textresults {
+    span {
+      
+    }
   }
 }
