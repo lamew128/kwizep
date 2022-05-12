@@ -98,7 +98,7 @@ module.exports = (db) => {
     let user = req.cookies.id;
     db.getKwizResult(req.params.id) // => if user = undefined ? user = guest
       .then(function (data) {
-        const templateVars = { user, username: data.user, title: data.title, image: data.url, score: data.score };
+        const templateVars = { user, username: data.user, title: data.title, image: data.url, score: data.score, quizId: data.quizId };
         res.render("results", templateVars);
       });
   });
