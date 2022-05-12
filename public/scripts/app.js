@@ -215,8 +215,9 @@ $(document).ready(() => {
   });
 
 
-
-  // ERD => id, user_id = null, q#, user_answer, correct_answer
-
+  $(document).on('click', '#shareresults', function (e) {
+    e.preventDefault();
+    copyToClipboard(window.location.href);
+  });
 
 });
