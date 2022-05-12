@@ -50,26 +50,36 @@
 
     <main class="container">
 
-      <div class="imagebackground" style="background-image: url('<%= image %>')">
-        <section class="results col" style="width: inherit;">
-          <header class="row">
-            <div class="display-5 fw-bold text-center textresults"><span>RESULTS</span></div>
-          </header>
-          <hr>
-          <div class="row resultsbody">
-            <div class="col">
-              <div class="row">
-                <p class="display-5 textresults"><span><%= username %></span></p>
-              </div>
-              <div class="row">
-                <p class="display-5 textresults"><span>KWIZ: <%= title %></span></p>
-              </div>
-              <div class="row">
-                <p class="display-5 textresults"><span>FINAL SCORE: <%= score %> %</span></p>
+      <div class="col">
+
+        <div class="row imagebackground" style="background-image: url('<%= image %>')">
+          <section class="results col" style="width: inherit;">
+            <header class="row">
+              <div class="display-5 fw-bold text-center textresults"><span>KWIZ RESULTS</span></div>
+            </header>
+            <hr>
+            <div class="row resultsbody">
+              <div class="col">
+                <div class="row">
+                  <p class="display-5 textresults"><span>
+                      <%= username %>
+                    </span></p>
+                </div>
+                <div class="row">
+                  <p class="display-5 textresults"><span>KWIZ: <%= title %></span></p>
+                </div>
+                <div class="row">
+                  <p class="display-5 textresults"><span>FINAL SCORE: <%= score %> %</span></p>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
+
+        <div class="row justify-content-center">
+          <button class="kwizbtn mt-5" id="shareresults">SHARE THIS RESULT!</button>
+        </div>
+
       </div>
 
     </main>

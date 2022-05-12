@@ -45,6 +45,10 @@ hr {
   .card-title {
     font-weight: bold;
   }
+
+  object {
+    padding: 0;
+  }
 }
 
 .profile {
@@ -75,13 +79,14 @@ hr {
 #scroll-top {
   position: fixed;
   bottom: 0;
-  right: 50%;
+  right: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 
   color: white;
   cursor: pointer;
+  margin-right: 10px;
   margin-bottom: 10px;
   border-radius: 50%;
   width: 50px;
@@ -144,4 +149,3 @@ hr {
   align-content: center;
   justify-content: center;
 }
-
