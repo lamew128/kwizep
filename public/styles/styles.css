@@ -35,6 +35,9 @@ hr {
 .kwizcard .card-title {
   font-weight: bold;
 }
+.kwizcard object {
+  padding: 0;
+}
 
 .profile {
   width: 20%;
@@ -63,12 +66,13 @@ hr {
 #scroll-top {
   position: fixed;
   bottom: 0;
-  right: 50%;
+  right: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   cursor: pointer;
+  margin-right: 10px;
   margin-bottom: 10px;
   border-radius: 50%;
   width: 50px;

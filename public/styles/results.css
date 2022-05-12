@@ -7,6 +7,8 @@
 }
 
 .results {
+  display: flex;
+  flex-direction: column;
   padding: 20px;
   height: 60vh;
   border-style: solid;
@@ -43,4 +45,5 @@
   background-color: rgba(0, 0, 0, 0.8);
   background-size: cover;
   fill-opacity: 0.5;
+  font-size: 4vw;
 }

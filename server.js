@@ -77,10 +77,13 @@ app.get("/mykwizes", (req, res) => {
   }
   db.getUserWithId(req.cookies.id)
     .then((user) => {
-      db.showMyKwizzes(user.id)
+      Promise.all([
+        db.showMyKwizzes(user.id),
+        db.countMyKwiz(req.cookies.id),
+        db.myLastKwiz(req.cookies.id)
+      ])
         .then((data) => {
-          console.log("DATAAAAAAAAAAAAAAAAAA:", data);
-          const templateVars = { user: user, db: data, public: false };
+          const templateVars = { user: user, db: data[0], count: data[1].count, score: data[2].score, public: false };
           res.render("index", templateVars);
         });
     });
@@ -93,9 +96,13 @@ app.get("/publickwizes", (req, res) => {
   }
   db.getUserWithId(req.cookies.id)
     .then((user) => {
-      db.showPublicKwizzes()
+      Promise.all([
+        db.showPublicKwizzes(),
+        db.countMyKwiz(req.cookies.id),
+        db.myLastKwiz(req.cookies.id)
+      ])
         .then((data) => {
-          const templateVars = { user: user, db: data, public: true };
+          const templateVars = { user: user, db: data[0], count: data[1].count, score: data[2].score, public: true };
           res.render("index", templateVars);
         });
     });
