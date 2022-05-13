@@ -121,11 +121,11 @@ module.exports = (db) => {
       db.getKwizCover(req.params.id),
       db.getUserWithId(req.cookies.id)
     ])
-    .then((data) => {
-      const kwizId = req.params.id;
-      const templateVars = { user: data[1], id: kwizId, image: data[0].url, title: data[0].title, description: data[0].description };
-      res.render("kwiz", templateVars);
-    });
+      .then((data) => {
+        const kwizId = req.params.id;
+        const templateVars = { user: data[1], id: kwizId, image: data[0].url, title: data[0].title, description: data[0].description };
+        res.render("kwiz", templateVars);
+      });
   });
 
   //store the questions after clicking the start quiz button
@@ -155,7 +155,7 @@ module.exports = (db) => {
   router.get('/result/:id', (req, res) => {
     let user = req.cookies.id;
     db.getKwizResult(req.params.id) // => if user = undefined ? user = guest
-      .then(function(data) {
+      .then(function (data) {
         const templateVars = { user, username: data.user, title: data.title, image: data.url, score: data.score, quizId: data.quiz_id };
         res.render("results", templateVars);
       });

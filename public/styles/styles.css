@@ -39,6 +39,22 @@ hr {
   padding: 0;
 }
 
+.kwizcardstatic {
+  display: flex;
+  background-color: #0019FF;
+  color: white;
+  font-family: "Orbitron", sans-serif;
+  width: -webkit-fill-available;
+  border: 10px solid #000f99;
+  border-radius: 20px;
+}
+.kwizcardstatic .card-title {
+  font-weight: bold;
+}
+.kwizcardstatic object {
+  padding: 0;
+}
+
 .profile {
   width: 20%;
   position: fixed;
@@ -128,6 +144,5 @@ hr {
 #questions {
   display: flex;
   flex-direction: column;
-  align-content: center;
-  justify-content: center;
+  align-items: center;
 }
