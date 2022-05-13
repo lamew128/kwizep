@@ -29,7 +29,7 @@ VALUES (3,
 
 
 INSERT INTO quiz (creator_id,url,public,title,description)
-VALUES (2,
+VALUES (3,
        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJFZ65LwsawfGT8XIQrWoCg-6inXNiMkopHQ&usqp=CAU',
         true,
        'Canada',
