@@ -19,7 +19,7 @@ module.exports = (db) => {
           db.myLastKwiz(req.cookies.id)
         ])
           .then((data) => {
-            let dataScore = 0;
+            let dataScore = '';
             let titleVar = '';
             if (data[2]) {
               dataScore = data[2].score;
