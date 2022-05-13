@@ -51,31 +51,34 @@
 
     <main class="container">
 
-      <div class="col">
+      <div class="col m-2">
 
         <div class="row imagebackground" style="background-image: url('<%= image %>')">
+
           <section class="results col" style="width: inherit;">
+
             <header class="row">
               <div class="display-5 fw-bold text-center textresults"><span>KWIZ RESULTS</span></div>
             </header>
             <hr>
-            <div class="row resultsbody">
+            <div class="row resultsbody align-self-center">
               <div class="col">
                 <div class="row">
-                  <p class="display-5 textresults"><span>
+                  <p class="display-5 textresults fw-bold"><span>
                       <%= username %>
                     </span></p>
                 </div>
                 <div class="row">
-                  <p class="display-5 textresults"><span>KWIZ: <%= title %></span></p>
+                  <p class="display-5 textresults fw-bold"><span>KWIZ: <%= title %></span></p>
                 </div>
                 <div class="row">
-                  <p class="display-5 textresults"><span>FINAL SCORE: <%= score %>%</span></p>
+                  <p class="display-5 textresults fw-bold"><span>FINAL SCORE: <%= score %>%</span></p>
                 </div>
-
               </div>
             </div>
+
           </section>
+
         </div>
 
         <div class="row mt-5">

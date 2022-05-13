@@ -8,7 +8,9 @@ $tertiaryColor: #0099FF;
   background-color: rgba(173, 216, 230, 0.9);
   padding: 20px;
   font-family: 'Orbitron', sans-serif;
-
+  margin-left: 2.5rem;
+  margin-right: 2.5rem;
+  width: -webkit-fill-available;
   p {
     color: $secondaryColor;
   }
