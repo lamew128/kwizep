@@ -6,9 +6,9 @@ Ajax, jQuery, ejs and CSS3 are used.
 
 ## Screenshots
 
-!["Kwiz list"](https://github.com/lamew128/tweeter/blob/master/screenshots/1.PNG)
-!["Answering a question"](https://github.com/lamew128/tweeter/blob/master/screenshots/2.PNG)
-!["Kwiz result"](https://github.com/lamew128/tweeter/blob/master/screenshots/3.PNG)
+!["Kwiz list"](https://github.com/lamew128/kwizep/blob/master/screenshots/1.PNG)
+!["Answering a question"](https://github.com/lamew128/kwizep/blob/master/screenshots/2.PNG)
+!["Kwiz result"](https://github.com/lamew128/kwizep/blob/master/screenshots/3.PNG)
 
 ## Main functions
 
