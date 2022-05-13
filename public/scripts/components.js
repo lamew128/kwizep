@@ -45,7 +45,7 @@ const question = (num) => {
   <section id="question${num}">
   <div class="form-floating mb-3">
     <input type="text" name="q1" class="form-control formfield" id="floatingInput" placeholder="Question 1">
-    <label for="floatingInput">Question ${num} (select the correct answer below)</label>
+    <label for="floatingInput">Question ${num}</label>
   </div>
   <div class="mb-3">
     <label class="form-label">Answer A</label>

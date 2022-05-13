@@ -65,6 +65,7 @@ $(document).ready(() => {
   $(document).on('submit', '#createkwizform', function (e) {
     e.preventDefault();
     const data = $(this).serialize();
+    console.log(data);
     let submit = true;
     $('.formfield').each(function () {
       if ($(this).val() === '') {
@@ -181,7 +182,7 @@ $(document).ready(() => {
     console.log("results", results);
     generateResult(results)
       .then((data) => {
-        console.log("appjs",data);
+        console.log("appjs", data);
         window.location.href = `${data[0].url}`;
       });
   });
