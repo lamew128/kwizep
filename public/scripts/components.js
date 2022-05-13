@@ -74,35 +74,44 @@ const kwizQuestion = (data, id, question) => {
   const qnum = `q${question}`;
   return `
   <article class="kwizquestions p-3 m-5">
-         <div class="mb-3">
-            <label class="form-label">Question ${question} - ${data[id][question][qnum]}</label>
-          </div>
-          <hr class="mb-2">
-          <div class="form-check">
-          <label class="form-check-label" for="${data[id][question][`${qnum}a`]}">
-            <input class="form-check-input" type="radio" name="${qnum}" id="${data[id][question][`${qnum}a`]}" value="${data[id][question][`${qnum}a`]}" required>
-              <span>${data[id][question][`${qnum}a`]}</span>
-            </label>
-          </div>
-          <div class="form-check">
-          <label class="form-check-label" for="${data[id][question][`${qnum}b`]}">
-            <input class="form-check-input" type="radio" name="${qnum}" id="${data[id][question][`${qnum}b`]}" value="${data[id][question][`${qnum}b`]}" required>
-              <span>${data[id][question][`${qnum}b`]}</span>
-            </label>
-          </div>
-          <div class="form-check">
-          <label class="form-check-label" for="${data[id][question][`${qnum}c`]}">
-            <input class="form-check-input" type="radio" name="${qnum}" id="${data[id][question][`${qnum}c`]}" value="${data[id][question][`${qnum}c`]}" required>
-              <span>${data[id][question][`${qnum}c`]}</span>
-            </label>
-          </div>
-          <div class="form-check">
-          <label class="form-check-label" for="${data[id][question][`${qnum}d`]}">
-            <input class="form-check-input" type="radio" name="${qnum}" id="${data[id][question][`${qnum}d`]}" value="${data[id][question][`${qnum}d`]}" required>
-              <span>${data[id][question][`${qnum}d`]}</span>
-            </label>
-          </div>
-  </article>`;
+                  <div class="col">
+                    <div class="row">
+                      <span>Question ${question}:</span>
+                    </div>
+                    <div class="row mb-2">
+                      <span>${data[id][question][qnum]}</span>
+                    </div>
+                  </div>
+                  <hr class="mb-2">
+                  <div class="form-check">
+                    <label class="form-check-label" for="${data[id][question][`${qnum}a`]}">
+                      <input class="form-check-input" type="radio" name="${qnum}" id="${data[id][question][`${qnum}a`]}"
+                        value="${data[id][question][`${qnum}a`]}" required>
+                      <span>${data[id][question][`${qnum}a`]}</span>
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label" for="${data[id][question][`${qnum}b`]}">
+                      <input class="form-check-input" type="radio" name="${qnum}" id="${data[id][question][`${qnum}b`]}"
+                        value="${data[id][question][`${qnum}b`]}" required>
+                      <span>${data[id][question][`${qnum}b`]}</span>
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label" for="${data[id][question][`${qnum}c`]}">
+                      <input class="form-check-input" type="radio" name="${qnum}" id="${data[id][question][`${qnum}c`]}"
+                        value="${data[id][question][`${qnum}c`]}" required>
+                      <span>${data[id][question][`${qnum}c`]}</span>
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label" for="${data[id][question][`${qnum}d`]}">
+                      <input class="form-check-input" type="radio" name="${qnum}" id="${data[id][question][`${qnum}d`]}"
+                        value="${data[id][question][`${qnum}d`]}" required>
+                      <span>${data[id][question][`${qnum}d`]}</span>
+                    </label>
+                  </div>
+                </article>`;
 };
 
 const nextQuestionButton = () => {
