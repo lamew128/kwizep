@@ -17,7 +17,7 @@ VALUES (3,
         'https://i.imgur.com/4d3WG1V.png',
         false,
         'Are you happy?',
-        'The only answer accepted is yes');
+        'It depends...');
 
 INSERT INTO quiz (creator_id,url,public,title,description)
 VALUES (3,
