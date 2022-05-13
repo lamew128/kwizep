@@ -20,10 +20,12 @@ module.exports = (db) => {
         ])
           .then((data) => {
             let dataScore = 0;
+            let titleVar = '';
             if (data[2]) {
               dataScore = data[2].score;
+              titleVar = data[2].title;
             }
-            const templateVars = { user: user, db: data[0], count: data[1].count, score: dataScore, public: false };
+            const templateVars = { user: user, db: data[0], count: data[1].count, score: dataScore, public: false, title: titleVar };
             res.render("index", templateVars);
           });
       });
@@ -43,11 +45,13 @@ module.exports = (db) => {
           db.myLastKwiz(req.cookies.id)
         ])
           .then((data) => {
-            let dataScore = 0;
+            let dataScore = '';
+            let titleVar = '';
             if (data[2]) {
               dataScore = data[2].score;
+              titleVar = data[2].title;
             }
-            const templateVars = { user: user, db: data[0], count: data[1].count, score: dataScore, public: true };
+            const templateVars = { user: user, db: data[0], count: data[1].count, score: dataScore, public: true, title: titleVar };
             res.render("index", templateVars);
           });
       });
