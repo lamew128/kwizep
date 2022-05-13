@@ -1,26 +1,24 @@
 <% if (user) { %>
   <% for (const card of db) { %>
-    <% if (!card.public) { %>
-      <article class="col-xl-4 col-lg-5 col-md-6 col-12 d-flex align-items-stretch">
-        <div class="row card kwizcard">
-          <object class="text-center" data="<%= card.imageurl %>" type="image/png">
-            <img src="/images/no-image-icon-15.png" alt="Photo not available">
-          </object>
-          <div class="card-body">
-            <h5 class="card-title">
-              <%= card.title %> KWIZ
-            </h5>
-            <p class="card-text">
-              <%= card.description %>
-            </p>
-          </div>
-          <div class="row mb-2 d-flex mz justify-content-evenly">
-            <a href="/kwiz/<%= card.id %>" class="btn btn-primary cardbtn">TAKE KWIZ!</a>
-            <button id="sharebutton" class="btn btn-primary cardbtn">SHARE!</button>
-          </div>
-          <div id="sharelink"></div>
+    <article class="col-xl-4 col-lg-5 col-md-6 col-12 d-flex align-items-stretch">
+      <div class="row card kwizcard">
+        <object class="text-center" data="<%= card.imageurl %>" type="image/png">
+          <img src="/images/no-image-icon-15.png" alt="Photo not available">
+        </object>
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= card.title %> KWIZ
+          </h5>
+          <p class="card-text">
+            <%= card.description %>
+          </p>
         </div>
-      </article>
+        <div class="row mb-2 d-flex mz justify-content-evenly">
+          <a href="/kwiz/<%= card.id %>" class="btn btn-primary cardbtn">TAKE KWIZ!</a>
+          <button id="sharebutton" class="btn btn-primary cardbtn">SHARE!</button>
+        </div>
+        <div id="sharelink"></div>
+      </div>
+    </article>
+    <% } %>
       <% } %>
-        <% } %>
-          <% } %>
