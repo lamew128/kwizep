@@ -200,8 +200,11 @@ $(document).ready(() => {
   $(document).on('click', '#sharebutton', function (e) {
     e.preventDefault();
 
-    const $link = $(this).siblings().attr('href');
-    copyToClipboard(`${window.location.origin}${$link}`);
+    let $link = window.location.origin + $(this).siblings().attr('href');
+    if (!$(this).siblings().attr('href')) {
+      $link = window.location.href;
+    }
+    copyToClipboard(`${$link}`);
 
     const $share = $(this).closest("div").nextAll("div[id]:first");
     $share.text('Copied to the clipboard!').addClass('text-center');
